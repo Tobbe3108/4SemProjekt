@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="RIDER_MODULE_ANDROID" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$/../../Presentation/XamarinApp/XamarinApp.Android" />
+    <orderEntry type="jdk" jdkName="Android API 28 Platform" jdkType="Android SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
