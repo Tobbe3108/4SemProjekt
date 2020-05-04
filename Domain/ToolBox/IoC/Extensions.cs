@@ -14,7 +14,6 @@ namespace ToolBox.IoC
     {
         public static void AddRabbitMq(this IServiceCollection services)
         {
-            //Domain Bus
             services.AddSingleton<IEventBus, RabbitMqBus>(sp =>
             {
                 var scopeFactory = sp.GetRequiredService<IServiceScopeFactory>();
