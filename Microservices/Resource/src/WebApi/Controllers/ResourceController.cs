@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Resource.Application.Resource.Commands.CreateResource;
+using Resource.Application.Resource.Commands.DeleteResource;
+using Resource.Application.Resource.Commands.UpdateResource;
 using Resource.Application.Resource.Queries.GetResources;
 
 namespace WebApi.Controllers
@@ -11,16 +13,16 @@ namespace WebApi.Controllers
     public class ResourceController : ApiController
     {
         [HttpGet]
-        public async Task<ActionResult<ResourceVm>> Get()
+        public async Task<ActionResult<ResourcesVm>> Get()
         {
             return await Mediator.Send(new GetResourcesQuery());
         }
 
-        // [HttpGet("{id}")]
-        // public async Task<ActionResult<ResourceVm>> Get(Guid id)
-        // {
-        //     return await Mediator.Send(new GetResourceQuery { Id = id });
-        // }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ResourceVm>> Get(Guid id)
+        {
+            return await Mediator.Send(new GetResourceQuery { Id = id });
+        }
 
         [HttpPost]
         public async Task<ActionResult<Guid>> Create(CreateResourceCommand command)
@@ -28,25 +30,25 @@ namespace WebApi.Controllers
             return await Mediator.Send(command);
         }
 
-        // [HttpPut("{id}")]
-        // public async Task<ActionResult> Update(Guid id, UpdateResourceCommand command)
-        // {
-        //     if (id != command.Id)
-        //     {
-        //         return BadRequest();
-        //     }
-        //
-        //     await Mediator.Send(command);
-        //
-        //     return NoContent();
-        // }
-        //
-        // [HttpDelete("{id}")]
-        // public async Task<ActionResult> Delete(Guid id)
-        // {
-        //     await Mediator.Send(new DeleteResourceCommand {Id = id});
-        //
-        //     return NoContent();
-        // }
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Update(Guid id, UpdateResourceCommand command)
+        {
+            if (id != command.Id)
+            {
+                return BadRequest();
+            }
+        
+            await Mediator.Send(command);
+        
+            return NoContent();
+        }
+        
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(Guid id)
+        {
+            await Mediator.Send(new DeleteResourceCommand {Id = id});
+        
+            return NoContent();
+        }
     }
 }

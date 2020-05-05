@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace Resource.Application.Resource.Queries.GetResources
+﻿namespace Resource.Application.Resource.Queries.GetResources
 {
     public class ResourceVm
     {
-        public IList<ResourceDto> List { get; set; }
+        public ResourceDto Resource { get; set; }
     }
 }
