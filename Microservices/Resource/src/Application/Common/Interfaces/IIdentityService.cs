@@ -1,5 +1,5 @@
-﻿using Resource.Application.Common.Models;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Resource.Application.Common.Models;
 
 namespace Resource.Application.Common.Interfaces
 {

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -11,9 +9,8 @@ using Resource.Application.Common.Interfaces;
 
 namespace Resource.Application.Resource.Queries.GetResources
 {
-    public class GetResourcesQuery :  IRequest<ResourceVm>
+    public class GetResourcesQuery : IRequest<ResourceVm>
     {
-        
     }
 
     public class GetResourcesQueryHandler : IRequestHandler<GetResourcesQuery, ResourceVm>

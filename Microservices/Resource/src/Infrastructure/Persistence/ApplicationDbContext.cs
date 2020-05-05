@@ -1,11 +1,11 @@
-﻿using Resource.Application.Common.Interfaces;
-using Resource.Domain.Common;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
-using System.Data;
+﻿using System.Data;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using Resource.Application.Common.Interfaces;
+using Resource.Domain.Common;
 
 namespace Resource.Infrastructure.Persistence
 {
@@ -23,12 +23,12 @@ namespace Resource.Infrastructure.Persistence
             _currentUserService = currentUserService;
             _dateTime = dateTime;
         }
+
         public DbSet<Domain.Entities.Resource> Resources { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
-            {
                 switch (entry.State)
                 {
                     case EntityState.Added:
@@ -40,17 +40,13 @@ namespace Resource.Infrastructure.Persistence
                         entry.Entity.LastModified = _dateTime.Now;
                         break;
                 }
-            }
 
             return base.SaveChangesAsync(cancellationToken);
         }
 
         public async Task BeginTransactionAsync()
         {
-            if (_currentTransaction != null)
-            {
-                return;
-            }
+            if (_currentTransaction != null) return;
 
             _currentTransaction = await base.Database.BeginTransactionAsync(IsolationLevel.ReadCommitted)
                 .ConfigureAwait(false);

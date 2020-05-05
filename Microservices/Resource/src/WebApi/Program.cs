@@ -14,7 +14,7 @@ namespace WebApi
         public static async Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
-            
+
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
@@ -23,11 +23,8 @@ namespace WebApi
                 {
                     var context = services.GetRequiredService<ApplicationDbContext>();
 
-                    if (context.Database.IsSqlServer())
-                    {
-                        context.Database.Migrate();
-                    }
-                    
+                    if (context.Database.IsSqlServer()) context.Database.Migrate();
+
                     //await ApplicationDbContextSeed.SeedSampleDataAsync(context);
                 }
                 catch (Exception ex)
@@ -43,8 +40,10 @@ namespace WebApi
             await host.RunAsync();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            return Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
+        }
     }
 }

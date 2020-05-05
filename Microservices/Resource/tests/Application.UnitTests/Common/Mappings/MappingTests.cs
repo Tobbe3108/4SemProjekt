@@ -1,7 +1,7 @@
-﻿using AutoMapper;
-using Resource.Application.Common.Mappings;
+﻿using System;
+using AutoMapper;
 using NUnit.Framework;
-using System;
+using Resource.Application.Common.Mappings;
 using Resource.Application.Resource.Queries.GetResources;
 
 namespace Resource.Application.UnitTests.Common.Mappings

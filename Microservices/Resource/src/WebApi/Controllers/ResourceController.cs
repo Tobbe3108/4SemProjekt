@@ -21,7 +21,7 @@ namespace WebApi.Controllers
         // {
         //     return await Mediator.Send(new GetResourceQuery { Id = id });
         // }
-        
+
         [HttpPost]
         public async Task<ActionResult<Guid>> Create(CreateResourceCommand command)
         {

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.Contracts;
 using Resource.Domain.Common;
 
 namespace Resource.Domain.Entities

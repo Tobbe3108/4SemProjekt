@@ -1,17 +1,17 @@
-﻿using MediatR;
-using Microsoft.Extensions.Logging;
-using Resource.Application.Common.Interfaces;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using MediatR;
+using Microsoft.Extensions.Logging;
+using Resource.Application.Common.Interfaces;
 
 namespace Resource.Application.Common.Behaviours
 {
     public class RequestPerformanceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     {
-        private readonly Stopwatch _timer;
-        private readonly ILogger<TRequest> _logger;
         private readonly ICurrentUserService _currentUserService;
+        private readonly ILogger<TRequest> _logger;
+        private readonly Stopwatch _timer;
 
         public RequestPerformanceBehaviour(
             ILogger<TRequest> logger,
