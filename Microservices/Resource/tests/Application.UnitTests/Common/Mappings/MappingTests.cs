@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using Resource.Application.Common.Mappings;
-using Resource.Application.TodoLists.Queries.GetTodos;
-using Resource.Domain.Entities;
 using NUnit.Framework;
 using System;
+using Resource.Application.Resource.Queries.GetResources;
 
 namespace Resource.Application.UnitTests.Common.Mappings
 {
@@ -26,8 +25,7 @@ namespace Resource.Application.UnitTests.Common.Mappings
         }
 
         [Test]
-        [TestCase(typeof(TodoList), typeof(TodoListDto))]
-        [TestCase(typeof(TodoItem), typeof(TodoItemDto))]
+        [TestCase(typeof(Domain.Entities.Resource), typeof(ResourceDto))]
         public void ShouldSupportMappingFromSourceToDestination(Type source, Type destination)
         {
             var instance = Activator.CreateInstance(source);

@@ -1,0 +1,15 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e67f6ee3_002Dea91_002D4b18_002Db0b7_002Da325dcaa0d9e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="RequestLoggerTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Or&gt;&#xD;
+    &lt;TestAncestor&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::60677D1B-9AEE-4160-BB81-AEDDF6BCE10E::.NETCoreApp,Version=v3.1::Resource.Application.UnitTests.Common.Behaviours.RequestLoggerTests&lt;/TestId&gt;&#xD;
+    &lt;/TestAncestor&gt;&#xD;
+    &lt;TestAncestor&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::60677D1B-9AEE-4160-BB81-AEDDF6BCE10E::.NETCoreApp,Version=v3.1::Resource.Application.UnitTests.Common.Mappings.MappingTests&lt;/TestId&gt;&#xD;
+    &lt;/TestAncestor&gt;&#xD;
+  &lt;/Or&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	
+	
+	
+	</wpf:ResourceDictionary>

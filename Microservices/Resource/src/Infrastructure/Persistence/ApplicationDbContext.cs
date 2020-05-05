@@ -1,13 +1,7 @@
-﻿using System;
-using Resource.Application.Common.Interfaces;
+﻿using Resource.Application.Common.Interfaces;
 using Resource.Domain.Common;
-using Resource.Domain.Entities;
-using Resource.Infrastructure.Identity;
-using IdentityServer4.EntityFramework.Options;
-using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.Extensions.Options;
 using System.Data;
 using System.Reflection;
 using System.Threading;
@@ -15,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Resource.Infrastructure.Persistence
 {
-    public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, IApplicationDbContext
+    public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly IDateTime _dateTime;
@@ -23,17 +17,12 @@ namespace Resource.Infrastructure.Persistence
 
         public ApplicationDbContext(
             DbContextOptions options,
-            IOptions<OperationalStoreOptions> operationalStoreOptions,
             ICurrentUserService currentUserService,
-            IDateTime dateTime) : base(options, operationalStoreOptions)
+            IDateTime dateTime) : base(options)
         {
             _currentUserService = currentUserService;
             _dateTime = dateTime;
         }
-
-        public DbSet<TodoList> TodoLists { get; set; }
-
-        public DbSet<TodoItem> TodoItems { get; set; }
         public DbSet<Domain.Entities.Resource> Resources { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())

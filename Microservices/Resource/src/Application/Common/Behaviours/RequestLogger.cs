@@ -10,14 +10,11 @@ namespace Resource.Application.Common.Behaviours
     {
         private readonly ILogger _logger;
         private readonly ICurrentUserService _currentUserService;
-        private readonly IIdentityService _identityService;
 
-        public RequestLogger(ILogger<TRequest> logger, ICurrentUserService currentUserService,
-            IIdentityService identityService)
+        public RequestLogger(ILogger<TRequest> logger, ICurrentUserService currentUserService)
         {
             _logger = logger;
             _currentUserService = currentUserService;
-            _identityService = identityService;
         }
 
         public async Task Process(TRequest request, CancellationToken cancellationToken)
@@ -27,6 +24,8 @@ namespace Resource.Application.Common.Behaviours
 
             _logger.LogInformation("Resource Request: {Name} {@UserName} {@Request}",
                 requestName, userName, request);
+
+            await Task.CompletedTask;
         }
     }
 }

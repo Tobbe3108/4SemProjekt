@@ -1,6 +1,4 @@
 ﻿using Resource.Application.Common.Interfaces;
-using Resource.Infrastructure.Files;
-using Resource.Infrastructure.Identity;
 using Resource.Infrastructure.Persistence;
 using Resource.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication;
@@ -30,15 +28,7 @@ namespace Resource.Infrastructure
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
 
-             services.AddDefaultIdentity<ApplicationUser>()
-                 .AddEntityFrameworkStores<ApplicationDbContext>();
-
-             services.AddIdentityServer()
-                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
-
             services.AddTransient<IDateTime, DateTimeService>();
-            services.AddTransient<IIdentityService, IdentityService>();
-            services.AddTransient<ICsvFileBuilder, CsvFileBuilder>();
 
              services.AddAuthentication()
                  .AddIdentityServerJwt();

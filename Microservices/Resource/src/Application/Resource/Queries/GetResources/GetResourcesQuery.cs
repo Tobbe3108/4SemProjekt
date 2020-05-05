@@ -8,8 +8,6 @@ using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Resource.Application.Common.Interfaces;
-using Resource.Application.TodoLists.Queries.GetTodos;
-using Resource.Domain.Enums;
 
 namespace Resource.Application.Resource.Queries.GetResources
 {
