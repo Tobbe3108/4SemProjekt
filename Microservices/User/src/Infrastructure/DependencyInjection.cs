@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using User.Application.Common.Interfaces;
+using User.Infrastructure.Persistence;
+using User.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Resource.Application.Common.Interfaces;
-using Resource.Infrastructure.Persistence;
-using Resource.Infrastructure.Services;
 
-namespace Resource.Infrastructure
+namespace User.Infrastructure
 {
     public static class DependencyInjection
     {
@@ -15,7 +14,7 @@ namespace Resource.Infrastructure
         {
             if (configuration.GetValue<bool>("UseInMemoryDatabase"))
                 services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseInMemoryDatabase("ResourceDb"));
+                    options.UseInMemoryDatabase("UserDb"));
             else
                 services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseSqlServer(
