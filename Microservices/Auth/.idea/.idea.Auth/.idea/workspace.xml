@@ -20,63 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8af318f3-a25a-4d53-870d-f1bbf233e81b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Auth/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Auth/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Auth/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Auth/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Auth/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Auth/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Resource/.idea/.idea.Resource/.idea/.idea.Resource.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Resource/.idea/.idea.Resource/.idea/contentModel.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Resource/.idea/.idea.Resource/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Resource/.idea/.idea.Resource/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Resource/.idea/.idea.Resource/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Resource/.idea/.idea.Resource/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Resource/.idea/.idea.Resource/.idea/projectSettingsUpdater.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Resource/.idea/.idea.Resource/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Resource/.idea/.idea.Resource/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User/src/Application/User/Commands/CreateUser/CreateUserCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User/src/Application/User/Commands/CreateUser/CreateUserCommandValidator.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User/src/Application/User/Commands/UpdateUser/UpdateUserCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User/src/Application/User/Commands/UpdateUser/UpdateUserCommandValidator.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User/src/Application/User/Queries/GetUser/GetCurrentUserQuery.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User/src/Application/User/Queries/GetUser/GetUserQuery.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User/src/Application/User/Queries/GetUser/UserDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User/src/Application/User/Queries/GetUser/UserVm.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User/src/Domain/Entities/User.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User/src/Infrastructure/Persistence/Configurations/UserConfiguration.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User/src/WebApi/Controllers/UserController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User/src/WebApi/Filters/SchemaFilter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.idea/config/applicationhost.config" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/config/applicationhost.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Auth.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Auth.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Application/Common/Behaviours/RequestLogger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Common/Behaviours/RequestLogger.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Application/Common/Behaviours/RequestPerformanceBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Common/Behaviours/RequestPerformanceBehaviour.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Application/Common/Interfaces/ICurrentUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Common/Interfaces/ICurrentUserService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Application/Common/Interfaces/IEncryptor.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Application/Common/Interfaces/IJwtHandler.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Application/Common/Models/JsonWebToken.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Application/Common/Models/JwtOptions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Infrastructure/Persistence/ApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Infrastructure/Persistence/ApplicationDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WebApi/Services/CurrentUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/WebApi/Services/CurrentUserService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Resource/Resource.sln" beforeDir="false" afterPath="$PROJECT_DIR$/../Resource/Resource.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Resource/src/Application/Common/Behaviours/RequestLogger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Resource/src/Application/Common/Behaviours/RequestLogger.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Resource/src/Application/Common/Behaviours/RequestPerformanceBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Resource/src/Application/Common/Behaviours/RequestPerformanceBehaviour.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Resource/src/Application/Common/Interfaces/ICurrentUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Resource/src/Application/Common/Interfaces/ICurrentUserService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Resource/src/Application/Resource/Commands/UpdateResource/UpdateResourceCommandValidator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Resource/src/Application/Resource/Commands/UpdateResource/UpdateResourceCommandValidator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Resource/src/Infrastructure/Persistence/ApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Resource/src/Infrastructure/Persistence/ApplicationDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Resource/src/WebApi/Services/CurrentUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Resource/src/WebApi/Services/CurrentUserService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../User/src/Application/Common/Behaviours/RequestLogger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Application/Common/Behaviours/RequestLogger.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../User/src/Application/Common/Behaviours/RequestPerformanceBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Application/Common/Behaviours/RequestPerformanceBehaviour.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../User/src/Application/Common/Interfaces/IApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Application/Common/Interfaces/IApplicationDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../User/src/Application/Common/Interfaces/ICurrentUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Application/Common/Interfaces/ICurrentUserService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../User/src/Application/Common/Mappings/IMapFrom.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Application/Common/Mappings/IMapFrom.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../User/src/Domain/Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Domain/Domain.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../User/src/Infrastructure/Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Infrastructure/Infrastructure.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../User/src/Infrastructure/Persistence/ApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Infrastructure/Persistence/ApplicationDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../User/src/WebApi/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/WebApi/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../User/src/WebApi/Services/CurrentUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/WebApi/Services/CurrentUserService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../User/src/WebApi/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/WebApi/Startup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../User/src/WebApi/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/WebApi/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Resource/.idea/.idea.Resource/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Resource/.idea/.idea.Resource/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
