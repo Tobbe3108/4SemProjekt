@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8af318f3-a25a-4d53-870d-f1bbf233e81b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Auth/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Auth/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Auth/.idea/indexLayout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Auth/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Auth/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Auth/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Resource/.idea/.idea.Resource/.idea/.idea.Resource.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Resource/.idea/.idea.Resource/.idea/contentModel.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Resource/.idea/.idea.Resource/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Resource/.idea/.idea.Resource/.idea/indexLayout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Resource/.idea/.idea.Resource/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Resource/.idea/.idea.Resource/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Resource/.idea/.idea.Resource/.idea/projectSettingsUpdater.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Resource/.idea/.idea.Resource/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Resource/.idea/.idea.Resource/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../User/src/Application/User/Commands/CreateUser/CreateUserCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../User/src/Application/User/Commands/CreateUser/CreateUserCommandValidator.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../User/src/Application/User/Commands/UpdateUser/UpdateUserCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../User/src/Application/User/Commands/UpdateUser/UpdateUserCommandValidator.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../User/src/Application/User/Queries/GetUser/GetCurrentUserQuery.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../User/src/Application/User/Queries/GetUser/GetUserQuery.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../User/src/Application/User/Queries/GetUser/UserDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../User/src/Application/User/Queries/GetUser/UserVm.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../User/src/Domain/Entities/User.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../User/src/Infrastructure/Persistence/Configurations/UserConfiguration.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../User/src/WebApi/Controllers/UserController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../User/src/WebApi/Filters/SchemaFilter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/config/applicationhost.config" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/config/applicationhost.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Auth.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Auth.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Common/Behaviours/RequestLogger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Common/Behaviours/RequestLogger.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Common/Behaviours/RequestPerformanceBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Common/Behaviours/RequestPerformanceBehaviour.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Common/Interfaces/ICurrentUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Common/Interfaces/ICurrentUserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Common/Interfaces/IEncryptor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Common/Interfaces/IJwtHandler.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Common/Models/JsonWebToken.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Common/Models/JwtOptions.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Infrastructure/Persistence/ApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Infrastructure/Persistence/ApplicationDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WebApi/Services/CurrentUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/WebApi/Services/CurrentUserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Resource/Resource.sln" beforeDir="false" afterPath="$PROJECT_DIR$/../Resource/Resource.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Resource/src/Application/Common/Behaviours/RequestLogger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Resource/src/Application/Common/Behaviours/RequestLogger.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Resource/src/Application/Common/Behaviours/RequestPerformanceBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Resource/src/Application/Common/Behaviours/RequestPerformanceBehaviour.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Resource/src/Application/Common/Interfaces/ICurrentUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Resource/src/Application/Common/Interfaces/ICurrentUserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Resource/src/Application/Resource/Commands/UpdateResource/UpdateResourceCommandValidator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Resource/src/Application/Resource/Commands/UpdateResource/UpdateResourceCommandValidator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Resource/src/Infrastructure/Persistence/ApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Resource/src/Infrastructure/Persistence/ApplicationDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Resource/src/WebApi/Services/CurrentUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Resource/src/WebApi/Services/CurrentUserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/Application/Common/Behaviours/RequestLogger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Application/Common/Behaviours/RequestLogger.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/Application/Common/Behaviours/RequestPerformanceBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Application/Common/Behaviours/RequestPerformanceBehaviour.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/Application/Common/Interfaces/IApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Application/Common/Interfaces/IApplicationDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/Application/Common/Interfaces/ICurrentUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Application/Common/Interfaces/ICurrentUserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/Application/Common/Mappings/IMapFrom.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Application/Common/Mappings/IMapFrom.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/Domain/Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Domain/Domain.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/Infrastructure/Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Infrastructure/Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/Infrastructure/Persistence/ApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Infrastructure/Persistence/ApplicationDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebApi/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/WebApi/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebApi/Services/CurrentUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/WebApi/Services/CurrentUserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebApi/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/WebApi/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebApi/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/WebApi/appsettings.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/WebApi/appsettings.Development.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Domain/Entities/User.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Application/User/Commands/AuthenticateUser/AuthenticateUserCommand.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/WebApi/appsettings.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/WebApi/Startup.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectId" id="1bXFGv75tPIrKpamrDOcya0DJ82" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
+  </component>
+  <component name="RunManager" selected=".NET Launch Settings Profile.WebApi">
+    <configuration name="WebApi" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
+      <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/src/WebApi/WebApi.csproj" />
+      <option name="LAUNCH_PROFILE_TFM" value=".NETCoreApp,Version=v3.1" />
+      <option name="LAUNCH_PROFILE_NAME" value="WebApi" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
+      <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
+      <option name="SEND_DEBUG_REQUEST" value="1" />
+      <option name="ADDITIONAL_IIS_EXPRESS_ARGUMENTS" value="" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
+    <configuration name="WebApi: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
+      <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/src/WebApi/WebApi.csproj" />
+      <option name="LAUNCH_PROFILE_TFM" value=".NETCoreApp,Version=v3.1" />
+      <option name="LAUNCH_PROFILE_NAME" value="IIS Express" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
+      <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
+      <option name="SEND_DEBUG_REQUEST" value="1" />
+      <option name="ADDITIONAL_IIS_EXPRESS_ARGUMENTS" value="" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8af318f3-a25a-4d53-870d-f1bbf233e81b" name="Default Changelist" comment="" />
+      <created>1588770438953</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1588770438953</updated>
+      <workItem from="1588770443497" duration="1636000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="null" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>

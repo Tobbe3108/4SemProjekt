@@ -37,7 +37,7 @@ namespace User.Application.Common.Behaviours
             if (elapsedMilliseconds > 500)
             {
                 var requestName = typeof(TRequest).Name;
-                var userName = _currentUserService.UserId ?? string.Empty;
+                var userName = _currentUserService.Username ?? string.Empty;
 
                 _logger.LogWarning(
                     "Resource Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@UserName} {@Request}",

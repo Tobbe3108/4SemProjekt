@@ -32,7 +32,7 @@ namespace WebApi
                 }
                 catch (Exception ex)
                 {
-                    var logger = scope.ServiceProvider.GetRequiredService<ILogger>();
+                    var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
 
                     logger.LogError(ex, "An error occurred while migrating or seeding the database.");
 

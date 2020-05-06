@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Tobbe\.nuget\packages\microsoft.net.test.sdk\16.4.0\build\netcoreapp2.1" t="Include">
+      <e p="Microsoft.NET.Test.Sdk.Program.cs" t="Include" />
+    </e>
+    <e p="C:\Users\Tobbe\.nuget\packages\microsoft.testplatform.testhost\16.4.0\build\netcoreapp2.1\x64\testhost.dll" t="Include" />
+    <e p="C:\Users\Tobbe\.nuget\packages\microsoft.testplatform.testhost\16.4.0\build\netcoreapp2.1\x64\testhost.exe" t="Include" />
+    <e p="C:\Users\Tobbe\.nuget\packages\nunit3testadapter\3.15.1\build\netcoreapp2.0\nunit.engine.api.dll" t="Include" />
+    <e p="C:\Users\Tobbe\.nuget\packages\nunit3testadapter\3.15.1\build\netcoreapp2.0\nunit.engine.dll" t="Include" />
+    <e p="C:\Users\Tobbe\.nuget\packages\nunit3testadapter\3.15.1\build\netcoreapp2.0\NUnit3.TestAdapter.dll" t="Include" />
+    <e p="C:\Users\Tobbe\.nuget\packages\nunit3testadapter\3.15.1\build\netcoreapp2.0\NUnit3.TestAdapter.pdb" t="Include" />
+    <e p="C:\Users\Tobbe\AppData\Local\JetBrains\Rider2020.1\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Tobbe\AppData\Local\JetBrains\Rider2020.1\resharper-host\Local\Transient\ReSharperHost\v201\SolutionCaches\_Resource.-1950403084.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Tobbe\AppData\Roaming\JetBrains\Rider2020.1\scratches" t="IncludeRecursive" />
+    <e p="C:\Users\Tobbe\Documents\GitHub\SMXMS\Microservices\Resource" t="IncludeFlat">
+      <e p="LICENSE" t="Include" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="README.md" t="Include" />
+      <e p="Resource.sln" t="IncludeFlat" />
+      <e p="Solution Items" t="Include" />
+      <e p="src" t="Include">
+        <e p="Application" t="IncludeRecursive">
+          <e p="Application.csproj" t="IncludeRecursive" />
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="Common" t="Include">
+            <e p="Behaviours" t="Include">
+              <e p="RequestLogger.cs" t="Include" />
+              <e p="RequestPerformanceBehaviour.cs" t="Include" />
+              <e p="RequestValidationBehavior.cs" t="Include" />
+              <e p="UnhandledExceptionBehaviour.cs" t="Include" />
+            </e>
+            <e p="Exceptions" t="Include">
+              <e p="NotFoundException.cs" t="Include" />
+              <e p="ValidationException.cs" t="Include" />
+            </e>
+            <e p="Interfaces" t="Include">
+              <e p="IApplicationDbContext.cs" t="Include" />
+              <e p="ICurrentUserService.cs" t="Include" />
+              <e p="IDateTime.cs" t="Include" />
+            </e>
+            <e p="Mappings" t="Include">
+              <e p="IMapFrom.cs" t="Include" />
+              <e p="MappingProfile.cs" t="Include" />
+            </e>
+            <e p="Models" t="Include">
+              <e p="Result.cs" t="Include" />
+            </e>
+          </e>
+          <e p="DependencyInjection.cs" t="Include" />
+          <e p="obj" t="ExcludeRecursive">
+            <e p="Debug" t="Include">
+              <e p="netstandard2.1" t="Include">
+                <e p="Application.AssemblyInfo.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="Resource" t="Include">
+            <e p="Commands" t="Include">
+              <e p="CreateResource" t="Include">
+                <e p="CreateResourceCommand.cs" t="Include" />
+                <e p="CreateResourceCommandValidator.cs" t="Include" />
+              </e>
+              <e p="DeleteResource" t="Include">
+                <e p="DeleteResourceCommand.cs" t="Include" />
+                <e p="DeleteResourceCommandValidator.cs" t="Include" />
+              </e>
+              <e p="UpdateResource" t="Include">
+                <e p="UpdateResourceCommand.cs" t="Include" />
+                <e p="UpdateResourceCommandValidator.cs" t="Include" />
+              </e>
+            </e>
+            <e p="Queries" t="Include">
+              <e p="GetResources" t="Include">
+                <e p="GetResourceQuery.cs" t="Include" />
+                <e p="GetResourcesQuery.cs" t="Include" />
+                <e p="ResourceDto.cs" t="Include" />
+                <e p="ResourcesVm.cs" t="Include" />
+                <e p="ResourceVm.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+        </e>
+        <e p="Domain" t="IncludeRecursive">
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="Common" t="Include">
+            <e p="AuditableEntity.cs" t="Include" />
+          </e>
+          <e p="Domain.csproj" t="IncludeRecursive" />
+          <e p="Entities" t="Include">
+            <e p="Resource.cs" t="Include" />
+          </e>
+          <e p="obj" t="ExcludeRecursive">
+            <e p="Debug" t="Include">
+              <e p="netstandard2.1" t="Include">
+                <e p="Domain.AssemblyInfo.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+        </e>
+        <e p="Infrastructure" t="IncludeRecursive">
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="DependencyInjection.cs" t="Include" />
+          <e p="Infrastructure.csproj" t="IncludeRecursive" />
+          <e p="obj" t="ExcludeRecursive">
+            <e p="Debug" t="Include">
+              <e p="netcoreapp3.1" t="Include">
+                <e p="Infrastructure.AssemblyInfo.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="Persistence" t="Include">
+            <e p="ApplicationDbContext.cs" t="Include" />
+            <e p="ApplicationDbContextSeed.cs" t="Include" />
+            <e p="Configurations" t="Include">
+              <e p="ResourceConfiguration.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Services" t="Include">
+            <e p="DateTimeService.cs" t="Include" />
+          </e>
+        </e>
+        <e p="WebApi" t="IncludeRecursive">
+          <e p="appsettings.Development.json" t="Include" />
+          <e p="appsettings.json" t="Include" />
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="Controllers" t="Include">
+            <e p="ApiController.cs" t="Include" />
+            <e p="ResourceController.cs" t="Include" />
+          </e>
+          <e p="Filters" t="Include">
+            <e p="ApiExceptionFilter.cs" t="Include" />
+          </e>
+          <e p="obj" t="ExcludeRecursive">
+            <e p="Debug" t="Include">
+              <e p="netcoreapp3.1" t="Include">
+                <e p="WebApi.AssemblyInfo.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="Program.cs" t="Include" />
+          <e p="Properties" t="Include">
+            <e p="launchSettings.json" t="Include" />
+          </e>
+          <e p="Services" t="Include">
+            <e p="CurrentUserService.cs" t="Include" />
+          </e>
+          <e p="Startup.cs" t="Include" />
+          <e p="WebApi.csproj" t="IncludeRecursive" />
+        </e>
+      </e>
+      <e p="tests" t="Include">
+        <e p="Application.UnitTests" t="IncludeRecursive">
+          <e p="Application.UnitTests.csproj" t="IncludeRecursive" />
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="Common" t="Include">
+            <e p="Mappings" t="Include">
+              <e p="MappingTests.cs" t="Include" />
+            </e>
+          </e>
+          <e p="obj" t="ExcludeRecursive">
+            <e p="Debug" t="Include">
+              <e p="netcoreapp3.1" t="Include">
+                <e p="Application.UnitTests.AssemblyInfo.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+        </e>
+        <e p="Applicaton.IntegrationTests" t="IncludeRecursive">
+          <e p="Application.IntegrationTests.csproj" t="IncludeRecursive" />
+        </e>
+        <e p="Domain.UnitTests" t="IncludeRecursive">
+          <e p="Domain.UnitTests.csproj" t="IncludeRecursive" />
+        </e>
+      </e>
+    </e>
+  </component>
+</project>

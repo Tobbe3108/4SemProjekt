@@ -3,7 +3,7 @@ using Resource.Application.Resource.Commands.CreateResource;
 
 namespace Resource.Application.Resource.Commands.UpdateResource
 {
-    public class UpdateResourceCommandValidator: AbstractValidator<UpdateResourceCommand>
+    public class UpdateResourceCommandValidator : AbstractValidator<UpdateResourceCommand>
     {
         public UpdateResourceCommandValidator()
         {

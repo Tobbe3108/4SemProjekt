@@ -18,6 +18,7 @@ using User.Application;
 using User.Application.Common.Interfaces;
 using User.Infrastructure;
 using User.Infrastructure.Persistence;
+using WebApi.Filters;
 using WebApi.Services;
 
 namespace WebApi
@@ -109,6 +110,7 @@ namespace WebApi
                         new List<string>()
                     }
                 });
+                c.SchemaFilter<SchemaFilter>();
             });
         }
 

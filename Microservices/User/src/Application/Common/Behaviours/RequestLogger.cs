@@ -20,7 +20,7 @@ namespace User.Application.Common.Behaviours
         public async Task Process(TRequest request, CancellationToken cancellationToken)
         {
             var requestName = typeof(TRequest).Name;
-            var userName = _currentUserService.UserId ?? string.Empty;
+            var userName = _currentUserService.Username ?? string.Empty;
 
             _logger.LogInformation("Resource Request: {Name} {@UserName} {@Request}",
                 requestName, userName, request);

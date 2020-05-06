@@ -14,7 +14,6 @@ namespace User.Infrastructure.Persistence
         private readonly ICurrentUserService _currentUserService;
         private readonly IDateTime _dateTime;
         private IDbContextTransaction _currentTransaction;
-
         
         public ApplicationDbContext(
             DbContextOptions options,
@@ -24,7 +23,9 @@ namespace User.Infrastructure.Persistence
             _currentUserService = currentUserService;
             _dateTime = dateTime;
         }
-        
+
+        public DbSet<Domain.Entities.User> Users { get; set; }
+
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
@@ -32,11 +33,11 @@ namespace User.Infrastructure.Persistence
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.CreatedBy = _currentUserService.UserId;
+                        entry.Entity.CreatedBy = _currentUserService.Username;
                         entry.Entity.Created = _dateTime.Now;
                         break;
                     case EntityState.Modified:
-                        entry.Entity.LastModifiedBy = _currentUserService.UserId;
+                        entry.Entity.LastModifiedBy = _currentUserService.Username;
                         entry.Entity.LastModified = _dateTime.Now;
                         break;
                 }
