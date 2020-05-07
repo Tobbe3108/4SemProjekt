@@ -2,7 +2,7 @@
 
 namespace Auth.Domain.Common
 {
-    public abstract class AuditableEntity
+    public abstract class BaseEntity
     {
         public string CreatedBy { get; set; }
 

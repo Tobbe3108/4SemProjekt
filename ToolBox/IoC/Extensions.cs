@@ -15,11 +15,11 @@ namespace ToolBox.IoC
             services.AddSingleton<IEventBus, RabbitMqBus>(sp =>
             {
                 var scopeFactory = sp.GetRequiredService<IServiceScopeFactory>();
-                return new RabbitMqBus(sp.GetService<IMediator>(), scopeFactory);
+                return new RabbitMqBus(scopeFactory);
             });
         }
 
-        public static void Subscribe<T, TH>(this IApplicationBuilder app) where T : Event where TH : IEventHandler<T>
+        public static void Subscribe<T, TH>(this IApplicationBuilder app) where T : BaseEvent where TH : IEventHandler<T>
         {
             var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
             eventBus.Subscribe<T, TH>();

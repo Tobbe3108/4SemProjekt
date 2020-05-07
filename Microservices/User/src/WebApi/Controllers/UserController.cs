@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using User.Application.User.Commands.CreateUser;
+using User.Application.User.Commands.DeleteUser;
 using User.Application.User.Commands.UpdateUser;
 using User.Application.User.Queries.GetUser;
 
@@ -40,6 +41,14 @@ namespace WebApi.Controllers
             
             await Mediator.Send(command);
             
+            return NoContent();
+        }
+        
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(Guid id)
+        {
+            await Mediator.Send(new DeleteUserCommand {Id = id});
+
             return NoContent();
         }
     }

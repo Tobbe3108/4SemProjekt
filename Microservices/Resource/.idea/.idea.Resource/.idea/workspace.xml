@@ -1,7 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c6fa22ce-3f77-41b5-8081-c508653b1ea5" name="Default Changelist" comment="" />
+    <list default="true" id="c6fa22ce-3f77-41b5-8081-c508653b1ea5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../Auth/src/Application/User/IntegrationEvents/UserCreated/UserCreatedEvent.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../User/src/Application/User/Commands/CreateUser/UserCreatedEvent.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../User/src/Application/User/Commands/DeleteUser/DeleteUserCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../User/src/Application/User/Commands/DeleteUser/DeleteUserCommandValidator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Auth/.idea/.idea.Auth/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Auth/.idea/.idea.Auth/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Auth/src/WebApi/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Auth/src/WebApi/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Auth/src/WebApi/WebApi.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../Auth/src/WebApi/WebApi.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Resource/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Resource/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/Application/Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Application/Application.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/Application/User/Commands/CreateUser/CreateUserCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Application/User/Commands/CreateUser/CreateUserCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/Application/User/Commands/UpdateUser/UpdateUserCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Application/User/Commands/UpdateUser/UpdateUserCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/Domain/Common/AuditableEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Domain/Common/BaseEntity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/Infrastructure/Persistence/ApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Infrastructure/Persistence/ApplicationDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebApi/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/WebApi/Controllers/UserController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebApi/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/WebApi/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ToolBox/Bus/Interfaces/IEventBus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../ToolBox/Bus/Interfaces/IEventBus.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ToolBox/Bus/RabbitMqBus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../ToolBox/Bus/RabbitMqBus.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ToolBox/Commands/Command.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ToolBox/Events/Event.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../ToolBox/Events/BaseEvent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ToolBox/Events/Message.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ToolBox/IoC/Extensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../ToolBox/IoC/Extensions.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,6 +39,8 @@
     <setting file="file://$PROJECT_DIR$/src/Application/Resource/Queries/GetResources/GetResourceQuery.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Infrastructure/Persistence/Configurations/ResourceConfiguration.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Application/Resource/Queries/GetResources/ResourceVm.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Application/Resource/Commands/DeleteResource/DeleteResourceCommand.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Application/Resource/Commands/DeleteResource/DeleteResourceCommandValidator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Application/Resource/Queries/GetResources/ResourceDto.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -82,6 +106,7 @@
       <updated>1588770401297</updated>
       <workItem from="1588770406868" duration="26000" />
       <workItem from="1588770919210" duration="3251000" />
+      <workItem from="1588838882359" duration="1462000" />
     </task>
     <servers />
   </component>

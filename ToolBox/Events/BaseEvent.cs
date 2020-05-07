@@ -1,11 +1,10 @@
 ﻿using System;
-using ToolBox.Events;
 
-namespace ToolBox.Commands
+namespace ToolBox.Events
 {
-    public abstract class Command : Message
+    public abstract class BaseEvent
     {
-        protected Command()
+        protected BaseEvent()
         {
             TimeStamp = DateTime.Now;
         }

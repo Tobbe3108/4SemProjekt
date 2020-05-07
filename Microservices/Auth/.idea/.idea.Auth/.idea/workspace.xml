@@ -20,7 +20,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8af318f3-a25a-4d53-870d-f1bbf233e81b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Application/User/IntegrationEvents/UserCreated/UserCreatedEvent.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../User/src/Application/User/Commands/CreateUser/UserCreatedEvent.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../User/src/Application/User/Commands/DeleteUser/DeleteUserCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../User/src/Application/User/Commands/DeleteUser/DeleteUserCommandValidator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Auth/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Auth/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WebApi/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/WebApi/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WebApi/WebApi.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/WebApi/WebApi.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Resource/.idea/.idea.Resource/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Resource/.idea/.idea.Resource/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/Application/Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Application/Application.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/Application/User/Commands/CreateUser/CreateUserCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Application/User/Commands/CreateUser/CreateUserCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/Application/User/Commands/UpdateUser/UpdateUserCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Application/User/Commands/UpdateUser/UpdateUserCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/Domain/Common/AuditableEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Domain/Common/BaseEntity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/Infrastructure/Persistence/ApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Infrastructure/Persistence/ApplicationDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebApi/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/WebApi/Controllers/UserController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebApi/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/WebApi/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ToolBox/Bus/Interfaces/IEventBus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../ToolBox/Bus/Interfaces/IEventBus.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ToolBox/Bus/RabbitMqBus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../ToolBox/Bus/RabbitMqBus.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ToolBox/Commands/Command.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ToolBox/Events/Event.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../ToolBox/Events/BaseEvent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ToolBox/Events/Message.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ToolBox/IoC/Extensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../ToolBox/IoC/Extensions.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,13 +112,14 @@
       <option name="presentableId" value="Default" />
       <updated>1588770438953</updated>
       <workItem from="1588770443497" duration="1636000" />
+      <workItem from="1588838884735" duration="596000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
   </component>
-  <component name="UnityProjectConfiguration" hasMinimizedUI="null" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -110,6 +131,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />

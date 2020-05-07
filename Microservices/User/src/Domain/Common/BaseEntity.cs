@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace User.Domain.Common
 {
-    public abstract class AuditableEntity
+    public abstract class BaseEntity
     {
         public string CreatedBy { get; set; }
 

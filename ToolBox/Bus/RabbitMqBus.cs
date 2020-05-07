@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using ToolBox.Bus.Interfaces;
-using ToolBox.Commands;
 using ToolBox.Events;
 
 namespace ToolBox.Bus
@@ -18,31 +16,22 @@ namespace ToolBox.Bus
     {
         private readonly List<Type> _eventTypes;
         private readonly Dictionary<string, List<Type>> _handlers;
-        private readonly IMediator _mediator;
         private readonly IServiceScopeFactory _serviceScopeFactory;
 
-        public RabbitMqBus(IMediator mediator, IServiceScopeFactory serviceScopeFactory)
+        public RabbitMqBus(IServiceScopeFactory serviceScopeFactory)
         {
-            _mediator = mediator;
             _serviceScopeFactory = serviceScopeFactory;
             _handlers = new Dictionary<string, List<Type>>();
             _eventTypes = new List<Type>();
         }
-
-        public Task SendCommand<T>(T command) where T : Command
+        
+        public void PublishEvent<T>(T @event) where T : BaseEvent
         {
-            return _mediator.Send(command);
-        }
-
-        public void PublishEvent<T>(T @event) where T : Event
-        {
-            var factory = new ConnectionFactory
-            {
-                Uri = new Uri(@"amqp://uuwjhqtb:FIaXRCFlumGxOENo0TGLM-M8c6T850uK@hawk.rmq.cloudamqp.com/uuwjhqtb")
-            };
+            var factory = new ConnectionFactory {HostName = "localhost", UserName = "guest", Password = "guest"};
 
             using var connection = factory.CreateConnection();
             using var channel = connection.CreateModel();
+            
             var eventName = @event.GetType().Name;
             var message = JsonConvert.SerializeObject(@event);
             var body = Encoding.UTF8.GetBytes(message);
@@ -51,7 +40,7 @@ namespace ToolBox.Bus
             channel.BasicPublish(eventName, "", null, body);
         }
 
-        public void Subscribe<T, TH>() where T : Event where TH : IEventHandler<T>
+        public void Subscribe<T, TH>() where T : BaseEvent where TH : IEventHandler<T>
         {
             var eventName = typeof(T).Name;
             var handlerType = typeof(TH);
@@ -67,14 +56,14 @@ namespace ToolBox.Bus
             StartBasicConsume<T>();
         }
 
-        private void StartBasicConsume<T>() where T : Event
+        private void StartBasicConsume<T>() where T : BaseEvent
         {
             var factory = new ConnectionFactory
             {
-                Uri = new Uri(@"amqp://uuwjhqtb:FIaXRCFlumGxOENo0TGLM-M8c6T850uK@hawk.rmq.cloudamqp.com/uuwjhqtb")
+                HostName = "localhost",
+                DispatchConsumersAsync = true
             };
-
-
+            
             var connection = factory.CreateConnection();
             var channel = connection.CreateModel();
             var eventName = typeof(T).Name;

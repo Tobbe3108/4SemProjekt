@@ -31,7 +31,7 @@ namespace Auth.Infrastructure.Persistence
         
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
-            foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
+            foreach (var entry in ChangeTracker.Entries<BaseEntity>())
                 switch (entry.State)
                 {
                     case EntityState.Added:

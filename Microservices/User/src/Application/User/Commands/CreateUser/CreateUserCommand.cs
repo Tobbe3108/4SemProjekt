@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using ToolBox.Bus.Interfaces;
 using User.Application.Common.Interfaces;
 
 namespace User.Application.User.Commands.CreateUser
@@ -19,16 +20,20 @@ namespace User.Application.User.Commands.CreateUser
     class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Guid>
     {
         private readonly IApplicationDbContext _dbContext;
+        private readonly IEventBus _eventBus;
 
-        public CreateUserCommandHandler(IApplicationDbContext dbContext)
+        public CreateUserCommandHandler(IApplicationDbContext dbContext, IEventBus eventBus)
         {
             _dbContext = dbContext;
+            _eventBus = eventBus;
         }
 
         public async Task<Guid> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
+            var id = Guid.NewGuid();
             var entity = new Domain.Entities.User
             {
+                Id = id,
                 Username = request.Username,
                 Email = request.Email,
                 FirstName = request.FirstName,
@@ -39,11 +44,19 @@ namespace User.Application.User.Commands.CreateUser
             await _dbContext.Users.AddAsync(entity, cancellationToken);
 
             await _dbContext.SaveChangesAsync(cancellationToken);
-
-            return entity.Id;
             
             //TODO Transactional Outbox
             //TODO Send password with event
+            _eventBus.PublishEvent(new UserCreatedEvent
+            {
+                Id = id,
+                Username = request.Username,
+                Email = request.Email,
+                Password = request.Password
+            });
+            
+            return entity.Id;
+            
         }
     }
 }

@@ -1,17 +1,16 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Auth.Application;
 using Auth.Application.Common.Interfaces;
-using Auth.Application.Common.Models;
+using Auth.Application.User.IntegrationEvents.UserCreated;
+using Auth.Application.User.IntegrationEvents.UserDeleted;
+using Auth.Application.User.IntegrationEvents.UserUpdated;
 using Auth.Domain.Entities;
 using Auth.Infrastructure;
 using Auth.Infrastructure.Persistence;
-using Auth.Infrastructure.Services;
 using Auth.WebApi.Filters;
 using Auth.WebApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -23,6 +22,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using ToolBox.IoC;
+
 
 namespace Auth.WebApi
 {
@@ -68,11 +69,14 @@ namespace Auth.WebApi
                     };
                 });
             
-            
             services.AddApplication();
             services.AddInfrastructure(Configuration);
-
+            services.AddRabbitMq();
+            
             services.AddScoped<ICurrentUserService, CurrentUserService>();
+            services.AddTransient<UserCreatedEventHandler>();
+            services.AddTransient<UserUpdatedEventHandler>();
+            services.AddTransient<UserDeletedEventHandler>();
 
             services.AddHttpContextAccessor();
 
@@ -105,6 +109,7 @@ namespace Auth.WebApi
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            
 
             app.UseHealthChecks("/health");
             app.UseHttpsRedirection();
@@ -121,10 +126,13 @@ namespace Auth.WebApi
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Auth Microservice v1"));
             
             await CreateRoles(serviceProvider);
+            
+            app.Subscribe<UserCreatedEvent, UserCreatedEventHandler>();
+            app.Subscribe<UserUpdatedEvent, UserUpdatedEventHandler>();
+            app.Subscribe<UserDeletedEvent, UserDeletedEventHandler>();
         }
         
         private async Task CreateRoles(IServiceProvider serviceProvider)
-
         {
             //adding custom roles
 

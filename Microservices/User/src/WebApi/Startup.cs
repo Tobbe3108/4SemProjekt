@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using ToolBox.IoC;
 using User.Application;
 using User.Application.Common.Interfaces;
 using User.Infrastructure;
@@ -67,6 +68,7 @@ namespace WebApi
             
             services.AddApplication();
             services.AddInfrastructure(Configuration);
+            services.AddRabbitMq();
             
             services.AddScoped<ICurrentUserService, CurrentUserService>();
 

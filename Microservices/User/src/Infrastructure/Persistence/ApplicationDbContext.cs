@@ -3,6 +3,7 @@ using User.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Data;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,9 +27,10 @@ namespace User.Infrastructure.Persistence
 
         public DbSet<Domain.Entities.User> Users { get; set; }
 
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
-            foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
+            
+            foreach (var entry in ChangeTracker.Entries<BaseEntity>())
             {
                 switch (entry.State)
                 {
@@ -42,8 +44,8 @@ namespace User.Infrastructure.Persistence
                         break;
                 }
             }
-
-            return base.SaveChangesAsync(cancellationToken);
+            
+            return await base.SaveChangesAsync(cancellationToken);
         }
 
         public async Task BeginTransactionAsync()
