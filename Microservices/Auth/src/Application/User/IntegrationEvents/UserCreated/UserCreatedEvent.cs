@@ -33,7 +33,7 @@ namespace Auth.Application.User.IntegrationEvents.UserCreated
         {
             _logger.LogInformation("UserCreatedEventHandler Called");
             string salt = _hashService.GenerateSalt();
-            Domain.Entities.User userToCreate = new Domain.Entities.User
+            Domain.Entities.AuthUser authUserToCreate = new Domain.Entities.AuthUser
             {
                 Id = @event.Id,
                 UserName = @event.Username,
@@ -42,7 +42,7 @@ namespace Auth.Application.User.IntegrationEvents.UserCreated
                 PasswordHash = _hashService.GenerateHash(@event.Password, salt)
             };
 
-            await _dbContext.Users.AddAsync(userToCreate);
+            await _dbContext.Users.AddAsync(authUserToCreate);
             await _dbContext.SaveChangesAsync(CancellationToken.None);
             await Task.CompletedTask;
         }

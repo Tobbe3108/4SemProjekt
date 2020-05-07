@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace User.Domain.Entities
 {
@@ -14,5 +15,6 @@ namespace User.Domain.Entities
         public string City { get; set; }
         public string Country { get; set; }
         public int? ZipCode { get; set; }
+        [NotMapped] public string Password { get; set; }
     }
 }

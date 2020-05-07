@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Auth.Infrastructure.Persistence.Configurations
 {
-    public class UserConfiguration : IEntityTypeConfiguration<Domain.Entities.User>
+    public class UserConfiguration : IEntityTypeConfiguration<Domain.Entities.AuthUser>
     {
-        public void Configure(EntityTypeBuilder<Domain.Entities.User> builder)
+        public void Configure(EntityTypeBuilder<Domain.Entities.AuthUser> builder)
         {
             builder.Property(t => t.UserName)
                 .IsUnicode()

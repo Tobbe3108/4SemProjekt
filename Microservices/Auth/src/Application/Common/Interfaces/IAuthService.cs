@@ -2,6 +2,6 @@
 {
     public interface IAuthService
     {
-        string GenerateJsonWebToken(Domain.Entities.User user);
+        string GenerateJsonWebToken(Domain.Entities.AuthUser authUser);
     }
 }

@@ -7,7 +7,7 @@ namespace Auth.Application.Common.Interfaces
 {
     public interface IApplicationDbContext
     {
-        DbSet<Domain.Entities.User> Users { get; set; }
+        DbSet<Domain.Entities.AuthUser> Users { get; set; }
         DbSet<Role> Roles { get; set; }
         DbSet<UserRole> UserRoles { get; set; }
 

@@ -16,12 +16,10 @@ namespace User.Application.User.Commands.DeleteUser
     class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand>
     {
         private readonly IApplicationDbContext _context;
-        private readonly IEventBus _eventBus;
 
-        public DeleteUserCommandHandler(IApplicationDbContext context, IEventBus eventBus)
+        public DeleteUserCommandHandler(IApplicationDbContext context)
         {
             _context = context;
-            _eventBus = eventBus;
         }
         
         public async Task<Unit> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
@@ -39,11 +37,7 @@ namespace User.Application.User.Commands.DeleteUser
 
             //TODO Transactional Outbox
             //TODO Send password with event
-            _eventBus.PublishEvent(new UserDeletedEvent
-            {
-                Id = request.Id
-            });
-            
+
             return Unit.Value;
             
         }

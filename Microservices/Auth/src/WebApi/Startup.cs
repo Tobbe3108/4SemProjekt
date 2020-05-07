@@ -158,7 +158,7 @@ namespace Auth.WebApi
             if (user == null)
             {
                 //creating an admin
-                var admin = new User
+                var admin = new AuthUser
                 {
                     Id = Guid.NewGuid(),
                     UserName = Configuration.GetSection("UserSettings")["UserName"],

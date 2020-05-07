@@ -6,7 +6,7 @@ using Auth.Domain.Common;
 
 namespace Auth.Domain.Entities
 {
-    public class User : BaseEntity
+    public class AuthUser : BaseEntity
     {
         public Guid Id { get; set; }
         public string UserName { get; set; }

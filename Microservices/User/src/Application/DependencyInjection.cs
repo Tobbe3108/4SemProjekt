@@ -4,6 +4,8 @@ using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using User.Application.Common.Interfaces;
+using User.Application.User.Commands.CreateUser;
 
 namespace User.Application
 {
@@ -18,6 +20,14 @@ namespace User.Application
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
 
+            services.Scan(
+                scan => scan
+                    .FromAssemblyOf<IEventMapper>()
+                    .AddClasses(classes => classes.AssignableTo(typeof(IEventMapper)))
+                    .AsImplementedInterfaces()
+                    .WithSingletonLifetime()
+            );
+            
             return services;
         }
     }

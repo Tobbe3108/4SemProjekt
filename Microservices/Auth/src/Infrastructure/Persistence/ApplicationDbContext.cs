@@ -25,7 +25,7 @@ namespace Auth.Infrastructure.Persistence
             _dateTime = dateTime;
         }
         
-        public DbSet<Domain.Entities.User> Users { get; set; }
+        public DbSet<Domain.Entities.AuthUser> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
         

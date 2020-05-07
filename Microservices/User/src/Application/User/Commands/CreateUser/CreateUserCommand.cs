@@ -20,25 +20,23 @@ namespace User.Application.User.Commands.CreateUser
     class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Guid>
     {
         private readonly IApplicationDbContext _dbContext;
-        private readonly IEventBus _eventBus;
 
-        public CreateUserCommandHandler(IApplicationDbContext dbContext, IEventBus eventBus)
+        public CreateUserCommandHandler(IApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
-            _eventBus = eventBus;
         }
 
         public async Task<Guid> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            var id = Guid.NewGuid();
             var entity = new Domain.Entities.User
             {
-                Id = id,
+                Id = Guid.NewGuid(),
                 Username = request.Username,
                 Email = request.Email,
                 FirstName = request.FirstName,
                 LastName = request.LastName,
-                NormalizedUserName = request.Username.ToUpperInvariant()
+                NormalizedUserName = request.Username.ToUpperInvariant(),
+                Password = request.Password
             };
 
             await _dbContext.Users.AddAsync(entity, cancellationToken);
@@ -47,14 +45,7 @@ namespace User.Application.User.Commands.CreateUser
             
             //TODO Transactional Outbox
             //TODO Send password with event
-            _eventBus.PublishEvent(new UserCreatedEvent
-            {
-                Id = id,
-                Username = request.Username,
-                Email = request.Email,
-                Password = request.Password
-            });
-            
+
             return entity.Id;
             
         }

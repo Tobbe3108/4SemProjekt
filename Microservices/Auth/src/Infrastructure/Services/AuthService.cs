@@ -30,7 +30,7 @@ namespace Auth.Infrastructure.Services
             _config = config;
         }
         
-        public string GenerateJsonWebToken(User user)
+        public string GenerateJsonWebToken(AuthUser authUser)
         {
             SecurityKey key = KeyService.BuildRsaSigningKey(xmlKey);
 
@@ -38,14 +38,14 @@ namespace Auth.Infrastructure.Services
 
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.UserName ?? string.Empty),
-                new Claim(JwtRegisteredClaimNames.Email, user.Email ?? string.Empty),
+                new Claim(JwtRegisteredClaimNames.Sub, authUser.UserName ?? string.Empty),
+                new Claim(JwtRegisteredClaimNames.Email, authUser.Email ?? string.Empty),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             };
 
             List<string> roles = new List<string>();
 
-            foreach (var userRole in user.UserRoles)
+            foreach (var userRole in authUser.UserRoles)
             {
                 roles.Add(userRole.Role.RoleName);
             }

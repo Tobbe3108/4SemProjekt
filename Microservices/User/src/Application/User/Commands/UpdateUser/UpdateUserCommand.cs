@@ -58,14 +58,7 @@ namespace User.Application.User.Commands.UpdateUser
             
             //TODO Transactional Outbox
             //TODO Send password with event
-            _eventBus.PublishEvent(new UserUpdatedEvent
-            {
-                Id = request.Id,
-                Username = request.Username,
-                Email = request.Email,
-                Password = request.Password
-            });
-            
+
             return Unit.Value;
             
         }
