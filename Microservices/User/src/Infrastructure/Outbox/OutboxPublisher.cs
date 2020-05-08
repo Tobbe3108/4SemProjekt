@@ -2,15 +2,13 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using ToolBox.Bus.Interfaces;
-using User.Application.Common.Interfaces;
 using User.Domain.Entities;
 using User.Infrastructure.Persistence;
 
-namespace User.Infrastructure.Events.Outbox
+namespace User.Infrastructure.Outbox
 {
     public class OutboxPublisher
     {

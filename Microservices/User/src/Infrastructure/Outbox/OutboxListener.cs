@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Channels;
 using Microsoft.Extensions.Logging;
 
-namespace User.Infrastructure.Events.Outbox
+namespace User.Infrastructure.Outbox
 {
     public class OutboxListener
     {

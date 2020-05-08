@@ -45,33 +45,11 @@ namespace Auth.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var provider = new RSACryptoServiceProvider(2048);
-            provider.FromXmlString(xmlKey);
-            var key = new RsaSecurityKey(provider);
-
-            services.AddAuthentication(options =>
-                {
-                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                })
-                .AddJwtBearer(options =>
-                {
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
-                        ValidateLifetime = true,
-                        ValidateIssuerSigningKey = true,
-                        ValidIssuer = Configuration["Jwt:Issuer"],
-                        ValidAudience = Configuration["Jwt:Issuer"],
-                        IssuerSigningKey = key
-                    };
-                });
+            services.ToolboxAddAuthentication(Configuration["Jwt:Issuer"], xmlKey);
             
             services.AddApplication();
             services.AddInfrastructure(Configuration);
-            services.AddRabbitMq();
+            services.ToolboxAddRabbitMq();
             
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddTransient<UserCreatedEventHandler>();
@@ -91,6 +69,7 @@ namespace Auth.WebApi
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "Auth MicroService", Version = "v1"});
+                c.ToolboxAddSwaggerSecurity();
                 c.SchemaFilter<SchemaFilter>();
             });
         }
@@ -127,9 +106,9 @@ namespace Auth.WebApi
             
             await CreateRoles(serviceProvider);
             
-            app.Subscribe<UserCreatedEvent, UserCreatedEventHandler>();
-            app.Subscribe<UserUpdatedEvent, UserUpdatedEventHandler>();
-            app.Subscribe<UserDeletedEvent, UserDeletedEventHandler>();
+            app.ToolboxSubscribe<UserCreatedEvent, UserCreatedEventHandler>();
+            app.ToolboxSubscribe<UserUpdatedEvent, UserUpdatedEventHandler>();
+            app.ToolboxSubscribe<UserDeletedEvent, UserDeletedEventHandler>();
         }
         
         private async Task CreateRoles(IServiceProvider serviceProvider)

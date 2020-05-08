@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using User.Domain.Delegates;
-using User.Infrastructure.Events.Outbox;
+using User.Infrastructure.Outbox;
 
 namespace User.Infrastructure
 {
@@ -24,14 +24,14 @@ namespace User.Infrastructure
                         b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
-
             services.AddTransient<IDateTime, DateTimeService>();
-            
+
+            #region Outbox
             services.AddSingleton<OutboxListener>();
             services.AddSingleton<OnNewOutboxMessages>(s => s.GetRequiredService<OutboxListener>().OnNewMessages);
             services.AddSingleton<OutboxPublisher>();
-
             services.AddHostedService<OutboxPublisherBackgroundService>();
+            #endregion
 
             return services;
         }
