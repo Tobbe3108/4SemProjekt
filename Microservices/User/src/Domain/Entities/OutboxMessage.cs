@@ -11,7 +11,7 @@ namespace User.Domain.Entities
             Event = @event;
         }
 
-        public long Id { get; private set; }
+        public Guid Id { get; private set; }
 
         public DateTime CreatedAt { get; private set; }
 

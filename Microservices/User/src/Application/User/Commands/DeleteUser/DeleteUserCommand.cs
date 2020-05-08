@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -34,10 +35,7 @@ namespace User.Application.User.Commands.DeleteUser
             _context.Users.Remove(entity);
 
             await _context.SaveChangesAsync(cancellationToken);
-
-            //TODO Transactional Outbox
-            //TODO Send password with event
-
+            
             return Unit.Value;
             
         }

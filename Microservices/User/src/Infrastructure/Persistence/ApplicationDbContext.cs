@@ -1,15 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using User.Application.Common.Interfaces;
 using User.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using ToolBox.Events;
+using User.Domain.Delegates;
 using User.Domain.Entities;
 
 namespace User.Infrastructure.Persistence
@@ -20,16 +23,18 @@ namespace User.Infrastructure.Persistence
         private readonly IDateTime _dateTime;
         private readonly IEnumerable<IEventMapper> _eventMappers;
         private IDbContextTransaction _currentTransaction;
-        
+        private readonly OnNewOutboxMessages _onNewOutboxMessages;
+
         public ApplicationDbContext(
             DbContextOptions options,
             ICurrentUserService currentUserService,
             IDateTime dateTime,
-            IEnumerable<IEventMapper> eventMappers) : base(options)
+            IEnumerable<IEventMapper> eventMappers, OnNewOutboxMessages onNewOutboxMessages) : base(options)
         {
             _currentUserService = currentUserService;
             _dateTime = dateTime;
             _eventMappers = eventMappers;
+            _onNewOutboxMessages = onNewOutboxMessages;
         }
 
         public DbSet<Domain.Entities.User> Users { get; set; }
@@ -53,10 +58,15 @@ namespace User.Infrastructure.Persistence
 
             var eventsDetected = GetEvents();
             AddEventIfAny(eventsDetected);
+
+            var result = await base.SaveChangesAsync(cancellationToken);
+
+            NotifyEventsIfAny(eventsDetected);
             
-            return await base.SaveChangesAsync(cancellationToken);
+            return result;
         }
-        
+
+        #region SaveChangesAsync Helper Methods
         private IReadOnlyCollection<OutboxMessage> GetEvents()
         {
             var now = _dateTime.Now;
@@ -74,7 +84,16 @@ namespace User.Infrastructure.Persistence
             }
         }
 
+        private void NotifyEventsIfAny(IReadOnlyCollection<OutboxMessage> eventsDetected)
+        {
+            if (eventsDetected.Count > 0)
+            {
+                _onNewOutboxMessages(eventsDetected.Select(e => e.Id));
+            }
+        }
+        #endregion
 
+        #region Transaction
         public async Task BeginTransactionAsync()
         {
             if (_currentTransaction != null)
@@ -85,7 +104,6 @@ namespace User.Infrastructure.Persistence
             _currentTransaction = await base.Database.BeginTransactionAsync(IsolationLevel.ReadCommitted)
                 .ConfigureAwait(false);
         }
-
         public async Task CommitTransactionAsync()
         {
             try
@@ -108,7 +126,6 @@ namespace User.Infrastructure.Persistence
                 }
             }
         }
-
         public void RollbackTransaction()
         {
             try
@@ -124,6 +141,7 @@ namespace User.Infrastructure.Persistence
                 }
             }
         }
+        #endregion
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

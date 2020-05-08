@@ -10,10 +10,10 @@ namespace User.Application.User.Commands.CreateUser
 {
     public class CreateUserCommand : IRequest<Guid>
     {
-        [DefaultValue("TestUsername")] public string Username { get; set; }
-        [DefaultValue("Test@Mail.com")] public string Email { get; set; }
-        [DefaultValue("TestFirstname")] public string FirstName { get; set; }
-        [DefaultValue("TestLastname")] public string LastName { get; set; }
+        [DefaultValue("Trut1936")] public string Username { get; set; }
+        [DefaultValue("ThomasFBrandt@rhyta.com")] public string Email { get; set; }
+        [DefaultValue("Thomas")] public string FirstName { get; set; }
+        [DefaultValue("Brandt")] public string LastName { get; set; }
         [DefaultValue("Zxasqw12")] public string Password { get; set; }
     }
 
@@ -43,9 +43,6 @@ namespace User.Application.User.Commands.CreateUser
 
             await _dbContext.SaveChangesAsync(cancellationToken);
             
-            //TODO Transactional Outbox
-            //TODO Send password with event
-
             return entity.Id;
             
         }

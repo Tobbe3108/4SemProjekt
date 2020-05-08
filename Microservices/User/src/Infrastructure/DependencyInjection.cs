@@ -4,6 +4,8 @@ using User.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using User.Domain.Delegates;
+using User.Infrastructure.Events.Outbox;
 
 namespace User.Infrastructure
 {
@@ -25,6 +27,12 @@ namespace User.Infrastructure
 
             services.AddTransient<IDateTime, DateTimeService>();
             
+            services.AddSingleton<OutboxListener>();
+            services.AddSingleton<OnNewOutboxMessages>(s => s.GetRequiredService<OutboxListener>().OnNewMessages);
+            services.AddSingleton<OutboxPublisher>();
+
+            services.AddHostedService<OutboxPublisherBackgroundService>();
+
             return services;
         }
     }
