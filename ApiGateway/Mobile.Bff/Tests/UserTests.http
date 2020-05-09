@@ -1,0 +1,68 @@
+﻿# Get Active User
+GET {{Host}}/User
+accept: text/plain
+Authorization: {{auth_token}}
+
+> {% 
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body.user !== null, "Response user is null");
+});
+%}
+###
+
+# Get By UserId
+GET {{Host}}/User/{{user_id}}
+accept: text/plain
+Authorization: {{auth_token}}
+
+> {% 
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body.user !== null, "Response user is null");
+});
+%}
+###
+
+# Put User
+PUT {{Host}}/User/{{user_id}}
+accept: text/plain
+Content-Type: application/json
+Authorization: {{auth_token}}
+
+{
+  "id": "{{user_id}}",
+  "username": "Trut1936",
+  "email": "ThomasFBrandt@rhyta.com",
+  "password": "Zxasqw12",
+  "firstName": "Thomas",
+  "lastName": "Brandt",
+  "address": "Mølleløkken 47",
+  "city": "Odder",
+  "country": "Denmark",
+  "zipCode": 9300
+}
+
+> {% 
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 204, "Response status is not 200");
+});
+%}
+###
+
+# Delete User
+DELETE {{Host}}/User/{{user_id}}
+accept: text/plain
+Authorization: {{auth_token}}
+
+> {% 
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 204, "Response status is not 200");
+});
+%}
+###
+
+
+
+
+

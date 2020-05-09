@@ -57,7 +57,7 @@ namespace Auth.WebApi
             services.AddTransient<UserDeletedEventHandler>();
 
             services.AddHttpContextAccessor();
-
+            
             services.AddHealthChecks()
                 .AddDbContextCheck<ApplicationDbContext>();
 
@@ -89,7 +89,6 @@ namespace Auth.WebApi
                 app.UseHsts();
             }
             
-
             app.UseHealthChecks("/health");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
