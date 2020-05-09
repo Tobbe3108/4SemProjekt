@@ -1,7 +1,6 @@
 ﻿using Auth.Application.Common.Interfaces;
 using Auth.Infrastructure.Persistence;
 using Auth.Infrastructure.Services;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

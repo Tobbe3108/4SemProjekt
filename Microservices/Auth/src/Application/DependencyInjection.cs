@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Auth.Application.Common.Behaviours;
+using Auth.Application.Common.Interfaces;
 using AutoMapper;
 using FluentValidation;
 using MediatR;
@@ -17,7 +18,7 @@ namespace Auth.Application
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPerformanceBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
-
+            
             return services;
         }
     }

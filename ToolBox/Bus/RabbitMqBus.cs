@@ -36,7 +36,7 @@ namespace ToolBox.Bus
             var message = JsonConvert.SerializeObject(@event);
             var body = Encoding.UTF8.GetBytes(message);
 
-            channel.ExchangeDeclare(eventName, ExchangeType.Fanout);
+            channel.ExchangeDeclare(eventName, ExchangeType.Fanout, true);
             channel.BasicPublish(eventName, "", null, body);
         }
 
@@ -67,9 +67,9 @@ namespace ToolBox.Bus
             var connection = factory.CreateConnection();
             var channel = connection.CreateModel();
             var eventName = typeof(T).Name;
-            var queueName = channel.QueueDeclare(eventName + "-" + Guid.NewGuid(), false, false, true, null).QueueName;
+            var queueName = channel.QueueDeclare(eventName, true, false, false, null).QueueName;
 
-            channel.ExchangeDeclare(eventName, ExchangeType.Fanout);
+            channel.ExchangeDeclare(eventName, ExchangeType.Fanout, true);
             channel.QueueBind(queueName, eventName, "");
 
             var consumer = new AsyncEventingBasicConsumer(channel);

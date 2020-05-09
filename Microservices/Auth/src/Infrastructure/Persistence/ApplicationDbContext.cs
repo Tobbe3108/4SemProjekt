@@ -25,11 +25,11 @@ namespace Auth.Infrastructure.Persistence
             _dateTime = dateTime;
         }
         
-        public DbSet<Domain.Entities.AuthUser> Users { get; set; }
+        public DbSet<AuthUser> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
         
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             foreach (var entry in ChangeTracker.Entries<BaseEntity>())
                 switch (entry.State)
@@ -43,10 +43,13 @@ namespace Auth.Infrastructure.Persistence
                         entry.Entity.LastModified = _dateTime.Now;
                         break;
                 }
-
-            return base.SaveChangesAsync(cancellationToken);
+            var result = await base.SaveChangesAsync(cancellationToken);
+            
+            return result;
         }
 
+        
+        
         public async Task BeginTransactionAsync()
         {
             if (_currentTransaction != null) return;

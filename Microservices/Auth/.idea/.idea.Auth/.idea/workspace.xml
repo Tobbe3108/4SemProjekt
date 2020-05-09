@@ -20,27 +20,115 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8af318f3-a25a-4d53-870d-f1bbf233e81b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Application/User/IntegrationEvents/UserCreated/UserCreatedEvent.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User/src/Application/User/Commands/CreateUser/UserCreatedEvent.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User/src/Application/User/Commands/DeleteUser/DeleteUserCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User/src/Application/User/Commands/DeleteUser/DeleteUserCommandValidator.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Application/Common/Interfaces/IEventMapper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Application/User/IntegrationEvents/UserCreated/AuthUserCreatedEvent.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Application/User/IntegrationEvents/UserCreated/AuthUserCreatedEventMapper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Domain/Delegates/OnNewOutboxMessages.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Domain/Entities/OutboxMessage.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Infrastructure/Outbox/OutboxListener.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Infrastructure/Outbox/OutboxPublisher.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Infrastructure/Outbox/OutboxPublisherBackgroundService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Infrastructure/Persistence/Configurations/OutboxMessageConfiguration.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../User/src/Application/User/IntegrationEvents/AuthUserCreated/AuthUserCreatedEvent.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Auth/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Auth/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WebApi/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/WebApi/Startup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WebApi/WebApi.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/WebApi/WebApi.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Resource/.idea/.idea.Resource/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Resource/.idea/.idea.Resource/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Application.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/DependencyInjection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Domain/Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Domain/Domain.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Infrastructure/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Infrastructure/DependencyInjection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Infrastructure/Persistence/ApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Infrastructure/Persistence/ApplicationDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/User.sln" beforeDir="false" afterPath="$PROJECT_DIR$/../User/User.sln" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../User/src/Application/Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Application/Application.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../User/src/Application/User/Commands/CreateUser/CreateUserCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Application/User/Commands/CreateUser/CreateUserCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../User/src/Application/User/Commands/UpdateUser/UpdateUserCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Application/User/Commands/UpdateUser/UpdateUserCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../User/src/Domain/Common/AuditableEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Domain/Common/BaseEntity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/Application/User/Queries/GetUser/GetUserQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Application/User/Queries/GetUser/GetUserQuery.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/Domain/Entities/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Domain/Entities/User.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../User/src/Infrastructure/Persistence/ApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Infrastructure/Persistence/ApplicationDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../User/src/WebApi/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/WebApi/Controllers/UserController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../User/src/WebApi/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/WebApi/Startup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ToolBox/Bus/Interfaces/IEventBus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../ToolBox/Bus/Interfaces/IEventBus.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/angular.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/browserslist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/e2e/protractor.conf.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/e2e/src/app.e2e-spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/e2e/src/app.po.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/e2e/tsconfig.e2e.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/api-authorization/api-authorization.constants.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/api-authorization/api-authorization.module.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/api-authorization/api-authorization.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/api-authorization/authorize.guard.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/api-authorization/authorize.guard.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/api-authorization/authorize.interceptor.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/api-authorization/authorize.interceptor.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/api-authorization/authorize.service.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/api-authorization/authorize.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/api-authorization/login-menu/login-menu.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/api-authorization/login-menu/login-menu.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/api-authorization/login-menu/login-menu.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/api-authorization/login-menu/login-menu.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/api-authorization/login/login.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/api-authorization/login/login.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/api-authorization/login/login.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/api-authorization/login/login.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/api-authorization/logout/logout.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/api-authorization/logout/logout.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/api-authorization/logout/logout.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/api-authorization/logout/logout.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/app/app.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/app/app.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/app/app.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/app/app.server.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/app/cleanarchitecture-api.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/app/counter/counter.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/app/counter/counter.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/app/counter/counter.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/app/fetch-data/fetch-data.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/app/fetch-data/fetch-data.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/app/home/home.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/app/home/home.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/app/nav-menu/nav-menu.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/app/nav-menu/nav-menu.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/app/nav-menu/nav-menu.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/app/todo/todo.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/app/todo/todo.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/app/todo/todo.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/assets/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/environments/environment.prod.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/environments/environment.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/karma.conf.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/main.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/polyfills.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/styles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/test.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/tsconfig.app.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/tsconfig.server.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/tsconfig.spec.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/src/tslint.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/ClientApp/tslint.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/Controllers/ApiController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/Controllers/OidcConfigurationController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/Controllers/TodoItemsController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/Controllers/TodoListsController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/Controllers/WeatherForecastController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/Filters/ApiExceptionFilter.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/Pages/Error.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/Pages/Error.cshtml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/Pages/Shared/_LoginPartial.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/Pages/_ViewImports.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/Program.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/Properties/launchSettings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/Services/CurrentUserService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/Startup.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/WebUI.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/appsettings.Development.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/appsettings.Production.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/appsettings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/nswag.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/wwwroot/api/specification.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/src/WebUI/wwwroot/favicon.ico" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../ToolBox/Bus/RabbitMqBus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../ToolBox/Bus/RabbitMqBus.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ToolBox/Commands/Command.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ToolBox/Events/Event.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../ToolBox/Events/BaseEvent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ToolBox/Events/Message.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ToolBox/IoC/Extensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../ToolBox/IoC/Extensions.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,8 +139,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/Application/User/IntegrationEvents/UserCreated/AuthUserCreatedEvent.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Application/User/IntegrationEvents/UserCreated/UserCreatedEvent.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/WebApi/appsettings.Development.json" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Domain/Entities/User.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Application/User/Commands/AuthenticateUser/AuthenticateUserCommand.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/WebApi/appsettings.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/WebApi/Startup.cs" root0="FORCE_HIGHLIGHTING" />
@@ -113,6 +202,7 @@
       <updated>1588770438953</updated>
       <workItem from="1588770443497" duration="1636000" />
       <workItem from="1588838884735" duration="596000" />
+      <workItem from="1589018768957" duration="1294000" />
     </task>
     <servers />
   </component>

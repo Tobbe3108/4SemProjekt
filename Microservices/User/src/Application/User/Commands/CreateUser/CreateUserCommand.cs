@@ -36,7 +36,7 @@ namespace User.Application.User.Commands.CreateUser
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 NormalizedUserName = request.Username.ToUpperInvariant(),
-                Password = request.Password
+                Password = request.Password,
             };
 
             await _dbContext.Users.AddAsync(entity, cancellationToken);

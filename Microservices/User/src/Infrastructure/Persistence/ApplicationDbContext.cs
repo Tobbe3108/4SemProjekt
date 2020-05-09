@@ -29,7 +29,8 @@ namespace User.Infrastructure.Persistence
             DbContextOptions options,
             ICurrentUserService currentUserService,
             IDateTime dateTime,
-            IEnumerable<IEventMapper> eventMappers, OnNewOutboxMessages onNewOutboxMessages) : base(options)
+            IEnumerable<IEventMapper> eventMappers,
+            OnNewOutboxMessages onNewOutboxMessages) : base(options)
         {
             _currentUserService = currentUserService;
             _dateTime = dateTime;

@@ -54,7 +54,7 @@ namespace User.Application.User.Commands.UpdateUser
             entity.FirstName = request.FirstName;
             entity.LastName = request.LastName;
             entity.ZipCode = request.ZipCode;
-
+            
             await _dbContext.SaveChangesAsync(cancellationToken);
             
             return Unit.Value;
