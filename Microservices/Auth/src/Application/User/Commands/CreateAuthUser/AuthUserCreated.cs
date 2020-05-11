@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ToolBox.Contracts.AuthUser
+namespace Contracts.AuthUser
 {
     public interface AuthUserCreated
     {

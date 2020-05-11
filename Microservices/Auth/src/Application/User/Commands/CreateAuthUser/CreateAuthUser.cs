@@ -1,13 +1,21 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Auth.Application.Common.Interfaces;
 using MassTransit;
 using Microsoft.Extensions.Logging;
-using ToolBox.Contracts.AuthUser;
 
-namespace Auth.Application.User.Commands.CreateAuthUser
+namespace Contracts.AuthUser
 {
-    public class CreateAuthUserConsumer : IConsumer<ToolBox.Contracts.AuthUser.CreateAuthUser>
+    public interface CreateAuthUser
+    {
+        public Guid Id { get; set; }
+        public string Username { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+    }
+    
+    public class CreateAuthUserConsumer : IConsumer<CreateAuthUser>
     {
         private readonly IApplicationDbContext _dbContext;
         private readonly IHashService _hashService;
@@ -19,11 +27,11 @@ namespace Auth.Application.User.Commands.CreateAuthUser
             _hashService = hashService;
             _logger = logger;
         }
-        public async Task Consume(ConsumeContext<ToolBox.Contracts.AuthUser.CreateAuthUser> context)
+        public async Task Consume(ConsumeContext<CreateAuthUser> context)
         {
            _logger.LogInformation("CreateAuthUserConsumer Called"); 
            string salt = _hashService.GenerateSalt();
-           Domain.Entities.AuthUser authUserToCreate = new Domain.Entities.AuthUser
+           Auth.Domain.Entities.AuthUser authUserToCreate = new Auth.Domain.Entities.AuthUser
            {
                Id = context.Message.Id,
                UserName = context.Message.Username,
@@ -37,7 +45,7 @@ namespace Auth.Application.User.Commands.CreateAuthUser
            
            await context.Publish<AuthUserCreated>(new
            {
-               Id = authUserToCreate.Id
+               authUserToCreate.Id
            });
         }
     }

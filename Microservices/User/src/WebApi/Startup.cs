@@ -1,34 +1,21 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Security.Cryptography;
-using System.Threading.Tasks;
-using Automatonymous;
-using FluentValidation;
-using GreenPipes;
+using Contracts.User;
 using MassTransit;
-using MassTransit.EntityFrameworkCoreIntegration;
+using MassTransit.Definition;
 using MassTransit.Saga;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using ToolBox.Contracts;
-using ToolBox.Contracts.User;
 using ToolBox.IoC;
 using User.Application;
 using User.Application.Common.Interfaces;
 using User.Application.User.Commands.CreateUser;
+using User.Application.User.Commands.DeleteUser;
 using User.Infrastructure;
 using User.Infrastructure.Persistence;
 using WebApi.Filters;
@@ -80,16 +67,12 @@ namespace WebApi
             });
             
             #region MassTransit
-            // Consumer dependencies should be scoped
-            //services.AddScoped<SomeConsumerDependency>();
-            
+            services.TryAddSingleton(KebabCaseEndpointNameFormatter.Instance);
             services.AddMassTransit(x =>
             {
                 x.AddConsumersFromNamespaceContaining<CreateUserConsumer>();
                 x.AddRequestClient<SubmitUser>();
-
-                //x.AddSagaStateMachine<CreateUserStateMachine, CreateUserState>().InMemoryRepository();
-                
+                x.AddRequestClient<SubmitDeleteUser>();
                 x.AddBus(ConfigureBus);
             });
 
@@ -140,6 +123,10 @@ namespace WebApi
                 cfg.ReceiveEndpoint("submit-user", e =>
                 {
                     e.StateMachineSaga(new CreateUserStateMachine(), new InMemorySagaRepository<CreateUserState>());
+                });
+                cfg.ReceiveEndpoint("submit-delete-user", e =>
+                {
+                    e.StateMachineSaga(new DeleteUserStateMachine(), new InMemorySagaRepository<DeleteUserState>());
                 });
             });
         }

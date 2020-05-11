@@ -1,9 +1,8 @@
 ﻿using System;
-using ToolBox.Events;
 
-namespace User.Application.User.Commands.CreateUser
+namespace Contracts.User
 {
-    public class UserCreatedEvent : BaseEvent
+    public interface UserCreated
     {
         public Guid Id { get; set; }
         public string Username { get; set; }

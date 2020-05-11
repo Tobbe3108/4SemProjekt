@@ -21,6 +21,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\..\..\ToolBox\ToolBox.csproj" />
+        <ProjectReference Include="..\..\..\Auth\src\Application\Application.csproj" />
         <ProjectReference Include="..\Domain\Domain.csproj" />
     </ItemGroup>
 

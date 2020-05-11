@@ -1,12 +1,22 @@
 ﻿using System;
 using System.ComponentModel;
 using FluentValidation;
+using User.Application.User.Commands.CreateUser;
 
-namespace User.Application.User.Commands.CreateUser
+namespace Contracts.User
 {
-    public class SubmitUserCommand : ToolBox.Contracts.User.SubmitUser
+    public interface SubmitUser
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public Guid Id { get; set; }
+        public string Username { get; set; }
+        public string Email { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Password { get; set; }
+    }
+    
+    public class SubmitUserCommand
+    {
         [DefaultValue("Trut1936")] public string Username { get; set; }
         [DefaultValue("ThomasFBrandt@rhyta.com")] public string Email { get; set; }
         [DefaultValue("Thomas")] public string FirstName { get; set; }
@@ -32,5 +42,4 @@ namespace User.Application.User.Commands.CreateUser
                 .NotEmpty();
         }
     }
-
 }

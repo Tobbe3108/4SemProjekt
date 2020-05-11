@@ -1,15 +1,10 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Threading.Tasks;
+using Contracts.User;
 using FluentValidation.Results;
 using MassTransit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using ToolBox.Contracts;
-using ToolBox.Contracts.User;
-using User.Application.User.Commands.CreateUser;
-using User.Application.User.Commands.DeleteUser;
 using User.Application.User.Commands.UpdateUser;
 using User.Application.User.Queries.GetUser;
 
@@ -29,41 +24,21 @@ namespace WebApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Guid>> Create(SubmitUserCommand command)
         {
-            //return await Mediator.Send(command);
-            
             var validator = new SubmitUserCommandValidator();
             ValidationResult result = await validator.ValidateAsync(command);
             if (!result.IsValid) return BadRequest(result.Errors);
             
-            // var (accepted, rejected) = await _submitUserRequestClient.GetResponse<CreateUserAccepted, CreateUserRejected>(new
-            // {
-            //     command.Id,
-            //     command.Username,
-            //     command.Email,
-            //     command.FirstName,
-            //     command.LastName,
-            //     command.Password
-            // });
-            //
-            // if (!accepted.IsCompletedSuccessfully)
-            // {
-            //     return Problem(rejected.Result.Message.Reason);
-            // }
-            // return Ok(accepted.Result.Message.Id);
-            
-            var endpoint = await _sendEndpointProvider.GetSendEndpoint(new Uri("exchange:submit-user"));
-
-            await endpoint.Send<SubmitUser>(new
+            var response = await _submitUserRequestClient.GetResponse<SubmitUserAccepted>(new
             {
-
-                command.Id,
+                Id = Guid.NewGuid(),
                 command.Username,
                 command.Email,
                 command.FirstName,
                 command.LastName,
                 command.Password
             });
-            return Ok(command.Id);
+            
+            return Ok(response.Message.Id);
         }
 
         [Authorize]
@@ -96,7 +71,16 @@ namespace WebApi.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(Guid id)
         {
-            await Mediator.Send(new DeleteUserCommand {Id = id});
+            var request = new SubmitDeleteUserCommand{ Id = id };
+            var validator = new SubmitDeleteUserCommandValidator();
+            ValidationResult result = await validator.ValidateAsync(request);
+            if (!result.IsValid) return BadRequest(result.Errors);
+
+            var endpoint = await _sendEndpointProvider.GetSendEndpoint(new Uri("exchange:submit-delete-user"));
+            await endpoint.Send<SubmitDeleteUser>(new
+            {
+                Id = request.Id
+            });
 
             return NoContent();
         }

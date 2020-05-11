@@ -1,11 +1,9 @@
 using System;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
 using Auth.Application;
 using Auth.Application.Common.Interfaces;
-using Auth.Application.User.Commands.CreateAuthUser;
 using Auth.Application.User.IntegrationEvents.UserCreated;
 using Auth.Application.User.IntegrationEvents.UserDeleted;
 using Auth.Application.User.IntegrationEvents.UserUpdated;
@@ -14,17 +12,17 @@ using Auth.Infrastructure;
 using Auth.Infrastructure.Persistence;
 using Auth.WebApi.Filters;
 using Auth.WebApi.Services;
+using Contracts.AuthUser;
 using MassTransit;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using MassTransit.Definition;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using ToolBox.Contracts.User;
 using ToolBox.IoC;
 
 
@@ -80,10 +78,10 @@ namespace Auth.WebApi
             // Consumer dependencies should be scoped
             //services.AddScoped<SomeConsumerDependency>();
             
+            services.TryAddSingleton(KebabCaseEndpointNameFormatter.Instance);
             services.AddMassTransit(x =>
             {
                 x.AddConsumersFromNamespaceContaining<CreateAuthUserConsumer>();
-
                 x.AddBus(ConfigureBus);
             });
 
