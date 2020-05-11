@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -80,7 +80,7 @@ namespace ToolBox.Bus
         private async Task Consumer_Received(object sender, BasicDeliverEventArgs @event)
         {
             var eventName = @event.Exchange;
-            var message = Encoding.UTF8.GetString(@event.Body.Span);
+            var message = Encoding.UTF8.GetString(@event.Body);
 
             try
             {

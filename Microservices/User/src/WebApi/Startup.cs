@@ -1,22 +1,34 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+using Automatonymous;
+using FluentValidation;
+using GreenPipes;
+using MassTransit;
+using MassTransit.EntityFrameworkCoreIntegration;
+using MassTransit.Saga;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using ToolBox.Contracts;
+using ToolBox.Contracts.User;
 using ToolBox.IoC;
 using User.Application;
 using User.Application.Common.Interfaces;
+using User.Application.User.Commands.CreateUser;
 using User.Infrastructure;
 using User.Infrastructure.Persistence;
 using WebApi.Filters;
@@ -66,8 +78,25 @@ namespace WebApi
                 c.ToolboxAddSwaggerSecurity();
                 c.SchemaFilter<SchemaFilter>();
             });
-        }
+            
+            #region MassTransit
+            // Consumer dependencies should be scoped
+            //services.AddScoped<SomeConsumerDependency>();
+            
+            services.AddMassTransit(x =>
+            {
+                x.AddConsumersFromNamespaceContaining<CreateUserConsumer>();
+                x.AddRequestClient<SubmitUser>();
 
+                //x.AddSagaStateMachine<CreateUserStateMachine, CreateUserState>().InMemoryRepository();
+                
+                x.AddBus(ConfigureBus);
+            });
+
+            services.AddMassTransitHostedService();
+            #endregion
+        }
+        
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -92,10 +121,27 @@ namespace WebApi
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "User Microservice v1"));
+        }
+        
+        static IBusControl ConfigureBus(IRegistrationContext<IServiceProvider> provider)
+        {
+            return Bus.Factory.CreateUsingRabbitMq(cfg =>
+            {
+                cfg.Host("rabbitmq://localhost");
+
+                cfg.ConfigureEndpoints(provider);
+                cfg.ReceiveEndpoint("submit-user", e =>
+                {
+                    e.StateMachineSaga(new CreateUserStateMachine(), new InMemorySagaRepository<CreateUserState>());
+                });
+            });
         }
     }
 }

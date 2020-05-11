@@ -35,20 +35,20 @@ namespace User.Infrastructure.Outbox
 
                 if (await TryDeleteMessageAsync(dbContext, message, stoppingToken))
                 {
-                    _logger.LogInformation($"Event with Name: {message.Event.GetType().Name} (outbox message Id {messageId}) published -> {Newtonsoft.Json.JsonConvert.SerializeObject(message.Event)}");
-                    _eventBus.PublishEvent(message.Event);
+                    //_logger.LogInformation($"Event with Name: {message.Event.GetType().Name} (outbox message Id {messageId}) published -> {Newtonsoft.Json.JsonConvert.SerializeObject(message.Event)}");
+                    //_eventBus.PublishEvent(message.Event);
                     //await transaction.CommitAsync(stoppingToken); //Transactions NOT supported in InMemoryDb
                 }
                 else
                 {
-                    _logger.LogInformation($"Event with Name: {message.Event.GetType().Name} (outbox message Id {messageId}) Failed to publish");
+                    //_logger.LogInformation($"Event with Name: {message.Event.GetType().Name} (outbox message Id {messageId}) Failed to publish");
                     //await transaction.RollbackAsync(stoppingToken); //Transactions NOT supported in InMemoryDb
                 }
             }
             catch (Exception e)
             {
                 //await transaction.RollbackAsync(stoppingToken); //Transactions NOT supported in InMemoryDb
-                _logger.LogWarning(e, e.Message);
+                //_logger.LogWarning(e, e.Message);
             }
         }
 

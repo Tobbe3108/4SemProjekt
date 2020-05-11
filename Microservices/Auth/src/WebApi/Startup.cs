@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Auth.Application;
 using Auth.Application.Common.Interfaces;
+using Auth.Application.User.Commands.CreateAuthUser;
 using Auth.Application.User.IntegrationEvents.UserCreated;
 using Auth.Application.User.IntegrationEvents.UserDeleted;
 using Auth.Application.User.IntegrationEvents.UserUpdated;
@@ -13,6 +14,7 @@ using Auth.Infrastructure;
 using Auth.Infrastructure.Persistence;
 using Auth.WebApi.Filters;
 using Auth.WebApi.Services;
+using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -22,6 +24,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using ToolBox.Contracts.User;
 using ToolBox.IoC;
 
 
@@ -72,6 +75,20 @@ namespace Auth.WebApi
                 c.ToolboxAddSwaggerSecurity();
                 c.SchemaFilter<SchemaFilter>();
             });
+            
+            #region MassTransit
+            // Consumer dependencies should be scoped
+            //services.AddScoped<SomeConsumerDependency>();
+            
+            services.AddMassTransit(x =>
+            {
+                x.AddConsumersFromNamespaceContaining<CreateAuthUserConsumer>();
+
+                x.AddBus(ConfigureBus);
+            });
+
+            services.AddMassTransitHostedService();
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -105,9 +122,19 @@ namespace Auth.WebApi
             
             await CreateRoles(serviceProvider);
             
-            app.ToolboxSubscribe<UserCreatedEvent, UserCreatedEventHandler>();
-            app.ToolboxSubscribe<UserUpdatedEvent, UserUpdatedEventHandler>();
-            app.ToolboxSubscribe<UserDeletedEvent, UserDeletedEventHandler>();
+            // app.ToolboxSubscribe<UserCreatedEvent, UserCreatedEventHandler>();
+            // app.ToolboxSubscribe<UserUpdatedEvent, UserUpdatedEventHandler>();
+            // app.ToolboxSubscribe<UserDeletedEvent, UserDeletedEventHandler>();
+        }
+        
+        static IBusControl ConfigureBus(IRegistrationContext<IServiceProvider> provider)
+        {
+            return Bus.Factory.CreateUsingRabbitMq(cfg =>
+            {
+                cfg.Host("rabbitmq://localhost");
+
+                cfg.ConfigureEndpoints(provider);
+            });
         }
         
         private async Task CreateRoles(IServiceProvider serviceProvider)

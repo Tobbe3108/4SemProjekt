@@ -1,7 +1,13 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
+using FluentValidation.Results;
+using MassTransit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using ToolBox.Contracts;
+using ToolBox.Contracts.User;
 using User.Application.User.Commands.CreateUser;
 using User.Application.User.Commands.DeleteUser;
 using User.Application.User.Commands.UpdateUser;
@@ -11,10 +17,53 @@ namespace WebApi.Controllers
 {
     public class UserController : ApiController
     {
-        [HttpPost]
-        public async Task<ActionResult<Guid>> Create(CreateUserCommand command)
+        private readonly IRequestClient<SubmitUser> _submitUserRequestClient;
+        private readonly ISendEndpointProvider _sendEndpointProvider;
+
+        public UserController(IRequestClient<SubmitUser> submitUserRequestClient, ISendEndpointProvider sendEndpointProvider)
         {
-            return await Mediator.Send(command);
+            _submitUserRequestClient = submitUserRequestClient;
+            _sendEndpointProvider = sendEndpointProvider;
+        }
+        
+        [HttpPost]
+        public async Task<ActionResult<Guid>> Create(SubmitUserCommand command)
+        {
+            //return await Mediator.Send(command);
+            
+            var validator = new SubmitUserCommandValidator();
+            ValidationResult result = await validator.ValidateAsync(command);
+            if (!result.IsValid) return BadRequest(result.Errors);
+            
+            // var (accepted, rejected) = await _submitUserRequestClient.GetResponse<CreateUserAccepted, CreateUserRejected>(new
+            // {
+            //     command.Id,
+            //     command.Username,
+            //     command.Email,
+            //     command.FirstName,
+            //     command.LastName,
+            //     command.Password
+            // });
+            //
+            // if (!accepted.IsCompletedSuccessfully)
+            // {
+            //     return Problem(rejected.Result.Message.Reason);
+            // }
+            // return Ok(accepted.Result.Message.Id);
+            
+            var endpoint = await _sendEndpointProvider.GetSendEndpoint(new Uri("exchange:submit-user"));
+
+            await endpoint.Send<SubmitUser>(new
+            {
+
+                command.Id,
+                command.Username,
+                command.Email,
+                command.FirstName,
+                command.LastName,
+                command.Password
+            });
+            return Ok(command.Id);
         }
 
         [Authorize]

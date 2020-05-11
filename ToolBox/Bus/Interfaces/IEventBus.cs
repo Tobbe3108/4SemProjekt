@@ -1,4 +1,4 @@
-﻿using ToolBox.Events;
+﻿﻿using ToolBox.Events;
 
 namespace ToolBox.Bus.Interfaces
 {
