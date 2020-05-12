@@ -1,34 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using ToolBox.Bus;
-using ToolBox.Bus.Interfaces;
-using ToolBox.Events;
 
 namespace ToolBox.IoC
 {
     public static class Extensions
     {
-        public static void ToolboxAddRabbitMq(this IServiceCollection services)
-        {
-            services.AddSingleton<IEventBus, RabbitMqBus>(sp =>
-            {
-                var scopeFactory = sp.GetRequiredService<IServiceScopeFactory>();
-                return new RabbitMqBus(scopeFactory);
-            });
-        }
-
-        public static void ToolboxSubscribe<T, TH>(this IApplicationBuilder app) where T : BaseEvent where TH : IEventHandler<T>
-        {
-            var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
-            eventBus.Subscribe<T, TH>();
-        }
-
         public static void ToolboxAddAuthentication(this IServiceCollection services, string issuer, string xmlKey)
         {
             var provider = new RSACryptoServiceProvider(2048);

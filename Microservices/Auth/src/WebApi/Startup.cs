@@ -4,9 +4,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Auth.Application;
 using Auth.Application.Common.Interfaces;
-using Auth.Application.User.IntegrationEvents.UserCreated;
-using Auth.Application.User.IntegrationEvents.UserDeleted;
-using Auth.Application.User.IntegrationEvents.UserUpdated;
 using Auth.Domain.Entities;
 using Auth.Infrastructure;
 using Auth.Infrastructure.Persistence;
@@ -50,12 +47,10 @@ namespace Auth.WebApi
             
             services.AddApplication();
             services.AddInfrastructure(Configuration);
-            services.ToolboxAddRabbitMq();
+
             
             services.AddScoped<ICurrentUserService, CurrentUserService>();
-            services.AddTransient<UserCreatedEventHandler>();
-            services.AddTransient<UserUpdatedEventHandler>();
-            services.AddTransient<UserDeletedEventHandler>();
+
 
             services.AddHttpContextAccessor();
             

@@ -12,7 +12,7 @@ namespace Contracts.User
     {
         public Guid Id { get; set; }
     }
-    
+
     public class SubmitDeleteUserCommandValidator : AbstractValidator<SubmitDeleteUserCommand>
     {
         public SubmitDeleteUserCommandValidator()

@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using Auth.Application.Common.Interfaces;
 using Microsoft.AspNetCore.Http;
+using Microsoft.IdentityModel.JsonWebTokens;
 
 namespace Auth.WebApi.Services
 {

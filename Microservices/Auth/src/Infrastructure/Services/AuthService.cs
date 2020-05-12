@@ -40,7 +40,7 @@ namespace Auth.Infrastructure.Services
             {
                 new Claim(JwtRegisteredClaimNames.Sub, authUser.UserName ?? string.Empty),
                 new Claim(JwtRegisteredClaimNames.Email, authUser.Email ?? string.Empty),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
             List<string> roles = new List<string>();

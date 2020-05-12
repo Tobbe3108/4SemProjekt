@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using User.Application.Common.Interfaces;
 using User.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Data;
-using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using ToolBox.Events;
-using User.Domain.Delegates;
-using User.Domain.Entities;
 
 namespace User.Infrastructure.Persistence
 {
@@ -21,21 +14,15 @@ namespace User.Infrastructure.Persistence
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly IDateTime _dateTime;
-        private readonly IEnumerable<IEventMapper> _eventMappers;
         private IDbContextTransaction _currentTransaction;
-        private readonly OnNewOutboxMessages _onNewOutboxMessages;
 
         public ApplicationDbContext(
             DbContextOptions options,
             ICurrentUserService currentUserService,
-            IDateTime dateTime,
-            IEnumerable<IEventMapper> eventMappers,
-            OnNewOutboxMessages onNewOutboxMessages) : base(options)
+            IDateTime dateTime) : base(options)
         {
             _currentUserService = currentUserService;
             _dateTime = dateTime;
-            _eventMappers = eventMappers;
-            _onNewOutboxMessages = onNewOutboxMessages;
         }
 
         public DbSet<Domain.Entities.User> Users { get; set; }
@@ -56,44 +43,11 @@ namespace User.Infrastructure.Persistence
                         break;
                 }
             }
-
-            var eventsDetected = GetEvents();
-            AddEventIfAny(eventsDetected);
-
-            var result = await base.SaveChangesAsync(cancellationToken);
-
-            NotifyEventsIfAny(eventsDetected);
             
+            var result = await base.SaveChangesAsync(cancellationToken);
             return result;
         }
-
-        #region SaveChangesAsync Helper Methods
-        private IReadOnlyCollection<OutboxMessage> GetEvents()
-        {
-            var now = _dateTime.Now;
-
-            return _eventMappers
-                .SelectMany(mapper => mapper.Map(this))
-                .ToList();
-        }
-
-        private void AddEventIfAny(IReadOnlyCollection<OutboxMessage> collection)
-        {
-            if (collection.Count > 0)
-            {
-                Set<OutboxMessage>().AddRange(collection);
-            }
-        }
-
-        private void NotifyEventsIfAny(IReadOnlyCollection<OutboxMessage> eventsDetected)
-        {
-            if (eventsDetected.Count > 0)
-            {
-                _onNewOutboxMessages(eventsDetected.Select(e => e.Id));
-            }
-        }
-        #endregion
-
+        
         #region Transaction
         public async Task BeginTransactionAsync()
         {

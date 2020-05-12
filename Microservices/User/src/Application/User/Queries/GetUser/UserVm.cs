@@ -1,7 +1,7 @@
-﻿namespace User.Application.User.Queries.GetUser
+﻿namespace Contracts.User
 {
-    public class UserVm
+    public interface UserVm
     {
-        public UserDto User { get; set; }
+        public global::User.Domain.Entities.User User { get; set; }
     }
 }

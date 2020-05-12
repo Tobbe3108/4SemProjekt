@@ -2,7 +2,6 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Auth.Application.Common.Interfaces;
-using Auth.Application.User.IntegrationEvents.UserDeleted;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;

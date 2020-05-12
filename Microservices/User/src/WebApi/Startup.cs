@@ -16,6 +16,7 @@ using User.Application;
 using User.Application.Common.Interfaces;
 using User.Application.User.Commands.CreateUser;
 using User.Application.User.Commands.DeleteUser;
+using User.Application.User.Commands.UpdateUser;
 using User.Infrastructure;
 using User.Infrastructure.Persistence;
 using WebApi.Filters;
@@ -43,10 +44,8 @@ namespace WebApi
         {
             services.ToolboxAddAuthentication(Configuration["Jwt:Issuer"], xmlKey);
             
-            services.AddApplication();
             services.AddInfrastructure(Configuration);
-            services.ToolboxAddRabbitMq();
-            
+
             services.AddScoped<ICurrentUserService, CurrentUserService>();
 
             services.AddHttpContextAccessor();
@@ -72,7 +71,8 @@ namespace WebApi
             {
                 x.AddConsumersFromNamespaceContaining<CreateUserConsumer>();
                 x.AddRequestClient<SubmitUser>();
-                x.AddRequestClient<SubmitDeleteUser>();
+                x.AddRequestClient<GetCurrentUser>();
+                x.AddRequestClient<GetUser>();
                 x.AddBus(ConfigureBus);
             });
 
@@ -127,6 +127,10 @@ namespace WebApi
                 cfg.ReceiveEndpoint("submit-delete-user", e =>
                 {
                     e.StateMachineSaga(new DeleteUserStateMachine(), new InMemorySagaRepository<DeleteUserState>());
+                });
+                cfg.ReceiveEndpoint("submit-update-user", e =>
+                {
+                    e.StateMachineSaga(new UpdateUserStateMachine(), new InMemorySagaRepository<UpdateUserState>());
                 });
             });
         }
