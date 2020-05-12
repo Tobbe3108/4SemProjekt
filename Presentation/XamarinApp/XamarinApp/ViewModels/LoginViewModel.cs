@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Threading;
 using System.Threading.Tasks;
-using RestSharp;
-using RestSharp.Authenticators;
-using RestSharp.Serialization.Xml;
+using Flurl;
+using Flurl.Http;
+using Xamarin.Essentials;
 
-namespace XamarinApp.Models
+namespace XamarinApp.ViewModels
 {
     public class LoginViewModel
     {
-        public string UsernameOrEmail { get; set; }
-        public string Password { get; set; }
+        public string UsernameOrEmail { get; set; } = "Tobbe3108";
+        public string Password { get; set; } = "Zxasqw12";
         public string ErrorMessage { get; private set; }
         
         public async Task<bool> Login()
@@ -26,17 +25,40 @@ namespace XamarinApp.Models
                 return false;
             }
             
-            // var client = new RestClient("https://localhost:5001/");
-            // var request = new RestRequest("Auth/login", Method.POST)
-            //     .AddJsonBody(new {UsernameOrEmail, Password});
-            //
-            // var result = await client.GetAsync<string>(request, CancellationToken.None);
-            
-            //Temp
-            ErrorMessage = result;
-            return false;
+            var result = await "http://10.0.2.2:5000/".AppendPathSegment("Auth/login").PostJsonAsync(new { UsernameOrEmail, Password });
+            if (result.IsSuccessStatusCode)
+            {
+                var token = await result.Content.ReadAsStringAsync();
+                if (token == null)
+                {
+                    ErrorMessage = new ArgumentNullException(nameof(token)).Message;
+                    return false;
+                }
+                
+                var (sucess, message) = await SaveCredentials(token);
+                if (!sucess)
+                {
+                    ErrorMessage = message;
+                }
+                
+                return true;
+            }
 
-            //return true;
+            return false;
+        }
+
+        private async Task<(bool, string)> SaveCredentials(string token)
+        {
+            try
+            {
+                await SecureStorage.SetAsync("jwt_token", token);
+            }
+            catch (Exception e)
+            {
+                return (false, e.Message);
+            }
+
+            return (true, null);
         }
     }
 }

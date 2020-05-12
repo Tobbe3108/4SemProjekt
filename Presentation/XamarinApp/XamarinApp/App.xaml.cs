@@ -18,6 +18,8 @@ namespace XamarinApp
             };
         }
 
+        public static readonly string AppName = "XamarinApp"; 
+
         protected override void OnStart()
         {
             // Handle when your app starts

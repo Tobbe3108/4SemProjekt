@@ -1,14 +1,14 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using XamarinApp.Models;
+using XamarinApp.ViewModels;
 
 namespace XamarinApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginView : ContentPage
     {
-        private LoginViewModel _loginViewModel;
+        private readonly LoginViewModel _loginViewModel;
 
         public LoginView()
         {
@@ -24,7 +24,7 @@ namespace XamarinApp.Views
             };
             
             var email = new Entry {
-                Placeholder = "E-Mail"
+                Placeholder = "Email or Username"
             };
             email.SetBinding(Entry.TextProperty, "UsernameOrEmail");
 
