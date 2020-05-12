@@ -1,0 +1,51 @@
+﻿# Post User
+POST {{Host}}/User
+accept: text/plain
+Content-Type: application/json
+
+{
+  "username":"Trut1936",
+  "email":"ThomasFBrandt@rhyta.com",
+  "firstName":"Thomas",
+  "lastName":"Brandt",
+  "password":"Zxasqw12"
+}
+
+> {% 
+client.global.set("user_id", response.body); 
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body.length > 0, "Response body empty");
+});
+%}
+###
+
+# Auth
+POST {{Host}}/Auth/Login
+accept: text/plain
+Content-Type: application/json
+
+{
+  "usernameOrEmail": "Tobbe3108",
+  "password": "Zxasqw12"
+}
+
+> {% 
+client.global.set("auth_token", response.body);
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+});
+%}
+###
+
+# Delete User
+DELETE {{Host}}/User/{{user_id}}
+accept: text/plain
+Authorization: {{auth_token}}
+
+> {% 
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 204, "Response status is not 200");
+});
+%}
+###

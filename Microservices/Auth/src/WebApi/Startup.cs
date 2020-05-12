@@ -45,7 +45,6 @@ namespace Auth.WebApi
         {
             services.ToolboxAddAuthentication(Configuration["Jwt:Issuer"], xmlKey);
             
-            services.AddApplication();
             services.AddInfrastructure(Configuration);
 
             
@@ -77,6 +76,7 @@ namespace Auth.WebApi
             services.AddMassTransit(x =>
             {
                 x.AddConsumersFromNamespaceContaining<CreateAuthUserConsumer>();
+                x.AddRequestClient<AuthenticateUser>();
                 x.AddBus(ConfigureBus);
             });
 
@@ -114,10 +114,6 @@ namespace Auth.WebApi
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Auth Microservice v1"));
             
             await CreateRoles(serviceProvider);
-            
-            // app.ToolboxSubscribe<UserCreatedEvent, UserCreatedEventHandler>();
-            // app.ToolboxSubscribe<UserUpdatedEvent, UserUpdatedEventHandler>();
-            // app.ToolboxSubscribe<UserDeletedEvent, UserDeletedEventHandler>();
         }
         
         static IBusControl ConfigureBus(IRegistrationContext<IServiceProvider> provider)

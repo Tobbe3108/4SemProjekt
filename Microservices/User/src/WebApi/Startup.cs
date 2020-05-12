@@ -74,6 +74,7 @@ namespace WebApi
                 x.AddRequestClient<GetCurrentUser>();
                 x.AddRequestClient<GetUser>();
                 x.AddBus(ConfigureBus);
+                x.AddTransactionOutbox();
             });
 
             services.AddMassTransitHostedService();
@@ -123,14 +124,17 @@ namespace WebApi
                 cfg.ReceiveEndpoint("submit-user", e =>
                 {
                     e.StateMachineSaga(new CreateUserStateMachine(), new InMemorySagaRepository<CreateUserState>());
+                    e.UseInMemoryOutbox();
                 });
                 cfg.ReceiveEndpoint("submit-delete-user", e =>
                 {
                     e.StateMachineSaga(new DeleteUserStateMachine(), new InMemorySagaRepository<DeleteUserState>());
+                    e.UseInMemoryOutbox();
                 });
                 cfg.ReceiveEndpoint("submit-update-user", e =>
                 {
                     e.StateMachineSaga(new UpdateUserStateMachine(), new InMemorySagaRepository<UpdateUserState>());
+                    e.UseInMemoryOutbox();
                 });
             });
         }

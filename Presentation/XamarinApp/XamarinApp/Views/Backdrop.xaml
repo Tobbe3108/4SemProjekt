@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<backdrop:SfBackdropPage  xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamarinApp.Backdrop" 
+        xmlns:backdrop="clr-namespace:Syncfusion.XForms.Backdrop;assembly=Syncfusion.SfBackdrop.XForms"
+        x:Name="BackdropPage" Title="Home Page" IsBackLayerRevealed="False" BackLayerRevealOption="Auto">
+    
+    <backdrop:SfBackdropPage.BackLayer>
+        <backdrop:BackdropBackLayer BackgroundColor="{StaticResource primaryColor}">
+            <StackLayout Padding="10,10,10,10">
+                <Label TextColor="White" VerticalOptions="Center" Text="Test" />
+            </StackLayout>
+        </backdrop:BackdropBackLayer>
+    </backdrop:SfBackdropPage.BackLayer>
+
+    <backdrop:SfBackdropPage.FrontLayer>
+        <backdrop:BackdropFrontLayer > 
+            <StackLayout Padding="10,0,10,10" VerticalOptions="FillAndExpand">
+                <Label VerticalOptions="Center" Text="Velkommen" VerticalTextAlignment="Center" HeightRequest="48" />
+                <!-- <Grid VerticalOptions="FillAndExpand" /> -->
+                <Button Text="Login" Clicked="Button_OnClicked"></Button>
+            </StackLayout>
+        </backdrop:BackdropFrontLayer>
+    </backdrop:SfBackdropPage.FrontLayer>
+</backdrop:SfBackdropPage>
