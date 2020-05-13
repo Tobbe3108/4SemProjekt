@@ -22,10 +22,7 @@ namespace Contracts.User
     {
         [DefaultValue("")] public Guid Id { get; set; }
         [DefaultValue("Trut1936")] public string Username { get; set; }
-
-        [DefaultValue("ThomasFBrandt@rhyta.com")]
-        public string Email { get; set; }
-
+        [DefaultValue("ThomasFBrandt@rhyta.com")] public string Email { get; set; }
         [DefaultValue("Zxasqw12")] public string Password { get; set; }
         [DefaultValue("Thomas")] public string FirstName { get; set; }
         [DefaultValue("Brandt")] public string LastName { get; set; }

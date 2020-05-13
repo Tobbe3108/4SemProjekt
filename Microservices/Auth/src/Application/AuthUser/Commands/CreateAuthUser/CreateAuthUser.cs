@@ -2,7 +2,9 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Auth.Application.Common.Interfaces;
+using Auth.Domain.Entities;
 using MassTransit;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Contracts.AuthUser
@@ -41,6 +43,10 @@ namespace Contracts.AuthUser
            };
 
            await _dbContext.Users.AddAsync(authUserToCreate);
+
+           var role = await _dbContext.Roles.FirstOrDefaultAsync(r => r.RoleName == "Admin");
+           await _dbContext.UserRoles.AddAsync(new UserRole {UserId = authUserToCreate.Id, Role = role});
+           
            await _dbContext.SaveChangesAsync(CancellationToken.None);
            
            await context.Publish<AuthUserCreated>(new

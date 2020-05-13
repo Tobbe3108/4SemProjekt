@@ -39,16 +39,19 @@ namespace Contracts.User
             
             var entity = await _dbContext.Users.FindAsync(context.Message.Id);
 
-            entity.Address = context.Message.Address;
-            entity.City = context.Message.City;
-            entity.Country = context.Message.Country;
-            entity.Email = context.Message.Email;
-            entity.Username = context.Message.Email;
-            entity.NormalizedUserName = context.Message.Username.ToUpperInvariant();
-            entity.FirstName = context.Message.FirstName;
-            entity.LastName = context.Message.LastName;
-            entity.ZipCode = context.Message.ZipCode;
-            
+            if (context.Message.Address != null) entity.Address = context.Message.Address;
+            if (context.Message.City != null) entity.City = context.Message.City;
+            if (context.Message.Country != null) entity.Country = context.Message.Country;
+            if (context.Message.Email != null) entity.Email = context.Message.Email;
+            if (context.Message.Username != null)
+            {
+                entity.Username = context.Message.Username;
+                entity.NormalizedUserName = context.Message.Username.ToUpperInvariant();
+            }
+            if (context.Message.FirstName != null) entity.FirstName = context.Message.FirstName;
+            if (context.Message.LastName != null) entity.LastName = context.Message.LastName;
+            if (context.Message.ZipCode != null) entity.ZipCode = context.Message.ZipCode;
+
             await _dbContext.SaveChangesAsync(CancellationToken.None);
             
             await context.Publish<UserUpdated>(new

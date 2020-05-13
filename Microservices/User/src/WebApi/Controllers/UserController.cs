@@ -56,7 +56,10 @@ namespace WebApi.Controllers
             {
                 Username = _userService.Username.ToUpperInvariant()
             });
-            return userVm.IsCompletedSuccessfully ? Ok(userVm.Result.Message.User) : Problem(notFound.Result.Message.Message);
+            if (userVm.IsCompletedSuccessfully)
+                return new OkObjectResult(userVm.Result.Message);
+            else
+                return Problem(notFound.Result.Message.Message);
         }
         
         [Authorize]

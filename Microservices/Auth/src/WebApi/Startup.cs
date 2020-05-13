@@ -44,15 +44,15 @@ namespace Auth.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.ToolboxAddAuthentication(Configuration["Jwt:Issuer"], xmlKey);
-            
+
             services.AddInfrastructure(Configuration);
 
-            
+
             services.AddScoped<ICurrentUserService, CurrentUserService>();
 
 
             services.AddHttpContextAccessor();
-            
+
             services.AddHealthChecks()
                 .AddDbContextCheck<ApplicationDbContext>();
 
@@ -67,11 +67,12 @@ namespace Auth.WebApi
                 c.ToolboxAddSwaggerSecurity();
                 c.SchemaFilter<SchemaFilter>();
             });
-            
+
             #region MassTransit
+
             // Consumer dependencies should be scoped
             //services.AddScoped<SomeConsumerDependency>();
-            
+
             services.TryAddSingleton(KebabCaseEndpointNameFormatter.Instance);
             services.AddMassTransit(x =>
             {
@@ -81,6 +82,7 @@ namespace Auth.WebApi
             });
 
             services.AddMassTransitHostedService();
+
             #endregion
         }
 
@@ -98,7 +100,7 @@ namespace Auth.WebApi
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            
+
             app.UseHealthChecks("/health");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -112,10 +114,10 @@ namespace Auth.WebApi
 
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Auth Microservice v1"));
-            
+
             await CreateRoles(serviceProvider);
         }
-        
+
         static IBusControl ConfigureBus(IRegistrationContext<IServiceProvider> provider)
         {
             return Bus.Factory.CreateUsingRabbitMq(cfg =>
@@ -125,13 +127,12 @@ namespace Auth.WebApi
                 cfg.ConfigureEndpoints(provider);
             });
         }
-        
+
         private async Task CreateRoles(IServiceProvider serviceProvider)
         {
             //adding custom roles
 
             var authContext = serviceProvider.GetRequiredService<IApplicationDbContext>();
-            var hashService = serviceProvider.GetRequiredService<IHashService>();
 
             const string roleName = "Admin";
 
@@ -145,29 +146,8 @@ namespace Auth.WebApi
             };
 
             if (!roleExist) await authContext.Roles.AddAsync(roleToAdd);
-
-            var user = authContext.Users.SingleOrDefault(u =>
-                u.UserName == Configuration.GetSection("UserSettings")["UserName"]);
-
-            if (user == null)
-            {
-                //creating an admin
-                var admin = new AuthUser
-                {
-                    Id = Guid.NewGuid(),
-                    UserName = Configuration.GetSection("UserSettings")["UserName"],
-                    Email = Configuration.GetSection("UserSettings")["UserEmail"],
-                    PasswordSalt = hashService.GenerateSalt()
-                };
-
-
-                admin.PasswordHash = hashService.GenerateHash(Configuration.GetSection("UserSettings")["UserPassword"],
-                    admin.PasswordSalt);
-
-                await authContext.Users.AddAsync(admin);
-                await authContext.UserRoles.AddAsync(new UserRole {UserId = admin.Id, Role = roleToAdd});
-                await authContext.SaveChangesAsync(CancellationToken.None);
-            }
+            
+            await authContext.SaveChangesAsync(CancellationToken.None);
         }
     }
 }

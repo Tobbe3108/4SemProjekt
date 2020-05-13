@@ -37,10 +37,13 @@ namespace Contracts.AuthUser
             var userToUpdate = await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == context.Message.Id);
             var salt = _hashService.GenerateSalt();
 
-            userToUpdate.UserName = context.Message.Username;
-            userToUpdate.Email = context.Message.Email;
-            userToUpdate.PasswordSalt = salt;
-            userToUpdate.PasswordHash = _hashService.GenerateHash(context.Message.Password, salt);
+            if (context.Message.Username != null) userToUpdate.UserName = context.Message.Username;
+            if (context.Message.Email != null) userToUpdate.Email = context.Message.Email;
+            if (context.Message.Password != null)
+            {
+                userToUpdate.PasswordSalt = salt;
+                userToUpdate.PasswordHash = _hashService.GenerateHash(context.Message.Password, salt);
+            }
 
             await _dbContext.SaveChangesAsync(CancellationToken.None);
             

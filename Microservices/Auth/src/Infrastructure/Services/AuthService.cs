@@ -58,7 +58,7 @@ namespace Auth.Infrastructure.Services
                 expires: DateTime.Now.AddMinutes(120),
                 signingCredentials: credentials);
 
-            return $"Bearer {new JwtSecurityTokenHandler().WriteToken(token)}";
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }
