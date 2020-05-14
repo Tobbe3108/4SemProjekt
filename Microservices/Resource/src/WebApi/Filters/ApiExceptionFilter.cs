@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Resource.Application.Common.Exceptions;
 
-namespace WebApi.Filters
+namespace Resource.WebApi.Filters
 {
     public class ApiExceptionFilter : ExceptionFilterAttribute
     {

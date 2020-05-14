@@ -28,6 +28,7 @@ namespace Mobile.Bff
                 })
                 .ConfigureServices(s =>
                 {
+                    s.AddCors();
                     s.AddOcelot();
                 })
                 .ConfigureLogging((hostingContext, logging) =>
@@ -37,6 +38,9 @@ namespace Mobile.Bff
                 .UseIISIntegration()
                 .Configure(app =>
                 {
+                    app.UseCors(builder => builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
                     app.UseRouting();
                     app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
                     app.UseOcelot().Wait();

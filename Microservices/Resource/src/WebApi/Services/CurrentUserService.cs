@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Resource.Application.Common.Interfaces;
 
-namespace WebApi.Services
+namespace Resource.WebApi.Services
 {
     public class CurrentUserService : ICurrentUserService
     {

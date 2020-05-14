@@ -1,0 +1,8 @@
+﻿@page "/"
+@attribute [Authorize]
+
+<AuthorizeView Roles="Admin">
+    <h1>Instrumentbræt</h1>
+    <hr/>
+    <p>Velkommen til dit instrumentbræt, @context.User.Identity.Name!</p>
+</AuthorizeView>

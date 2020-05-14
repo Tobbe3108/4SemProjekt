@@ -14,6 +14,7 @@ namespace XamarinApp.Views
         private readonly SfListView _listView;
         private SearchBar _searchBar;
         private readonly ResourceViewModel _resourceViewModel;
+        private readonly SfBusyIndicator _busyIndicator;
         
         public ResourceListPageCS()
         { 
@@ -55,8 +56,14 @@ namespace XamarinApp.Views
                 PropertyName = "Name",
                 Direction = ListSortDirection.Ascending
             });
+            _listView.Loaded += async (sender, args) =>
+            {
+                _busyIndicator.IsBusy = true;
+                await _resourceViewModel.GenerateResources();
+                _busyIndicator.IsBusy = false;
+            };
 
-            var busyIndicator = new SfBusyIndicator
+            _busyIndicator = new SfBusyIndicator
             {
                 AnimationType = AnimationTypes.Cupertino,
                 ViewBoxHeight = 150,
@@ -65,18 +72,13 @@ namespace XamarinApp.Views
                 IsBusy = false
             };
 
-            // busyIndicator.IsBusy = true;
-            // await _resourceViewModel.GenerateResources();
-            // busyIndicator.IsBusy = false;
-            
-            
             Content = new StackLayout
             {
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 Padding = 30,
                 Spacing = 10,
-                Children = {_searchBar, busyIndicator, _listView}
+                Children = {_searchBar, _busyIndicator, _listView}
             };
         }
         

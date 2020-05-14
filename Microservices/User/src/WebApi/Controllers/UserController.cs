@@ -73,6 +73,7 @@ namespace WebApi.Controllers
             return userVm.IsCompletedSuccessfully ? Ok(userVm.Result.Message.User) : Problem(notFound.Result.Message.Message);
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<ActionResult> Update(Guid id, SubmitUpdateUserCommand command)
         {
@@ -103,6 +104,7 @@ namespace WebApi.Controllers
             return NoContent();
         }
         
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(Guid id)
         {

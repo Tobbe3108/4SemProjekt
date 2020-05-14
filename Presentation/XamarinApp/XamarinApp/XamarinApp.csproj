@@ -2,6 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
+        <LangVersion>8</LangVersion>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -13,6 +14,7 @@
         <PackageReference Include="Flurl.Http" Version="2.4.2" />
         <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
         <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="18.1.0.52" />
+        <PackageReference Include="Syncfusion.Xamarin.SfAutoComplete" Version="18.1.0.52" />
         <PackageReference Include="Syncfusion.Xamarin.SfBackdrop" Version="18.1.0.48" />
         <PackageReference Include="Syncfusion.Xamarin.SfBusyIndicator" Version="18.1.0.52" />
         <PackageReference Include="Syncfusion.Xamarin.SfDataForm" Version="18.1.0.48" />

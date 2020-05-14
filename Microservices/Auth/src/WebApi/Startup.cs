@@ -72,13 +72,13 @@ namespace Auth.WebApi
 
             // Consumer dependencies should be scoped
             //services.AddScoped<SomeConsumerDependency>();
-
-            services.TryAddSingleton(KebabCaseEndpointNameFormatter.Instance);
+            
             services.AddMassTransit(x =>
             {
                 x.AddConsumersFromNamespaceContaining<CreateAuthUserConsumer>();
                 x.AddRequestClient<AuthenticateUser>();
                 x.AddBus(ConfigureBus);
+                x.AddTransactionOutbox();
             });
 
             services.AddMassTransitHostedService();
@@ -124,7 +124,7 @@ namespace Auth.WebApi
             {
                 cfg.Host("rabbitmq://localhost");
 
-                cfg.ConfigureEndpoints(provider);
+                cfg.ConfigureEndpoints(provider, KebabCaseEndpointNameFormatter.Instance);
             });
         }
 

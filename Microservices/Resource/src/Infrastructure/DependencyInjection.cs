@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Resource.Application.Common.Interfaces;
@@ -15,7 +14,7 @@ namespace Resource.Infrastructure
         {
             if (configuration.GetValue<bool>("UseInMemoryDatabase"))
                 services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseInMemoryDatabase("ResourceDb"));
+                    options.UseInMemoryDatabase("UserDb"));
             else
                 services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseSqlServer(
@@ -23,7 +22,6 @@ namespace Resource.Infrastructure
                         b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
-
             services.AddTransient<IDateTime, DateTimeService>();
             
             return services;

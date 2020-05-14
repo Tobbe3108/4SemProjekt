@@ -1,0 +1,23 @@
+@using BlazorSPA.Client.Components
+
+<Router AppAssembly="@typeof(Program).Assembly">
+    <Found Context="routeData">
+        <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+            <NotAuthorized>
+                <RedirectToLogin />
+            </NotAuthorized>
+            <Authorizing>
+                <h1>Logger ind...</h1>
+                <hr />
+                <p>Vi fors�ger at logge dig ind...</p>
+            </Authorizing>
+        </AuthorizeRouteView>
+    </Found>
+    <NotFound>
+        <LayoutView Layout="@typeof(MainLayout)">
+            <h1>Fejl 404</h1>
+            <hr />
+            <p>Siden blev ikke fundet. Tjek at adressen er stavet korrekt eller pr�v igen senere.</p>
+        </LayoutView>
+    </NotFound>
+</Router>

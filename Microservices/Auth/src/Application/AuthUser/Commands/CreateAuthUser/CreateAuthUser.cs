@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Auth.Application.Common.Interfaces;
@@ -31,7 +32,7 @@ namespace Contracts.AuthUser
         }
         public async Task Consume(ConsumeContext<CreateAuthUser> context)
         {
-           _logger.LogInformation("CreateAuthUserConsumer Called"); 
+            _logger.LogInformation("CreateAuthUserConsumer Called"); 
            string salt = _hashService.GenerateSalt();
            Auth.Domain.Entities.AuthUser authUserToCreate = new Auth.Domain.Entities.AuthUser
            {
@@ -39,13 +40,18 @@ namespace Contracts.AuthUser
                UserName = context.Message.Username,
                Email = context.Message.Email,
                PasswordSalt = salt,
-               PasswordHash = _hashService.GenerateHash(context.Message.Password, salt)
+               PasswordHash = _hashService.GenerateHash(context.Message.Password, salt),
+               UserRoles = new List<UserRole>
+               {
+                   new UserRole
+                   {
+                       UserId = context.Message.Id,
+                       Role = await _dbContext.Roles.FirstOrDefaultAsync(r => r.RoleName == "Admin")
+                   }
+               }
            };
 
            await _dbContext.Users.AddAsync(authUserToCreate);
-
-           var role = await _dbContext.Roles.FirstOrDefaultAsync(r => r.RoleName == "Admin");
-           await _dbContext.UserRoles.AddAsync(new UserRole {UserId = authUserToCreate.Id, Role = role});
            
            await _dbContext.SaveChangesAsync(CancellationToken.None);
            

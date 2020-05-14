@@ -1,0 +1,65 @@
+﻿@inject NavigationManager NavigationManager
+@inject IAuthService AuthService
+@page "/Login"
+@using BlazorSPA.Client.DTOs
+@using BlazorSPA.Client.Services
+
+<h1>Log ind</h1>
+<hr/>
+
+<div class="col-md-6">
+    @if (_invalidLogin)
+    {
+        <div class="alert alert-danger">
+            @Message
+        </div>
+    }
+
+    <EditForm Model="@_loginDTO" OnValidSubmit="OnValidSubmit">
+
+        <div class="form-group">
+            <label>Username or Email</label>
+            <InputText id="login-username" class="form-control" placeholder="Username" @bind-Value="_loginDTO.UsernameOrEmail"/>
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <InputText id="login-password" class="form-control" placeholder="********" type="password" @bind-Value="_loginDTO.Password"/>
+        </div>
+
+        <div class="form-group">
+            <button id="loginSubmit" class="btn btn-primary" type="submit">Login</button>
+        </div>
+
+    </EditForm>
+</div>
+
+
+@code {
+    private readonly LoginDTO _loginDTO = new LoginDTO
+    {
+        UsernameOrEmail = "Tobbe3108",
+        Password = "Zxasqw12"
+    };
+
+    private bool _invalidLogin;
+    private string Message { get; set; }
+
+    private async void OnValidSubmit()
+    {
+        _invalidLogin = false;
+
+        var (success, message) = await AuthService.Login(_loginDTO); 
+        if (success)
+        {
+            NavigationManager.NavigateTo("");
+        }
+        else
+        {
+            Message = message;
+            _invalidLogin = true;
+            StateHasChanged();
+        }
+    }
+
+}

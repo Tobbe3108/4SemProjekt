@@ -25,10 +25,12 @@ namespace Resource.Infrastructure.Persistence
         }
 
         public DbSet<Domain.Entities.Resource> Resources { get; set; }
-
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        public DbSet<Domain.Entities.DayAndTime> DayAndTimes { get; set; }
+        
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
-            foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
+            foreach (var entry in ChangeTracker.Entries<BaseEntity>())
+            {
                 switch (entry.State)
                 {
                     case EntityState.Added:
@@ -40,18 +42,23 @@ namespace Resource.Infrastructure.Persistence
                         entry.Entity.LastModified = _dateTime.Now;
                         break;
                 }
-
-            return base.SaveChangesAsync(cancellationToken);
+            }
+            
+            var result = await base.SaveChangesAsync(cancellationToken);
+            return result;
         }
-
+        
+        #region Transaction
         public async Task BeginTransactionAsync()
         {
-            if (_currentTransaction != null) return;
+            if (_currentTransaction != null)
+            {
+                return;
+            }
 
             _currentTransaction = await base.Database.BeginTransactionAsync(IsolationLevel.ReadCommitted)
                 .ConfigureAwait(false);
         }
-
         public async Task CommitTransactionAsync()
         {
             try
@@ -74,7 +81,6 @@ namespace Resource.Infrastructure.Persistence
                 }
             }
         }
-
         public void RollbackTransaction()
         {
             try
@@ -90,6 +96,7 @@ namespace Resource.Infrastructure.Persistence
                 }
             }
         }
+        #endregion
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

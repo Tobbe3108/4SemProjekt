@@ -66,7 +66,6 @@ namespace WebApi
             });
             
             #region MassTransit
-            services.TryAddSingleton(KebabCaseEndpointNameFormatter.Instance);
             services.AddMassTransit(x =>
             {
                 x.AddConsumersFromNamespaceContaining<CreateUserConsumer>();
@@ -120,7 +119,7 @@ namespace WebApi
             {
                 cfg.Host("rabbitmq://localhost");
 
-                cfg.ConfigureEndpoints(provider);
+                cfg.ConfigureEndpoints(provider, KebabCaseEndpointNameFormatter.Instance);
                 cfg.ReceiveEndpoint("submit-user", e =>
                 {
                     e.StateMachineSaga(new CreateUserStateMachine(), new InMemorySagaRepository<CreateUserState>());

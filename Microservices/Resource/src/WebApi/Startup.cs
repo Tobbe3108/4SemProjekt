@@ -1,22 +1,29 @@
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System;
+using System.Reflection;
+using Automatonymous;
+using Contracts.Resource;
+using MassTransit;
+using MassTransit.Definition;
+using MassTransit.Saga;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Resource.Application;
 using Resource.Application.Common.Interfaces;
+using Resource.Application.Resource.Commands.CreateResource;
+using Resource.Application.Resource.Commands.DeleteResource;
+using Resource.Application.Resource.Commands.UpdateResource;
 using Resource.Infrastructure;
 using Resource.Infrastructure.Persistence;
+using Resource.WebApi.Filters;
+using Resource.WebApi.Services;
 using ToolBox.IoC;
-using WebApi.Services;
 
-namespace WebApi
+namespace Resource.WebApi
 {
     public class Startup
     {
@@ -25,7 +32,7 @@ namespace WebApi
             "<Modulus>p9ZX2CSot2aHOiIRJJz0lngezY51Z+stl/sMYGFD1rxcYZbuHDs/cZgUURDhxdlkGoLGv5VSVSyecJ15LIDsjkaKeZ5HJOT5TXVXQOtvtq8Wm/gPsOZso0qoxNIswKwEAsHclfaNOQ7zi3yvVv04Wq3AnhC6y2u/I7YhZUIZtW9oy1BWKnP+HS0PUlP+EhCSmcCro76kWNTQn0Y9lv9ouJqrlOuGmjBEobCyGXISQYfitCTMFZXTcFv9k5F8Y3Kq7FIjAakAjX90rUzl5JxY81Q+8xeOT7zzXn+CrqGuFvlQ0+QrIJLylUOf/x6OguBHlfco682RIqReVFGRwPU+db77OUlj7Yazq1s5X2aRUFn+dRIo/x7+iEin+b1OeA8JycjCrk6bqkttGpy4rKYGuZfoheRwUoJdI8KnuWwWg7D5VbxCh0TX8l9aSczQCryHNN0YZtVDbxRhU/HdOgHSzTAzKsQ8O/fJwgGcaEZs/JH3AS9BGmfurYXZbpiMnkoBEvZpe1pd64GeRenaaCnL2UYFu96Bbb/IUW62foh78+T/leuY1buTLlsiYHAu2fmZw7FBiaPa+RSJ6WXO/sPG/aFPk3AgZx6xX/9tY7Zo1UJ4BWyNw3tpxM+NTu49y9rdiaJ1hdZscPfFACpt/VFFKolgMcVauqV+OvVBZO3ZrsE=</Modulus>" +
             "<Exponent>AQAB</Exponent>" +
             "</RSAKeyValue>";
-
+        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -37,8 +44,7 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.ToolboxAddAuthentication(Configuration["Jwt:Issuer"], xmlKey);
-
-            services.AddApplication();
+            
             services.AddInfrastructure(Configuration);
 
             services.AddScoped<ICurrentUserService, CurrentUserService>();
@@ -47,9 +53,9 @@ namespace WebApi
 
             services.AddHealthChecks()
                 .AddDbContextCheck<ApplicationDbContext>();
-
+            
             services.AddControllers();
-
+            
             // Customise default API behaviour
             services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; });
 
@@ -57,9 +63,25 @@ namespace WebApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "Resource Microservice", Version = "v1"});
                 c.ToolboxAddSwaggerSecurity();
+                c.SchemaFilter<SchemaFilter>();
             });
-        }
+            
+            #region MassTransit
+            services.AddMassTransit(x =>
+            {
+                x.AddConsumersFromNamespaceContaining<CreateResourceConsumer>();
+                
+                x.AddRequestClient<SubmitResource>();
+                x.AddRequestClient<GetResource>();
+                
+                x.AddBus(ConfigureBus);
+                x.AddTransactionOutbox();
+            });
 
+            services.AddMassTransitHostedService();
+            #endregion
+        }
+        
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -84,10 +106,38 @@ namespace WebApi
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Resource Microservice v1"));
+        }
+        
+        static IBusControl ConfigureBus(IRegistrationContext<IServiceProvider> provider)
+        {
+            return Bus.Factory.CreateUsingRabbitMq(cfg =>
+            {
+                cfg.Host("rabbitmq://localhost");
+
+                cfg.ConfigureEndpoints(provider, KebabCaseEndpointNameFormatter.Instance);
+                cfg.ReceiveEndpoint("submit-resource", e =>
+                {
+                    e.StateMachineSaga(new CreateResourceStateMachine(), new InMemorySagaRepository<CreateResourceState>());
+                    e.UseInMemoryOutbox();
+                });
+                cfg.ReceiveEndpoint("submit-delete-resource", e =>
+                {
+                    e.StateMachineSaga(new DeleteResourceStateMachine(), new InMemorySagaRepository<DeleteResourceState>());
+                    e.UseInMemoryOutbox();
+                });
+                cfg.ReceiveEndpoint("submit-update-resource", e =>
+                {
+                    e.StateMachineSaga(new UpdateResourceStateMachine(), new InMemorySagaRepository<UpdateResourceState>());
+                    e.UseInMemoryOutbox();
+                });
+            });
         }
     }
 }

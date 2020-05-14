@@ -1,28 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="c6fa22ce-3f77-41b5-8081-c508653b1ea5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Auth/src/Application/User/IntegrationEvents/UserCreated/UserCreatedEvent.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User/src/Application/User/Commands/CreateUser/UserCreatedEvent.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User/src/Application/User/Commands/DeleteUser/DeleteUserCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User/src/Application/User/Commands/DeleteUser/DeleteUserCommandValidator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Auth/.idea/.idea.Auth/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Auth/.idea/.idea.Auth/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Auth/src/WebApi/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Auth/src/WebApi/Startup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Auth/src/WebApi/WebApi.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../Auth/src/WebApi/WebApi.csproj" afterDir="false" />
+    <list default="true" id="86732cb1-095f-4bd7-aa30-2116da3cd1a4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Domain/Common/BaseEntity.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/WebApi/Filters/SchemaFilter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Resource/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Resource/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Resource/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Resource/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../User/src/Application/Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Application/Application.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../User/src/Application/User/Commands/CreateUser/CreateUserCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Application/User/Commands/CreateUser/CreateUserCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../User/src/Application/User/Commands/UpdateUser/UpdateUserCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Application/User/Commands/UpdateUser/UpdateUserCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../User/src/Domain/Common/AuditableEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Domain/Common/BaseEntity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../User/src/Infrastructure/Persistence/ApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/Infrastructure/Persistence/ApplicationDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../User/src/WebApi/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/WebApi/Controllers/UserController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../User/src/WebApi/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../User/src/WebApi/Startup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ToolBox/Bus/Interfaces/IEventBus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../ToolBox/Bus/Interfaces/IEventBus.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ToolBox/Bus/RabbitMqBus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../ToolBox/Bus/RabbitMqBus.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ToolBox/Commands/Command.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ToolBox/Events/Event.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../ToolBox/Events/BaseEvent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ToolBox/Events/Message.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ToolBox/IoC/Extensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../ToolBox/IoC/Extensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Resource.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Resource.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Application.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Common/Behaviours/RequestLogger.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Common/Behaviours/RequestPerformanceBehaviour.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Common/Behaviours/RequestValidationBehavior.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Common/Behaviours/UnhandledExceptionBehaviour.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Common/Exceptions/NotFoundException.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Common/Exceptions/NotFoundException.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Common/Exceptions/ValidationException.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Common/Exceptions/ValidationException.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Common/Interfaces/IApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Common/Interfaces/IApplicationDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Common/Interfaces/ICurrentUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Common/Interfaces/ICurrentUserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Common/Interfaces/IDateTime.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Common/Interfaces/IDateTime.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Common/Mappings/IMapFrom.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Common/Mappings/MappingProfile.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Common/Models/Result.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Common/Models/Result.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/DependencyInjection.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Resource/Commands/CreateResource/CreateResourceCommand.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Resource/Commands/CreateResource/CreateResourceCommandValidator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Resource/Commands/DeleteResource/DeleteResourceCommand.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Resource/Commands/DeleteResource/DeleteResourceCommandValidator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Resource/Commands/UpdateResource/UpdateResourceCommand.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Resource/Commands/UpdateResource/UpdateResourceCommandValidator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Resource/Queries/GetResources/GetResourceQuery.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Resource/Queries/GetResources/GetResourcesQuery.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Resource/Queries/GetResources/ResourceDto.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Resource/Queries/GetResources/ResourceVm.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Resource/Queries/GetResources/ResourcesVm.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Domain/Common/AuditableEntity.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Domain/Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Domain/Domain.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Domain/Entities/Resource.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Infrastructure/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Infrastructure/DependencyInjection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Infrastructure/Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Infrastructure/Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Infrastructure/Persistence/ApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Infrastructure/Persistence/ApplicationDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Infrastructure/Persistence/ApplicationDbContextSeed.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Infrastructure/Persistence/ApplicationDbContextSeed.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Infrastructure/Persistence/Configurations/ResourceConfiguration.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Infrastructure/Services/DateTimeService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Infrastructure/Services/DateTimeService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WebApi/Controllers/ApiController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WebApi/Controllers/ResourceController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/WebApi/Controllers/ResourceController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WebApi/Filters/ApiExceptionFilter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/WebApi/Filters/ApiExceptionFilter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WebApi/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/WebApi/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WebApi/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/WebApi/Properties/launchSettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WebApi/Services/CurrentUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/WebApi/Services/CurrentUserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WebApi/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/WebApi/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WebApi/WebApi.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/WebApi/WebApi.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WebApi/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/WebApi/appsettings.Development.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WebApi/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/WebApi/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Application.UnitTests/Application.UnitTests.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Application.UnitTests/Common/Mappings/MappingTests.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/tests/Application.UnitTests/Application.UnitTests.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/tests/Application.UnitTests/Common/Behaviours/RequestLoggerTests.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/tests/Application.UnitTests/Common/Mappings/MappingTests.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/tests/Applicaton.IntegrationTests/Application.IntegrationTests.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/tests/Applicaton.IntegrationTests/TestBase.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/tests/Applicaton.IntegrationTests/Testing.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/tests/Applicaton.IntegrationTests/TodoItems/Commands/CreateTodoItemTests.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/tests/Applicaton.IntegrationTests/TodoItems/Commands/DeleteTodoItemTests.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/tests/Applicaton.IntegrationTests/TodoItems/Commands/UpdateTodoItemDetailTests.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/tests/Applicaton.IntegrationTests/TodoItems/Commands/UpdateTodoItemTests.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/tests/Applicaton.IntegrationTests/TodoLists/Commands/CreateTodoListTests.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/tests/Applicaton.IntegrationTests/TodoLists/Commands/DeleteTodoListTests.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/tests/Applicaton.IntegrationTests/TodoLists/Commands/UpdateTodoListTests.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/tests/Applicaton.IntegrationTests/TodoLists/Queries/GetTodosTests.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/tests/Applicaton.IntegrationTests/appsettings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/tests/Domain.UnitTests/Domain.UnitTests.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User/tests/Domain.UnitTests/ValueObjects/AdAccountTests.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Presentation/XamarinApp/XamarinApp/ViewModels/ResourceViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Presentation/XamarinApp/XamarinApp/ViewModels/ResourceViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Presentation/XamarinApp/XamarinApp/Views/ResourceListPageCS.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Presentation/XamarinApp/XamarinApp/Views/ResourceListPageCS.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Presentation/XamarinApp/XamarinApp/XamarinApp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../Presentation/XamarinApp/XamarinApp/XamarinApp.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SMXMS.sln" beforeDir="false" afterPath="$PROJECT_DIR$/../../SMXMS.sln" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,24 +102,28 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/Application/Resource/Commands/UpdateResource/UpdateResourceCommand.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Application/Resource/Commands/UpdateResource/UpdateResourceCommandValidator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Application/Common/Interfaces/IApplicationDbContext.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/WebApi/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/WebApi/Controllers/ResourceController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Application/Resource/Queries/GetResources/GetResourceQuery.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Infrastructure/Persistence/Configurations/ResourceConfiguration.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Application/Resource/Queries/GetResources/ResourceVm.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Application/Resource/Commands/DeleteResource/DeleteResourceCommand.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Application/Resource/Commands/DeleteResource/DeleteResourceCommandValidator.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Application/Resource/Queries/GetResources/ResourceDto.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Infrastructure/Persistence/ApplicationDbContext.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/WebApi/Startup.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Application/Resource/Commands/UpdateResource/UpdateResourceCommandValidator.cs" />
+        <option value="$PROJECT_DIR$/src/Domain/Domain.csproj" />
+        <option value="$PROJECT_DIR$/tests/Applicaton.IntegrationTests/Application.IntegrationTests.csproj" />
+        <option value="$PROJECT_DIR$/src/Application/Application.csproj" />
+        <option value="$PROJECT_DIR$/src/Infrastructure/Persistence/ApplicationDbContext.cs" />
+        <option value="$PROJECT_DIR$/src/Application/Common/Interfaces/IApplicationDbContext.cs" />
+        <option value="$PROJECT_DIR$/src/WebApi/Controllers/UserController.cs" />
+        <option value="$PROJECT_DIR$/src/WebApi/Controllers/ResourceController.cs" />
+        <option value="$PROJECT_DIR$/src/WebApi/Program.cs" />
+        <option value="$PROJECT_DIR$/src/WebApi/Startup.cs" />
       </list>
     </option>
   </component>
-  <component name="ProjectId" id="1bXFCDQ2KUOrXe6eeZlfVT4ZaRb" />
+  <component name="ProjectId" id="1btKKV1SYf5ub4glnDhbKntAaXw" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -60,7 +133,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RunManager" selected=".NET Launch Settings Profile.WebApi">
     <configuration name="WebApi" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
@@ -99,23 +172,40 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="c6fa22ce-3f77-41b5-8081-c508653b1ea5" name="Default Changelist" comment="" />
-      <created>1588770401297</created>
+      <changelist id="86732cb1-095f-4bd7-aa30-2116da3cd1a4" name="Default Changelist" comment="" />
+      <created>1589445886296</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1588770401297</updated>
-      <workItem from="1588770406868" duration="26000" />
-      <workItem from="1588770919210" duration="3251000" />
-      <workItem from="1588838882359" duration="1462000" />
+      <updated>1589445886296</updated>
+      <workItem from="1589445889954" duration="583000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
   </component>
-  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="null" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
-    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/../../.." />
+    </ignored-roots>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="354" y="168" key="SettingsEditor" timestamp="1589445919494">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="354" y="168" key="SettingsEditor/0.0.2560.1040@0.0.2560.1040" timestamp="1589445919494" />
   </component>
 </project>
