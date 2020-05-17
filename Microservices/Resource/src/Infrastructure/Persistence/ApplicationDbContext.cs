@@ -1,11 +1,11 @@
-﻿using System.Data;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Resource.Application.Common.Interfaces;
 using Resource.Domain.Common;
+using Resource.Domain.Entities;
 
 namespace Resource.Infrastructure.Persistence
 {
@@ -13,17 +13,16 @@ namespace Resource.Infrastructure.Persistence
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly IDateTime _dateTime;
-        private IDbContextTransaction _currentTransaction;
-
-        public ApplicationDbContext(
-            DbContextOptions options,
+        
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options,
             ICurrentUserService currentUserService,
-            IDateTime dateTime) : base(options)
+            IDateTime dateTime)
+            : base(options)
         {
             _currentUserService = currentUserService;
             _dateTime = dateTime;
         }
-
+        
         public DbSet<Domain.Entities.Resource> Resources { get; set; }
         public DbSet<Domain.Entities.DayAndTime> DayAndTimes { get; set; }
         
@@ -47,56 +46,16 @@ namespace Resource.Infrastructure.Persistence
             var result = await base.SaveChangesAsync(cancellationToken);
             return result;
         }
-        
-        #region Transaction
-        public async Task BeginTransactionAsync()
-        {
-            if (_currentTransaction != null)
-            {
-                return;
-            }
 
-            _currentTransaction = await base.Database.BeginTransactionAsync(IsolationLevel.ReadCommitted)
-                .ConfigureAwait(false);
-        }
-        public async Task CommitTransactionAsync()
+        public override EntityEntry Entry(object entity)
         {
-            try
-            {
-                await SaveChangesAsync().ConfigureAwait(false);
+            return base.Entry(entity);
+        }
 
-                _currentTransaction?.Commit();
-            }
-            catch
-            {
-                RollbackTransaction();
-                throw;
-            }
-            finally
-            {
-                if (_currentTransaction != null)
-                {
-                    _currentTransaction.Dispose();
-                    _currentTransaction = null;
-                }
-            }
-        }
-        public void RollbackTransaction()
+        public override EntityEntry Update(object entity)
         {
-            try
-            {
-                _currentTransaction?.Rollback();
-            }
-            finally
-            {
-                if (_currentTransaction != null)
-                {
-                    _currentTransaction.Dispose();
-                    _currentTransaction = null;
-                }
-            }
+            return base.Update(entity);
         }
-        #endregion
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

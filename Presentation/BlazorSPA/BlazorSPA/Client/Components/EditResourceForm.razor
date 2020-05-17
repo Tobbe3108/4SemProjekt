@@ -1,0 +1,61 @@
+﻿@using BlazorSPA.Client.Data
+@using BlazorSPA.Client.Components
+<EditForm Model="@Resource" OnValidSubmit="OnValidSubmit">
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Name</label>
+                <InputText id="inputResourceName" class="form-control" placeholder="Name" @bind-Value="Resource.Name"/>
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <InputTextArea class="form-control" placeholder="Description" @bind-Value="Resource.Description"></InputTextArea>
+            </div>
+        </div>
+    </div>
+    <h3>Time slots</h3>
+    <p>
+        <button id="addTimeSlot" type="button" class="btn btn-info" @onclick="AddTimeSlot"><b>+</b> Add time slot</button>
+    </p>
+    @if (Resource.Available != null)
+    {
+        <div class="row">
+            @foreach (DayAndTime timeSlot in Resource.Available)
+            {
+                <TimeSlot timeSlot="@timeSlot" RemoveTimeSlot="RemoveTimeSlot" />
+            }
+        </div>
+    }
+    <div class="form-group">
+        <button id="resourceSubmit" class="btn btn-primary" type="submit">@SubmitButtonText</button>
+    </div>
+</EditForm>
+
+@code {
+
+    [Parameter]
+    public ResourceViewModel Resource { get; set; }
+
+    [Parameter]
+    public string SubmitButtonText { get; set; }
+
+    [Parameter]
+    public Action<ResourceViewModel> OnEditComplete { get; set; }
+
+    private void OnValidSubmit()
+    {
+        OnEditComplete?.Invoke(Resource);
+    }
+
+    private void AddTimeSlot()
+    {
+        Resource.Available ??= new List<DayAndTime>();
+        Resource.Available.Add(new DayAndTime{ Id = Guid.NewGuid() });
+    }
+
+    private void RemoveTimeSlot(DayAndTime timeSlot)
+    {
+        Resource.Available.Remove(timeSlot);
+    }
+}

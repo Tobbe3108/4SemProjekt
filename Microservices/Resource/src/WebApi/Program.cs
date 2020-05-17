@@ -25,7 +25,7 @@ namespace Resource.WebApi
 
                     if (context.Database.IsSqlServer()) context.Database.Migrate();
 
-                    //await ApplicationDbContextSeed.SeedSampleDataAsync(context);
+                    await ApplicationDbContextSeed.SeedSampleDataAsync(context);
                 }
                 catch (Exception ex)
                 {

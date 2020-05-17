@@ -1,0 +1,16 @@
+﻿@page "/logout"
+@using BlazorSPA.Client.Services
+@inject AuthService AuthService
+
+<h1>Du er logget ud</h1>
+<hr/>
+<p>Du er nu blevet logget ud.</p>
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        AuthService.Logout();
+    }
+
+}

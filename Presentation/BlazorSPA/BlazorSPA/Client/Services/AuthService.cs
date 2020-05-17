@@ -3,17 +3,14 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
 using System.Threading.Tasks;
-using BlazorSPA.Client.DTOs;
-using Flurl;
-using Flurl.Http;
-using Flurl.Http.Configuration;
+using BlazorSPA.Client.Data;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Configuration;
 using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 
 namespace BlazorSPA.Client.Services
 {
-    public class AuthService : IAuthService
+    public class AuthService
     {
         private readonly HttpClient _client;
         private readonly AuthCredentialsKeeper _credentialsKeeper;
@@ -34,9 +31,7 @@ namespace BlazorSPA.Client.Services
             HttpResponseMessage result;
             try
             {
-                //result = await mobileBffUrl.AppendPathSegment("Auth/login").PostJsonAsync(new { usernameOrEmail = loginDTO.UsernameOrEmail, password = loginDTO.Password });
-                _client.BaseAddress = new Uri(mobileBffUrl);
-                result = await _client.PostAsJsonAsync("Auth/login", loginDTO);
+                result = await _client.PostAsJsonAsync($"{mobileBffUrl}/Auth/login", loginDTO);
             }
             catch (Exception e)
             {
@@ -53,14 +48,16 @@ namespace BlazorSPA.Client.Services
             {
                 return (false, new ArgumentNullException(nameof(token)).Message);
             }
+            
             _credentialsKeeper.SetCredentials(token);
             _authenticationStateProvider.Refresh();
             return (true, null);
         }
 
-        public void Logout()
+        public void  Logout()
         {
-            throw new System.NotImplementedException();
+            _credentialsKeeper.ClearCredentials();
+            _authenticationStateProvider.Refresh();
         }
     }
 }

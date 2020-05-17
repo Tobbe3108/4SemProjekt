@@ -1,0 +1,63 @@
+﻿@page "/Resource/Edit/{Id:guid}"
+@using BlazorSPA.Client.Services
+@using BlazorSPA.Client.Data
+@using BlazorSPA.Client.Components
+@inject ResourceService ResourceService
+@inject NavigationManager NavigationManager
+
+@attribute [Authorize(Roles = "Admin")]
+@if (_resource == null)
+{
+    <div class="alert alert-info">
+        <b>Loading...</b>
+    </div>
+}
+else
+{
+    <h1>Edit resource: @_resource.Name</h1>
+    <hr />
+
+    @if (_error)
+    {
+        <div class="alert alert-danger">
+            <b>Error!</b>@_message
+        </div>
+    }
+
+    <EditResourceForm Resource="_resource" SubmitButtonText="Save" OnEditComplete="OnEditComplete" />
+}
+
+@code {
+
+    [Parameter]
+    public Guid Id { get; set; }
+
+    ResourceViewModel _resource;
+
+    bool _error = false;
+    string _message;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _resource = await ResourceService.GetById(Id);
+    }
+
+    private async void OnEditComplete(ResourceViewModel resource)
+    {
+        try
+        {
+            var (success, message) = await ResourceService.Update(resource);
+            if (success) NavigationManager.NavigateTo("Resource/Details/" + resource.Id);
+            _message = message;
+            _error = true;
+            StateHasChanged();
+        }
+        catch (Exception e)
+        {
+            _message = e.Message;
+            _error = true;
+            StateHasChanged();
+        }
+    }
+
+}

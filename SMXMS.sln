@@ -54,6 +54,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "Microservices\Res
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorSPA.Client", "Presentation\BlazorSPA\BlazorSPA\Client\BlazorSPA.Client.csproj", "{93303154-8DE1-4F4C-B87E-A6A4ED1EABF7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinApp.Infrastructure", "Presentation\XamarinApp\XamarinApp.Infrastructure\XamarinApp.Infrastructure.csproj", "{DE73B3D2-3975-4553-BF15-AD7E13F06C43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinApp.Domain", "Presentation\XamarinApp\XamarinApp.Domain\XamarinApp.Domain.csproj", "{D34F5416-95F6-4CDA-8868-80DAC569D05F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinApp.Application", "Presentation\XamarinApp\XamarinApp.Application\XamarinApp.Application.csproj", "{A53E83AE-0438-4481-BB2E-ACA263E9775E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +89,9 @@ Global
 		{4158F1C2-F521-48ED-8941-846D3545AC26} = {65BE4441-6933-445C-94DC-550BCC3B9026}
 		{8DBDC2AB-E09C-4A7F-B5CF-C55C0505EB8E} = {65BE4441-6933-445C-94DC-550BCC3B9026}
 		{93303154-8DE1-4F4C-B87E-A6A4ED1EABF7} = {58000631-5EC1-4779-B232-59B7FB7010D3}
+		{DE73B3D2-3975-4553-BF15-AD7E13F06C43} = {0EF57A51-CCF1-4F67-B141-98DF15167426}
+		{D34F5416-95F6-4CDA-8868-80DAC569D05F} = {0EF57A51-CCF1-4F67-B141-98DF15167426}
+		{A53E83AE-0438-4481-BB2E-ACA263E9775E} = {0EF57A51-CCF1-4F67-B141-98DF15167426}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{3FB6736B-98DA-4205-BCBD-DAA383B43D41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -161,5 +170,17 @@ Global
 		{93303154-8DE1-4F4C-B87E-A6A4ED1EABF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93303154-8DE1-4F4C-B87E-A6A4ED1EABF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93303154-8DE1-4F4C-B87E-A6A4ED1EABF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE73B3D2-3975-4553-BF15-AD7E13F06C43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE73B3D2-3975-4553-BF15-AD7E13F06C43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE73B3D2-3975-4553-BF15-AD7E13F06C43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE73B3D2-3975-4553-BF15-AD7E13F06C43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D34F5416-95F6-4CDA-8868-80DAC569D05F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D34F5416-95F6-4CDA-8868-80DAC569D05F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D34F5416-95F6-4CDA-8868-80DAC569D05F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D34F5416-95F6-4CDA-8868-80DAC569D05F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A53E83AE-0438-4481-BB2E-ACA263E9775E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A53E83AE-0438-4481-BB2E-ACA263E9775E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A53E83AE-0438-4481-BB2E-ACA263E9775E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A53E83AE-0438-4481-BB2E-ACA263E9775E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

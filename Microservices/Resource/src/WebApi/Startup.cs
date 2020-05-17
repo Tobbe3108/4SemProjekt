@@ -53,7 +53,8 @@ namespace Resource.WebApi
 
             services.AddHealthChecks()
                 .AddDbContextCheck<ApplicationDbContext>();
-            
+
+            services.AddCors();
             services.AddControllers();
             
             // Customise default API behaviour
@@ -73,6 +74,7 @@ namespace Resource.WebApi
                 
                 x.AddRequestClient<SubmitResource>();
                 x.AddRequestClient<GetResource>();
+                x.AddRequestClient<GetAllResources>();
                 
                 x.AddBus(ConfigureBus);
                 x.AddTransactionOutbox();
@@ -101,6 +103,10 @@ namespace Resource.WebApi
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseCors(builder => builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+            
             app.UseRouting();
 
             app.UseAuthentication();

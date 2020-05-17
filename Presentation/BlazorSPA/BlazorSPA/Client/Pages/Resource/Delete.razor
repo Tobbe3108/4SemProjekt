@@ -1,0 +1,78 @@
+﻿@page "/Resource/Delete/{Id:guid}"
+@using BlazorSPA.Client.Services
+@using BlazorSPA.Client.Data
+@inject ResourceService ResourceService
+@inject NavigationManager NavigationManager
+
+@attribute [Authorize(Roles = "Admin")]
+@if (_error)
+{
+    <p>@_message</p>
+}
+@if (_loading)
+{
+    <div class="alert alert-info">
+            <b>Loading...</b>
+        </div>
+}
+else
+{
+    <h3>Delete resource: @_resource.Name</h3>
+    <hr />
+    <p>Are you sure?</p>
+    <button id="confirmDelete" class="btn btn-danger" @onclick="OnConfirm">Yes</button>
+    <button class="btn btn-dark" @onclick="RedirectToOverviewPage">No</button>
+}
+
+@code
+{
+
+    [Parameter]
+    public Guid Id { get; set; }
+
+    ResourceViewModel _resource;
+
+    private bool _error = false;
+    private string _message;
+    private bool _loading = true;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        _resource = await ResourceService.GetById(Id);
+        _loading = false;
+    }
+
+    private async void OnConfirm()
+    {
+        var (success, message) = await ResourceService.Delete(Id);
+        if (success)
+        {
+            try
+            {
+                _loading = true;
+                var hasValue = true;
+                while (hasValue)
+                {
+                    var result = await ResourceService.GetById(Id);
+                    if (result == null) hasValue = false;
+                    await Task.Delay(500);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+        
+        
+        if (success) RedirectToOverviewPage();
+        _message = message;
+        _error = true;
+        _loading = false;
+    }
+
+    private void RedirectToOverviewPage()
+    {
+        NavigationManager.NavigateTo("Resource/All");
+    }
+}

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Resource.Application.Common.Interfaces;
+using Resource.Domain.Entities;
 
 namespace Contracts.Resource
 {
@@ -24,7 +25,7 @@ namespace Contracts.Resource
         {
             try
             {
-                var resource = await _dbContext.Resources.FirstOrDefaultAsync(r => r.Id == context.Message.Id);
+                var resource = await _dbContext.Resources.Include(r => r.Available).FirstOrDefaultAsync(r => r.Id == context.Message.Id);
                 await context.RespondAsync<ResourceVm>(new
                 {
                     Resource = resource
@@ -38,15 +39,10 @@ namespace Contracts.Resource
                 });
             }
         }
+        
     }
-
     public interface ResourceVm
     {
         public global::Resource.Domain.Entities.Resource Resource { get; set; }
-    }
-
-    public interface NotFound
-    {
-        public string Message { get; set; }
     }
 }

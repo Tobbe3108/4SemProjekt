@@ -1,0 +1,84 @@
+﻿@page "/Resource/Details/{Id:guid}"
+@using BlazorSPA.Client.Data
+@using BlazorSPA.Client.Services
+@using BlazorSPA.Client.Components
+@inject ResourceService ResourceService
+@inject NavigationManager NavigationManager
+
+@attribute [Authorize(Roles = "Admin")]
+@if (_resource == null)
+{
+    <div class="alert alert-info">
+            <b>Loading...</b>
+        </div>
+}
+else
+{
+    var deleteUrl = "Resource/Delete/" + _resource.Id;
+    var editUrl = "Resource/Edit/" + _resource.Id;
+
+    <h1 id="ressourceDetail">Resource: @_resource.Name</h1>
+    <hr />
+    <p>
+        <NavLink href="@editUrl" class="btn btn-info">Rediger</NavLink>
+        <NavLink href="@deleteUrl" class="btn btn-danger">Slet</NavLink>
+    </p>
+    <p>
+        <b>ID</b>
+        <div>@_resource.Id</div>
+    </p>
+    <p>
+        <b>Name</b>
+        <div>@_resource.Name</div>
+    </p>
+    <p>
+        <b>Description</b>
+        <div>@_resource.Description</div>
+    </p>
+    @if (_resource.Available == null)
+    {
+        <p>This resource is not availible at any time</p>
+    }
+     else
+     {
+         <b class="mb-4">Times availible (@_resource.Available.Count)</b>
+         <div class="row">
+             @foreach (var dayAndTime in _resource.Available)
+             {
+                 <div class="col-md-6 col-xl-4">
+                     <div class="card mb-3">
+                         <div class="card-header">Period</div>
+                         <div class="card-body">
+                             <p>
+                                 <b>Day</b>
+                                 <div>@dayAndTime.DayOfWeek.ToString()</div>
+                             </p>
+                             <p>
+                                 <b>From</b>
+                                 <div>@dayAndTime.From.ToString("HH:mm")</div>
+                             </p>
+                             <p>
+                                 <b>To</b>
+                                 <div>@dayAndTime.To.ToString("HH:mm")</div>
+                             </p>
+                         </div>
+                     </div>
+                 </div>
+             }
+         </div>
+     }
+}
+
+@code {
+
+    [Parameter]
+    public Guid Id { get; set; }
+
+    ResourceViewModel _resource;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _resource = await ResourceService.GetById(Id);
+    }
+
+}

@@ -7,7 +7,7 @@ namespace Resource.Domain.Entities
     {
         public Guid Id { get; set; }
         public DayOfWeek DayOfWeek { get; set; }
-        public LocalTime To { get; set; }
-        public LocalTime From { get; set; }
+        public DateTime To { get; set; }
+        public DateTime From { get; set; }
     }
 }

@@ -50,7 +50,7 @@ namespace WebApi.Controllers
 
         [Authorize]
         [HttpGet]
-        public async Task<ActionResult<UserVm>> Get()
+        public async Task<IActionResult> Get()
         {
             var (userVm, notFound) = await _getCurrentUserRequestClient.GetResponse<UserVm, NotFound>(new
             {
@@ -64,7 +64,7 @@ namespace WebApi.Controllers
         
         [Authorize]
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserVm>> GetById(Guid id)
+        public async Task<IActionResult> GetById(Guid id)
         {
             var (userVm, notFound) = await _getUserRequestClient.GetResponse<UserVm, NotFound>(new
             {
@@ -75,7 +75,7 @@ namespace WebApi.Controllers
 
         [Authorize]
         [HttpPut("{id}")]
-        public async Task<ActionResult> Update(Guid id, SubmitUpdateUserCommand command)
+        public async Task<IActionResult> Update(Guid id, SubmitUpdateUserCommand command)
         {
             if (id != command.Id)
             {
@@ -106,7 +106,7 @@ namespace WebApi.Controllers
         
         [Authorize]
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             var request = new SubmitDeleteUserCommand{ Id = id };
             var validator = new SubmitDeleteUserCommandValidator();

@@ -1,0 +1,69 @@
+﻿@using BlazorSPA.Client.Data
+<div class="col-md-6 col-xl-4">
+    <div class="card mb-3">
+        <div class="card-header">
+            Time slot
+        </div>
+        <div class="card-body">
+            <label>Day</label>
+            <SfComboBox Placeholder="e.g. Monday" @bind-Value="timeSlot.DayOfWeek" DataSource="@Days">
+                <ComboBoxFieldSettings Value="Name"></ComboBoxFieldSettings>
+            </SfComboBox>
+            
+            <label class="mt-2">From</label>
+            <SfTimePicker TValue="DateTime" PlaceHolder="Select a time" Step=15 Format="HH:mm" @bind-Value="@timeSlot.From">
+                <TimePickerEvents TValue="DateTime" ValueChange="@((Syncfusion.Blazor.Calendars.ChangeEventArgs<DateTime> args) => MinVal = args.Value.AddMinutes(15))"></TimePickerEvents>
+            </SfTimePicker>
+
+            <label class="mt-2">To</label>
+            <SfTimePicker TValue="DateTime" PlaceHolder="Select a time" Step=15 Format="HH:mm" Min="@MinVal" Value="@timeSlot.To">
+                <TimePickerEvents TValue="DateTime" ValueChange="@((Syncfusion.Blazor.Calendars.ChangeEventArgs<DateTime> args) => timeSlot.To = args.Value)"></TimePickerEvents>
+            </SfTimePicker>
+       
+            <div class="form-group mt-2">
+                <button type="button" class="btn btn-danger" @onclick="@(() => RemoveTimeSlot.InvokeAsync(timeSlot))">
+                    <b>-</b> Remove
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code
+{
+    [Parameter]
+    public DayAndTime timeSlot { get; set; }
+
+    [Parameter]
+    public EventCallback<DayAndTime> RemoveTimeSlot { get; set; }
+
+    public DateTime MinVal { get; set; } = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
+
+    public class Day
+    {
+        public string Name { get; set; }
+        public DayOfWeek DayOfWeek { get; set; }
+
+        public Day(DayOfWeek dayOfWeek)
+        {
+            DayOfWeek = dayOfWeek;
+            Name = dayOfWeek.ToString();
+        }
+    }
+
+    public class Time
+    {
+
+    }
+
+    List<Day> Days = new List<Day>
+    {
+        new Day(DayOfWeek.Sunday),
+        new Day(DayOfWeek.Saturday),
+        new Day(DayOfWeek.Friday),
+        new Day(DayOfWeek.Thursday),
+        new Day(DayOfWeek.Wednesday),
+        new Day(DayOfWeek.Tuesday),
+        new Day(DayOfWeek.Monday)
+    };
+}

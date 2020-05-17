@@ -1,39 +1,27 @@
 ﻿@inject NavigationManager NavigationManager
-@inject IAuthService AuthService
+@inject AuthService AuthService
 @page "/Login"
-@using BlazorSPA.Client.DTOs
 @using BlazorSPA.Client.Services
+@using BlazorSPA.Client.Data
 
-<h1>Log ind</h1>
-<hr/>
-
-<div class="col-md-6">
-    @if (_invalidLogin)
-    {
-        <div class="alert alert-danger">
-            @Message
-        </div>
-    }
-
-    <EditForm Model="@_loginDTO" OnValidSubmit="OnValidSubmit">
-
-        <div class="form-group">
-            <label>Username or Email</label>
-            <InputText id="login-username" class="form-control" placeholder="Username" @bind-Value="_loginDTO.UsernameOrEmail"/>
-        </div>
-
-        <div class="form-group">
-            <label>Password</label>
-            <InputText id="login-password" class="form-control" placeholder="********" type="password" @bind-Value="_loginDTO.Password"/>
-        </div>
-
-        <div class="form-group">
-            <button id="loginSubmit" class="btn btn-primary" type="submit">Login</button>
-        </div>
-
+@if (_invalidLogin)
+{
+    <div class="alert alert-danger">
+        @Message
+    </div>
+}
+<div class="text-center">
+    <EditForm class="form-signin" Model="@_loginDTO" OnValidSubmit="OnValidSubmit" id="form">
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <label for="inputUsername" class="sr-only">Email address</label>
+        <InputText type="username" id="inputUsername" class="form-control" placeholder="Username Or Email" required autofocus @bind-Value="_loginDTO.UsernameOrEmail" />
+        <label for="inputPassword" class="sr-only">Password</label>
+        <InputText type="password" id="inputPassword" class="form-control" placeholder="Password" required @bind-Value="_loginDTO.Password" />
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </EditForm>
 </div>
 
+<SfSpinner @ref="SpinnerObj" Target="#form" />
 
 @code {
     private readonly LoginDTO _loginDTO = new LoginDTO
@@ -49,6 +37,7 @@
     {
         _invalidLogin = false;
 
+        SpinnerObj.ShowSpinner(target);
         var (success, message) = await AuthService.Login(_loginDTO); 
         if (success)
         {
@@ -60,6 +49,46 @@
             _invalidLogin = true;
             StateHasChanged();
         }
+        SpinnerObj.HideSpinner(target);
     }
-
+    
+    SfSpinner SpinnerObj;
+    string target { get; set; } = "#form";
 }
+
+<style>
+    .text-center {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-align: center;
+      align-items: center;
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+    .form-signin {
+      width: 100%;
+      max-width: 330px;
+      padding: 15px;
+      margin: auto;
+    }
+    .form-signin .form-control {
+      position: relative;
+      box-sizing: border-box;
+      height: auto;
+      padding: 10px;
+      font-size: 16px;
+    }
+    .form-signin .form-control:focus {
+      z-index: 2;
+    }
+    .form-signin input[type="email"] {
+      margin-bottom: -1px;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    .form-signin input[type="password"] {
+      margin-bottom: 10px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+</style>

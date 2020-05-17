@@ -1,0 +1,28 @@
+﻿{
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/Resource",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5011
+        }
+      ],
+      "UpstreamPathTemplate": "/Resource",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/Resource/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5011
+        }
+      ],
+      "UpstreamPathTemplate": "/Resource/{id}",
+      "UpstreamHttpMethod": [ "Get" ]
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+﻿@page "/Resource/Add"
+@using BlazorSPA.Client.Services
+@using BlazorSPA.Client.Data
+@using BlazorSPA.Client.Components
+@inject ResourceService ResourceService
+@inject NavigationManager NavigationManager
+
+@attribute [Authorize (Roles = "Admin")]
+<h1>New Resource</h1>
+<hr/>
+
+@if (_error)
+{
+    <div class="alert alert-danger">
+        <b>Error!</b> It was not possible to create a resource at this time
+    </div>
+}
+
+@if (_loading)
+{
+    <div class="alert alert-info">
+        <b>Loading...</b>
+    </div>
+}
+
+<EditResourceForm Resource="_resource" SubmitButtonText="Create Resource" OnEditComplete="OnEditComplete"/>
+
+@code {
+
+    private ResourceViewModel _resource = new ResourceViewModel
+    {
+        Available = new List<DayAndTime>()
+    };
+
+    private bool _error;
+    private bool _loading = false;
+
+    private async void OnEditComplete(ResourceViewModel resource)
+    {
+        _error = false;
+        StateHasChanged();
+
+        try
+        {
+            _loading = true;
+            var (id, message) = await ResourceService.Add(resource);
+            if (id == Guid.Empty)
+            {
+                _error = true;
+                _loading = false;
+                StateHasChanged();
+                return;
+            }
+
+            var hasValue = false;
+            while (!hasValue)
+            {
+                var result = await ResourceService.GetById(id);
+                if (result != null) hasValue = true;
+                await Task.Delay(500);
+            }
+
+            NavigationManager.NavigateTo("Resource/Details/" + id);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Begin Error");
+            Console.WriteLine(e);
+            Console.WriteLine(e.Message);
+            Console.WriteLine(e.StackTrace);
+            Console.WriteLine("End error");
+            _loading = false;
+            _error = true;
+            StateHasChanged();
+        }
+    }
+
+}

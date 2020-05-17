@@ -1,13 +1,14 @@
-﻿using System;
-using Xamarin.Essentials;
-using Xamarin.Forms;
+﻿using Xamarin.Essentials;
 using Xamarin.Forms.Xaml;
-using XamarinApp.Views;
+using XamarinApp.Application.Common.Interfaces;
+using XamarinApp.Infrastructure.Services;
+using XamarinApp.ViewModels;
+using XamarinApp.ViewModels.User;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace XamarinApp
 {
-    public partial class App : Application
+    public partial class App : Xamarin.Forms.Application, IHaveMainPage
     {
         public App()
         {
@@ -15,11 +16,17 @@ namespace XamarinApp
             
             InitializeComponent();
             
-            MainPage = new NavigationPage(new LoginPageCS())
-            {
-                BarTextColor = Color.White,
-                BarBackgroundColor = Color.FromHex("007DE6")
-            };
+            var navigator = new NavigationService(this, new ViewLocator());
+
+            var rootViewModel = new LoginViewModel(navigator, "/Login");
+
+            navigator.PresentAsNavigatableMainPage(rootViewModel);
+            
+            // MainPage = new NavigationPage(new LoginPageCS())
+            // {
+            //     BarTextColor = Color.White,
+            //     BarBackgroundColor = Color.FromHex("007DE6")
+            // };
         }
 
         public static readonly string AppName = "XamarinApp"; 
@@ -30,7 +37,7 @@ namespace XamarinApp
             
             SecureStorage.RemoveAll();
             
-            Application.Current.Properties["MobileBffUrl"] = "http://10.0.2.2:5000/";
+            Current.Properties["MobileBffUrl"] = "http://10.0.2.2:5000/";
             //var id = Application.Current.Properties ["id"] as int;
 
         }

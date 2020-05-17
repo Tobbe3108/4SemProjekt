@@ -3,20 +3,19 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Utf8Json;
 using Xamarin.Essentials;
-using XamarinApp.Annotations;
-using XamarinApp.Data;
+using XamarinApp.Domain.Entities;
 
 namespace XamarinApp.ViewModels
 {
     public class UserViewModel
     {
-        public User User { get; set; }
+        public Domain.Entities.User User { get; set; }
 
         public UserViewModel()
         {
             try
             {
-                User = JsonSerializer.Deserialize<User>(SecureStorage.GetAsync("current_user").Result);
+                User = JsonSerializer.Deserialize<Domain.Entities.User>(SecureStorage.GetAsync("current_user").Result);
             }
             catch (Exception)
             {

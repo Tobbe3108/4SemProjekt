@@ -38,11 +38,11 @@ namespace Web.Bff
                 .UseIISIntegration()
                 .Configure(app =>
                 {
-                    app.UseRouting();
-                    app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
                     app.UseCors(builder => builder.AllowAnyOrigin()
                         .AllowAnyMethod()
                         .AllowAnyHeader());
+                    app.UseRouting();
+                    app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
                     app.UseOcelot().Wait();
                 })
                 .Build()

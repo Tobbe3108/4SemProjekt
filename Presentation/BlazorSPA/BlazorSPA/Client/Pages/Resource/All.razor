@@ -1,0 +1,70 @@
+﻿@page "/Resource/All"
+@using BlazorSPA.Client.Services
+@using BlazorSPA.Client.Data
+@inject ResourceService ResourceService
+
+@attribute [Authorize(Roles = "Admin")]
+<h1>All Resources</h1>
+<hr/>
+<p>
+    <NavLink id="newRessource" class="btn btn-primary" href="Resource/Add"><b>+</b> New Resource</NavLink>
+</p>
+@if (_resources == null)
+{
+    <div class="alert alert-info">
+            <b>Loading...</b>
+        </div>
+}
+else
+{
+    if (_resources.Count <= 0)
+    {
+        <div class="alert alert-info">
+                <b>No resources loaded</b>
+            </div>
+    }
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Reource</th>
+            <th>Timeslots</th>
+            <th>Options</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var resource in _resources)
+        {
+            var deleteUrl = "Resource/Delete/" + resource.Id;
+            var detailsUrl = "Resource/Details/" + resource.Id;
+            var editUrl = "Resource/Edit/" + resource.Id;
+            <tr id="tableRow">
+                <td id="ressourceName">
+                    <NavLink id="detailsBtn" href="@detailsUrl">@resource.Name</NavLink>
+                </td>
+                @if (resource.Available != null)
+                {
+                    <td>@resource.Available.Count</td>
+                }
+                else
+                {
+                    <td>0</td>
+                }
+                <td>
+                    <NavLink id="editRessource" class="btn btn-info" href="@editUrl">Rediger</NavLink>
+                    <NavLink id="deleteRessource" class="btn btn-danger" href="@deleteUrl">Slet</NavLink>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code {
+    List<ResourceViewModel> _resources;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _resources = await ResourceService.GetAll();
+    }
+
+}
