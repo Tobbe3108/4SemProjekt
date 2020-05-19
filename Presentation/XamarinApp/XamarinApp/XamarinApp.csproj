@@ -12,6 +12,7 @@
 
     <ItemGroup>
         <PackageReference Include="Flurl.Http" Version="2.4.2" />
+        <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="3.1.4" />
         <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
         <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="18.1.0.52" />
         <PackageReference Include="Syncfusion.Xamarin.Cards" Version="18.1.0.52" />

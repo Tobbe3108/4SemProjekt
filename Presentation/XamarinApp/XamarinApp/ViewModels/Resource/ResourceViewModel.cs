@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.SignalR.Client;
 using Syncfusion.SfSchedule.XForms;
 using Syncfusion.XForms.DataForm.Editors;
 using Xamarin.Forms;
@@ -23,6 +24,7 @@ namespace XamarinApp.ViewModels.Resource
         public ScheduleAppointmentCollection BlockedAppointments { get; set; }
         public double MinFromTime = 0;
         public double MaxToTime = 24;
+        private HubConnection _hubConnection;
 
         public ResourceViewModel(INavigationService navigator, string navigationPath, Domain.Entities.Resource resource)
         {
@@ -35,12 +37,37 @@ namespace XamarinApp.ViewModels.Resource
             BlockedAppointments = GenerateNonAccessibleBlocks();
         }
 
+        public override Task BeforeFirstShown()
+        {
+            #region SignalR
+            var signalRUrl = Xamarin.Forms.Application.Current.Properties["SignalRUrl"] as string;
+            _hubConnection = new HubConnectionBuilder().WithUrl($"{signalRUrl}/reservationHub").Build();  
+  
+            _hubConnection.On<Domain.Entities.Reservation>("ReceiveReservation", (reservation) =>
+            {
+                if (reservation.ResourceId != Resource.Id) return;
+                var reservationToCheck = Resource.Reservations.FirstOrDefault(r => r.Id == reservation.Id); 
+                if (reservationToCheck == null)
+                    Resource.Reservations.Add(reservation);
+                else
+                {
+                    Resource.Reservations.Remove(reservationToCheck);
+                    Resource.Reservations.Add(reservation);
+                }
+            });  
+  
+            _hubConnection.StartAsync();
+            #endregion
+            
+            return base.BeforeFirstShown();
+        }
+        
         public void ScheduleOnCellTapped(object sender, CellTappedEventArgs e)
         {
             if (e.Appointment != null) _navigator.DisplayAlert("Error", "You cannot create an overlapping reservation", "Ok");
             else
             {
-                _navigator.NavigateToModal(new CreateReservationViewModel(_navigator, $"{NavigationPath}/CreateReservation", e.Datetime));
+                _navigator.NavigateToModal(new CreateReservationViewModel(_navigator, $"{NavigationPath}/CreateReservation", e.Datetime, Resource));
             }
             
         }

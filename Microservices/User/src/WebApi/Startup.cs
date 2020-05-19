@@ -1,5 +1,4 @@
 using System;
-using Contracts.User;
 using MassTransit;
 using MassTransit.Definition;
 using MassTransit.Saga;
@@ -11,12 +10,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using ToolBox.Contracts.User;
 using ToolBox.IoC;
 using User.Application;
 using User.Application.Common.Interfaces;
 using User.Application.User.Commands.CreateUser;
 using User.Application.User.Commands.DeleteUser;
 using User.Application.User.Commands.UpdateUser;
+using User.Application.User.Queries.GetUser;
 using User.Infrastructure;
 using User.Infrastructure.Persistence;
 using WebApi.Filters;
@@ -69,6 +70,10 @@ namespace WebApi
             services.AddMassTransit(x =>
             {
                 x.AddConsumersFromNamespaceContaining<CreateUserConsumer>();
+                x.AddConsumersFromNamespaceContaining<DeleteUserConsumer>();
+                x.AddConsumersFromNamespaceContaining<UpdateUserConsumer>();
+                x.AddConsumersFromNamespaceContaining<GetCurrentUserConsumer>();
+                
                 x.AddRequestClient<SubmitUser>();
                 x.AddRequestClient<GetCurrentUser>();
                 x.AddRequestClient<GetUser>();

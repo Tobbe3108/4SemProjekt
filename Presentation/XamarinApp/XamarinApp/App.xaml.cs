@@ -38,6 +38,7 @@ namespace XamarinApp
             SecureStorage.RemoveAll();
             
             Current.Properties["MobileBffUrl"] = "http://10.0.2.2:5000/";
+            Current.Properties["SignalRUrl"] = "http://10.0.2.2:5012";
             //var id = Application.Current.Properties ["id"] as int;
 
         }

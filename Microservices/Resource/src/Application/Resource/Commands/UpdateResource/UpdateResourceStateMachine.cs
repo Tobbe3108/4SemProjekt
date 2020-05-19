@@ -1,7 +1,7 @@
 ﻿using System;
 using Automatonymous;
-using Contracts.Resource;
 using MassTransit;
+using ToolBox.Contracts.Resource;
 
 namespace Resource.Application.Resource.Commands.UpdateResource
 {
@@ -25,7 +25,7 @@ namespace Resource.Application.Resource.Commands.UpdateResource
             Initially(
                 When(SubmitUpdateResource)
                     .Then(x => x.Instance.ResourceToUpdate = x.Data)
-                    .SendAsync(new Uri("queue:update-resource"), x => x.Init<Contracts.Resource.UpdateResource>(new
+                    .SendAsync(new Uri("queue:update-resource"), x => x.Init<ToolBox.Contracts.Resource.UpdateResource>(new
                     {
                         x.Instance.ResourceToUpdate.Id,
                         x.Instance.ResourceToUpdate.Name,

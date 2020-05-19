@@ -1,7 +1,6 @@
 using System;
 using System.Reflection;
 using Automatonymous;
-using Contracts.Resource;
 using MassTransit;
 using MassTransit.Definition;
 using MassTransit.Saga;
@@ -14,13 +13,18 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Resource.Application.Common.Interfaces;
+using Resource.Application.Reservation.CreateResourceReservation;
+using Resource.Application.Reservation.DeleteResourceReservation;
+using Resource.Application.Reservation.UpdateResourceReservation;
 using Resource.Application.Resource.Commands.CreateResource;
 using Resource.Application.Resource.Commands.DeleteResource;
 using Resource.Application.Resource.Commands.UpdateResource;
+using Resource.Application.Resource.Queries.GetResource;
 using Resource.Infrastructure;
 using Resource.Infrastructure.Persistence;
 using Resource.WebApi.Filters;
 using Resource.WebApi.Services;
+using ToolBox.Contracts.Resource;
 using ToolBox.IoC;
 
 namespace Resource.WebApi
@@ -71,7 +75,13 @@ namespace Resource.WebApi
             services.AddMassTransit(x =>
             {
                 x.AddConsumersFromNamespaceContaining<CreateResourceConsumer>();
-                
+                x.AddConsumersFromNamespaceContaining<UpdateResourceConsumer>();
+                x.AddConsumersFromNamespaceContaining<DeleteResourceConsumer>();
+                x.AddConsumersFromNamespaceContaining<GetAllResourcesConsumer>();
+                x.AddConsumersFromNamespaceContaining<CreateResourceReservationConsumer>();
+                x.AddConsumersFromNamespaceContaining<UpdateResourceReservationConsumer>();
+                x.AddConsumersFromNamespaceContaining<DeleteResourceReservationConsumer>();
+
                 x.AddRequestClient<SubmitResource>();
                 x.AddRequestClient<GetResource>();
                 x.AddRequestClient<GetAllResources>();

@@ -3,13 +3,16 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Auth.Application;
+using Auth.Application.AuthUser.Commands.CreateAuthUser;
+using Auth.Application.AuthUser.Commands.DeleteAuthUser;
+using Auth.Application.AuthUser.Commands.UpdateAuthUser;
 using Auth.Application.Common.Interfaces;
+using Auth.Application.User.Commands.AuthenticateUser;
 using Auth.Domain.Entities;
 using Auth.Infrastructure;
 using Auth.Infrastructure.Persistence;
 using Auth.WebApi.Filters;
 using Auth.WebApi.Services;
-using Contracts.AuthUser;
 using MassTransit;
 using MassTransit.Definition;
 using Microsoft.AspNetCore.Builder;
@@ -20,6 +23,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using ToolBox.Contracts.Auth;
 using ToolBox.IoC;
 
 
@@ -76,6 +80,9 @@ namespace Auth.WebApi
             services.AddMassTransit(x =>
             {
                 x.AddConsumersFromNamespaceContaining<CreateAuthUserConsumer>();
+                x.AddConsumersFromNamespaceContaining<UpdateAuthUserConsumer>();
+                x.AddConsumersFromNamespaceContaining<DeleteAuthUserConsumer>();
+                x.AddConsumersFromNamespaceContaining<AuthenticateUserConsumer>();
                 x.AddRequestClient<AuthenticateUser>();
                 x.AddBus(ConfigureBus);
                 x.AddTransactionOutbox();

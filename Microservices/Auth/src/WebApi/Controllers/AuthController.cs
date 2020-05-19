@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Contracts.AuthUser;
+using Auth.Application.User.Commands.AuthenticateUser;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
+using ToolBox.Contracts;
+using ToolBox.Contracts.Auth;
 
 namespace Auth.WebApi.Controllers
 {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Internal;
 using Resource.Domain.Entities;
+using ToolBox.Contracts.Resource;
 
 namespace Resource.Infrastructure.Persistence
 {

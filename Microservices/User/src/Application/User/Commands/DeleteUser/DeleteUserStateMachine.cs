@@ -1,8 +1,8 @@
 ﻿using System;
 using Automatonymous;
-using Contracts.AuthUser;
-using Contracts.User;
 using MassTransit;
+using ToolBox.Contracts.Auth;
+using ToolBox.Contracts.User;
 
 namespace User.Application.User.Commands.DeleteUser
 {
@@ -36,7 +36,7 @@ namespace User.Application.User.Commands.DeleteUser
 
             During(Submitted,
                 When(AuthUserDeleted)
-                    .SendAsync(new Uri("queue:delete-user"), x => x.Init<Contracts.User.DeleteUser>(new
+                    .SendAsync(new Uri("queue:delete-user"), x => x.Init<ToolBox.Contracts.User.DeleteUser>(new
                     {
                         x.Instance.Id
                     }))

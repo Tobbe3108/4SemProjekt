@@ -1,9 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using User.Domain.Common;
 
 namespace User.Domain.Entities
 {
-    public class User
+    public class User : BaseEntity
     {
         public Guid Id { get; set; }
         public string Username { get; set; }

@@ -1,8 +1,8 @@
 ﻿using System;
 using Automatonymous;
-using Contracts.AuthUser;
-using Contracts.User;
 using MassTransit;
+using ToolBox.Contracts.Auth;
+using ToolBox.Contracts.User;
 using User.Application.User.Commands.DeleteUser;
 
 namespace User.Application.User.Commands.UpdateUser
@@ -40,19 +40,20 @@ namespace User.Application.User.Commands.UpdateUser
 
             During(Submitted,
                 When(AuthUserUpdated)
-                    .SendAsync(new Uri("queue:update-user"), x => x.Init<Contracts.User.UpdateUser>(new
-                    {
-                        x.Instance.UserToUpdate.Id,
-                        x.Instance.UserToUpdate.Username,
-                        x.Instance.UserToUpdate.Email,
-                        x.Instance.UserToUpdate.Password,
-                        x.Instance.UserToUpdate.FirstName,
-                        x.Instance.UserToUpdate.LastName,
-                        x.Instance.UserToUpdate.Address,
-                        x.Instance.UserToUpdate.City,
-                        x.Instance.UserToUpdate.Country,
-                        x.Instance.UserToUpdate.ZipCode
-                    }))
+                    .SendAsync(new Uri("queue:update-user"),
+                        x => x.Init<ToolBox.Contracts.User.UpdateUser>(new
+                        {
+                            x.Instance.UserToUpdate.Id,
+                            x.Instance.UserToUpdate.Username,
+                            x.Instance.UserToUpdate.Email,
+                            x.Instance.UserToUpdate.Password,
+                            x.Instance.UserToUpdate.FirstName,
+                            x.Instance.UserToUpdate.LastName,
+                            x.Instance.UserToUpdate.Address,
+                            x.Instance.UserToUpdate.City,
+                            x.Instance.UserToUpdate.Country,
+                            x.Instance.UserToUpdate.ZipCode
+                        }))
                     .TransitionTo(Pending));
 
             During(Pending,

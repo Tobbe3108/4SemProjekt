@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Resource.Application.Common.Interfaces;
 using Resource.Domain.Common;
 using Resource.Domain.Entities;
+using ToolBox.Contracts.Resource;
 
 namespace Resource.Infrastructure.Persistence
 {
@@ -24,7 +25,8 @@ namespace Resource.Infrastructure.Persistence
         }
         
         public DbSet<Domain.Entities.Resource> Resources { get; set; }
-        public DbSet<Domain.Entities.DayAndTime> DayAndTimes { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<DayAndTime> DayAndTimes { get; set; }
         
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
@@ -46,17 +48,7 @@ namespace Resource.Infrastructure.Persistence
             var result = await base.SaveChangesAsync(cancellationToken);
             return result;
         }
-
-        public override EntityEntry Entry(object entity)
-        {
-            return base.Entry(entity);
-        }
-
-        public override EntityEntry Update(object entity)
-        {
-            return base.Update(entity);
-        }
-
+        
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

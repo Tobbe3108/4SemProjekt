@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Contracts.User;
 using FluentValidation.Results;
 using MassTransit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ToolBox.Contracts;
+using ToolBox.Contracts.User;
 using User.Application.Common.Interfaces;
+using User.Application.User.Commands.CreateUser;
+using User.Application.User.Commands.DeleteUser;
+using User.Application.User.Commands.UpdateUser;
+using User.Application.User.Queries.GetUser;
 
 namespace WebApi.Controllers
 {

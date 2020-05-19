@@ -39,7 +39,9 @@ namespace XamarinApp.ViewModels.User
                 if (await Login())
                 {
                     await _navigator.PopModal();
-                    _navigator.PresentAsNavigatableMainPage(new HomeViewModel(_navigator, new ResourceListView(new ResourceListViewModel(_navigator, $"{NavigationPath}/ResourceList"))));
+                    var resourceListViewModel = new ResourceListViewModel(_navigator, $"{NavigationPath}/ResourceList");
+                    await resourceListViewModel.BeforeFirstShown();
+                    _navigator.PresentAsNavigatableMainPage(new HomeViewModel(_navigator, new ResourceListView(resourceListViewModel)));
                 }
                 else
                 {

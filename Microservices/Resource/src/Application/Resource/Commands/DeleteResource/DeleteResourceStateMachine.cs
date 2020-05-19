@@ -1,7 +1,7 @@
 ﻿using System;
 using Automatonymous;
-using Contracts.Resource;
 using MassTransit;
+using ToolBox.Contracts.Resource;
 
 namespace Resource.Application.Resource.Commands.DeleteResource
 {
@@ -25,7 +25,7 @@ namespace Resource.Application.Resource.Commands.DeleteResource
             Initially(
                 When(SubmitDeleteResource)
                     .Then(x => x.Instance.Id = x.Data.Id)
-                    .SendAsync(new Uri("queue:delete-resource"), x => x.Init<Contracts.Resource.DeleteResource>(new
+                    .SendAsync(new Uri("queue:delete-resource"), x => x.Init<ToolBox.Contracts.Resource.DeleteResource>(new
                     {
                         x.Instance.Id
                     }))

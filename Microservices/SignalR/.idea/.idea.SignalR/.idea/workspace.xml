@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="9a2657f9-197b-465a-8dd7-72c746109ef0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Auth/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Auth/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Auth/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Auth/.idea/indexLayout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Auth/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Auth/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.SignalR/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.SignalR/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SignalR.sln" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Application/Application.csproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Application/AuthUser/Commands/CreateAuthUser/AuthUserCreated.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Application/AuthUser/Commands/CreateAuthUser/CreateAuthUser.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Application/AuthUser/Commands/DeleteAuthUser/AuthUserDeleted.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Application/AuthUser/Commands/DeleteAuthUser/DeleteAuthUser.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Application/AuthUser/Commands/UpdateAuthUser/AuthUserUpdated.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Application/AuthUser/Commands/UpdateAuthUser/UpdateAuthUser.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Application/Common/Exceptions/NotFoundException.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Application/Common/Exceptions/ValidationException.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Application/Common/Interfaces/IApplicationDbContext.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Application/Common/Interfaces/IAuthService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Application/Common/Interfaces/ICurrentUserService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Application/Common/Interfaces/IDateTime.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Application/Common/Interfaces/IHashService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Application/Common/Models/Result.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Application/User/Commands/AuthenticateUser/AuthenticateUser.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Domain/Common/BaseEntity.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Domain/Domain.csproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Domain/Entities/AuthUser.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Domain/Entities/Role.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Domain/Entities/UserRole.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Infrastructure/DependencyInjection.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Infrastructure/Infrastructure.csproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Infrastructure/Persistence/ApplicationDbContext.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Infrastructure/Persistence/ApplicationDbContextSeed.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Infrastructure/Persistence/Configurations/UserConfiguration.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Infrastructure/Persistence/Configurations/UserRoleConfiguration.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Infrastructure/Services/AuthService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Infrastructure/Services/DateTimeService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Infrastructure/Services/HashService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Infrastructure/Services/KeyService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/WebApi/Controllers/AuthController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/WebApi/Filters/ApiExceptionFilter.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/WebApi/Filters/SchemaFilter.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/WebApi/Program.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/WebApi/Properties/launchSettings.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/WebApi/Services/CurrentUserService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/WebApi/Startup.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/WebApi/WebApi.csproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/WebApi/appsettings.Development.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/WebApi/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Presentation/BlazorSPA/.vs/BlazorSPA/DesignTimeBuild/.dtbcache.v2" beforeDir="false" afterPath="$PROJECT_DIR$/../../Presentation/BlazorSPA/.vs/BlazorSPA/DesignTimeBuild/.dtbcache.v2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Presentation/BlazorSPA/.vs/BlazorSPA/v16/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/../../Presentation/BlazorSPA/.vs/BlazorSPA/v16/.suo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Presentation/XamarinApp/XamarinApp/App.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Presentation/XamarinApp/XamarinApp/App.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Presentation/XamarinApp/XamarinApp/ViewModels/Resource/ResourceListViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Presentation/XamarinApp/XamarinApp/ViewModels/Resource/ResourceListViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Presentation/XamarinApp/XamarinApp/XamarinApp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../Presentation/XamarinApp/XamarinApp/XamarinApp.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SMXMS.sln" beforeDir="false" afterPath="$PROJECT_DIR$/../../SMXMS.sln" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="1c4QDd6dFB9vcoHkgK4yo67VHgZ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9a2657f9-197b-465a-8dd7-72c746109ef0" name="Default Changelist" comment="" />
+      <created>1589785266952</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1589785266952</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>

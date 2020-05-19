@@ -10,7 +10,8 @@ namespace XamarinApp.Domain.Entities
         private string _name;
         private string _description;
         private List<DayAndTime> _available;
-
+        private List<Reservation> _reservations;
+        
         public Guid Id
         {
             get => _id;
@@ -51,6 +52,16 @@ namespace XamarinApp.Domain.Entities
             }
         }
         
+        public List<Reservation> Reservations
+        {
+            get => _reservations;
+            set
+            {
+                _reservations = value;
+                OnPropertyChanged("Reservations");
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string name)
         {

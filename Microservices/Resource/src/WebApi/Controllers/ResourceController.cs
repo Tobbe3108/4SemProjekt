@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Contracts.Resource;
 using FluentValidation.Results;
 using MassTransit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Resource.Application.Resource.Commands.CreateResource;
+using Resource.Application.Resource.Commands.DeleteResource;
+using Resource.Application.Resource.Commands.UpdateResource;
+using Resource.Application.Resource.Queries.GetResource;
+using ToolBox.Contracts;
+using ToolBox.Contracts.Resource;
 
 namespace Resource.WebApi.Controllers
 {
@@ -42,7 +47,7 @@ namespace Resource.WebApi.Controllers
                 Id = Guid.NewGuid(),
                 command.Name,
                 command.Description,
-                command.Available
+                command.Available,
             });
             
             return Ok(response.Message.Id);

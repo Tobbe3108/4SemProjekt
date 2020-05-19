@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using Automatonymous;
-using Contracts.Resource;
 using MassTransit;
+using ToolBox.Contracts.Resource;
 
 namespace Resource.Application.Resource.Commands.CreateResource
 {
@@ -31,7 +29,7 @@ namespace Resource.Application.Resource.Commands.CreateResource
                     }))
                     .Then(x => x.Instance.ResourceToCreate = x.Data)
                     .SendAsync(new Uri("queue:create-resource"), x =>
-                        x.Init<Contracts.Resource.CreateResource>(new
+                        x.Init<ToolBox.Contracts.Resource.CreateResource>(new
                         {
                             x.Instance.ResourceToCreate.Id,
                             x.Instance.ResourceToCreate.Name,

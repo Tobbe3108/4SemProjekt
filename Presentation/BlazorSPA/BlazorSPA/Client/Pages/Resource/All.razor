@@ -1,7 +1,10 @@
 ﻿@page "/Resource/All"
 @using BlazorSPA.Client.Services
 @using BlazorSPA.Client.Data
+@using Microsoft.AspNetCore.SignalR.Client
+@using Microsoft.Extensions.Configuration
 @inject ResourceService ResourceService
+@inject IConfiguration Configuration
 
 @attribute [Authorize(Roles = "Admin")]
 <h1>All Resources</h1>
@@ -60,10 +63,31 @@ else
 }
 
 @code {
+    private HubConnection _hubConnection;
     List<ResourceViewModel> _resources;
 
     protected override async Task OnInitializedAsync()
     {
+        var SignalRUrl = Configuration.GetValue<string>("SignalR:BaseUrl");
+        _hubConnection = new HubConnectionBuilder()
+            .WithUrl($"{SignalRUrl}/resourceHub")
+            .Build();
+
+        _hubConnection.On<ResourceViewModel>("ReceiveResource", (resource) =>
+        {
+            var resourceToCheck = _resources.FirstOrDefault(r => r.Id == resource.Id);
+            if (resourceToCheck == null)
+                _resources.Add(resource);
+            else
+            {
+                _resources.Remove(resourceToCheck);
+                _resources.Add(resource);
+            }
+            StateHasChanged();
+        });
+
+        await _hubConnection.StartAsync();
+
         _resources = await ResourceService.GetAll();
     }
 

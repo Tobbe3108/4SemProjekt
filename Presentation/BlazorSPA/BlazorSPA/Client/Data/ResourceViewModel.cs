@@ -16,18 +16,9 @@ namespace BlazorSPA.Client.Data
 
             foreach (var dayAndTime in Available)
             {
-                var one = timeSlot.From;
-                var two = dayAndTime.To;
-                var tre = dayAndTime.From;
-                var four = timeSlot.To;
-
-                if (dayAndTime.DayOfWeek == timeSlot.DayOfWeek)
-                {
-                    if (dayAndTime.Id != timeSlot.Id)
-                    {
-                        if (timeSlot.From < dayAndTime.To && dayAndTime.From < timeSlot.To) return true;
-                    }
-                }
+                if (dayAndTime.DayOfWeek != timeSlot.DayOfWeek) continue;
+                if (dayAndTime.Id == timeSlot.Id) continue;
+                if (timeSlot.From < dayAndTime.To && dayAndTime.From < timeSlot.To) return true;
             }
 
             return false;

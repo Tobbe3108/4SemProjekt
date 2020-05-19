@@ -1,4 +1,4 @@
-﻿namespace Contracts.User
+﻿namespace User.Application.User.Queries.GetUser
 {
     public interface UserVm
     {

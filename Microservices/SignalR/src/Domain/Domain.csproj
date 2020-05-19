@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <RootNamespace>SignalR.Domain</RootNamespace>
+        <AssemblyName>SignalR.Domain</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\..\ToolBox\ToolBox.csproj" />
+    </ItemGroup>
+
+</Project>

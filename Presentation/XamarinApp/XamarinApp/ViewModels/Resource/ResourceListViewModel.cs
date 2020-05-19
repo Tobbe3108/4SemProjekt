@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Flurl;
 using Flurl.Http;
+using Microsoft.AspNetCore.SignalR.Client;
 using Syncfusion.ListView.XForms;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -25,8 +26,8 @@ namespace XamarinApp.ViewModels.Resource
         
         public ObservableCollection<Domain.Entities.Resource> Resources { get; set; }
         public string ErrorMessage { get; private set; }
-
         private SearchBar _searchBar;
+        HubConnection _hubConnection;
 
         public ResourceListViewModel(INavigationService navigator, string navigationPath)
         {
@@ -42,6 +43,30 @@ namespace XamarinApp.ViewModels.Resource
             #endregion
             
             Resources = new ObservableCollection<Domain.Entities.Resource>();
+        }
+
+        public override Task BeforeFirstShown()
+        {
+            #region SignalR
+            var signalRUrl = Xamarin.Forms.Application.Current.Properties["SignalRUrl"] as string;
+            _hubConnection = new HubConnectionBuilder().WithUrl($"{signalRUrl}/resourceHub").Build();  
+  
+            _hubConnection.On<Domain.Entities.Resource>("ReceiveResource", (resource) =>
+            {
+                var resourceToCheck = Resources.FirstOrDefault(r => r.Id == resource.Id); 
+                if (resourceToCheck == null)
+                    Resources.Add(resource);
+                else
+                {
+                    Resources.Remove(resourceToCheck);
+                    Resources.Add(resource);
+                }
+            });  
+  
+            _hubConnection.StartAsync();
+            #endregion
+            
+            return base.BeforeFirstShown();
         }
         
         private async Task GenerateResources()

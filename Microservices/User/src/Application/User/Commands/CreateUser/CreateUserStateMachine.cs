@@ -1,8 +1,8 @@
 ﻿using System;
 using Automatonymous;
-using Contracts.AuthUser;
-using Contracts.User;
 using MassTransit;
+using ToolBox.Contracts.Auth;
+using ToolBox.Contracts.User;
 
 namespace User.Application.User.Commands.CreateUser
 {
@@ -43,7 +43,7 @@ namespace User.Application.User.Commands.CreateUser
 
             During(Submitted,
                 When(AuthUserCreated)
-                .SendAsync(new Uri("queue:create-user"), x => x.Init<Contracts.User.CreateUser>(new
+                .SendAsync(new Uri("queue:create-user"), x => x.Init<ToolBox.Contracts.User.CreateUser>(new
                 {
                     x.Instance.UserToCreate.Id,
                     x.Instance.UserToCreate.Username,

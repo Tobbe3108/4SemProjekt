@@ -1,8 +1,9 @@
 ﻿using System;
+using Auth.Domain.Common;
 
 namespace Auth.Domain.Entities
 {
-    public class Role
+    public class Role : BaseEntity
     {
         public Guid RoleId { get; set; }
 
