@@ -1,10 +1,8 @@
-﻿using System;
-using System.ComponentModel;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using XamarinApp.Domain.Common;
-using XamarinApp.ViewModels.Resource;
+using XamarinApp.ViewModels.Reservation;
 
-namespace XamarinApp.Views.Resource
+namespace XamarinApp.Views.Reservation
 {
     public class CreateReservationView : ContentPage
     { 

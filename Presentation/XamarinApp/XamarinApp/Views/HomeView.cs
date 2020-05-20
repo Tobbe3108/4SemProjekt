@@ -27,7 +27,14 @@ namespace XamarinApp.Views
             {
                 Text = "Profile",
                 BackgroundColor = Color.Transparent,
-                Command = ((HomeViewModel)BindingContext).NavigateToProfileCommand
+                Command = ((HomeViewModel)BindingContext).NavigateToProfileViewCommand
+            };
+            
+            var reservations = new SfButton
+            {
+                Text = "Reservations",
+                BackgroundColor = Color.Transparent,
+                Command = ((HomeViewModel)BindingContext).NavigateToReservationsViewCommand
             };
 
             var logout = new SfButton
@@ -42,7 +49,7 @@ namespace XamarinApp.Views
                 Content = new StackLayout
                 {
                     Padding = new Thickness(10,10,10,10),
-                    Children = {profile, logout}
+                    Children = {profile,reservations, logout}
                 }
             };
             BackLayer = backLayer;

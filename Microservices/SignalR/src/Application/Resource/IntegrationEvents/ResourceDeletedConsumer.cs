@@ -6,21 +6,21 @@ using SignalR.Domain.Enums;
 
 namespace SignalR.Application.Resource.IntegrationEvents
 {
-    public class ResourceCreatedConsumer : IConsumer<ToolBox.Contracts.Resource.ResourceCreated>
+    public class ResourceDeletedConsumer : IConsumer<ToolBox.Contracts.Resource.ResourceDeleted>
     {
         private readonly IResourceService _resourceService;
-        private readonly ILogger<ResourceCreatedConsumer> _logger;
+        private readonly ILogger<ResourceDeletedConsumer> _logger;
 
-        public ResourceCreatedConsumer(IResourceService resourceService, ILogger<ResourceCreatedConsumer> logger)
+        public ResourceDeletedConsumer(IResourceService resourceService, ILogger<ResourceDeletedConsumer> logger)
         {
             _resourceService = resourceService;
             _logger = logger;
         }
         
-        public async Task Consume(ConsumeContext<ToolBox.Contracts.Resource.ResourceCreated> context)
+        public async Task Consume(ConsumeContext<ToolBox.Contracts.Resource.ResourceDeleted> context)
         {
-            _logger.LogInformation("ResourceCreatedConsumer Called");
-            await _resourceService.SendResource(Type.Create, new Domain.Entities.Resource
+            _logger.LogInformation("ResourceDeletedConsumer Called");
+            await _resourceService.SendResource(Type.Delete, new Domain.Entities.Resource
             {
                 Id = context.Message.Id,
                 Name = context.Message.Name,

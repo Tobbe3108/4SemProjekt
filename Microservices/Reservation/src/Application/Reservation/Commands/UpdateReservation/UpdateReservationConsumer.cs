@@ -32,7 +32,11 @@ namespace Reservation.Application.Reservation.Commands.UpdateReservation
 
             await context.Publish<ReservationUpdated>(new
             {
-                reservationToUpdate.Id
+                reservationToUpdate.Id,
+                reservationToUpdate.UserId,
+                reservationToUpdate.ResourceId,
+                reservationToUpdate.From,
+                reservationToUpdate.To
             });
         }
     }

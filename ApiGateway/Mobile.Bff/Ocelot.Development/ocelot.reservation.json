@@ -23,6 +23,18 @@
       ],
       "UpstreamPathTemplate": "/Reservation/{id}",
       "UpstreamHttpMethod": [ "Get", "Put", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/Reservation/UserId/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5015
+        }
+      ],
+      "UpstreamPathTemplate": "/Reservation/UserId/{id}",
+      "UpstreamHttpMethod": [ "Get" ]
     }
   ]
 }

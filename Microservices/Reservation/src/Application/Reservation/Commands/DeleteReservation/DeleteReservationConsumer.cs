@@ -29,7 +29,11 @@ namespace Reservation.Application.Reservation.Commands.DeleteReservation
 
             await context.Publish<ReservationDeleted>(new
             {
-                reservationToDelete.Id
+                reservationToDelete.Id,
+                reservationToDelete.UserId,
+                reservationToDelete.ResourceId,
+                reservationToDelete.From,
+                reservationToDelete.To
             });
         }
     }

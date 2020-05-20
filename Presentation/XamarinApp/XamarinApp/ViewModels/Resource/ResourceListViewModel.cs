@@ -13,10 +13,11 @@ using Xamarin.Forms;
 using XamarinApp.Application.Common.Interfaces;
 using XamarinApp.Domain.Common;
 using ItemTappedEventArgs = Syncfusion.ListView.XForms.ItemTappedEventArgs;
+using Type = XamarinApp.Domain.Enums.Type;
 
 namespace XamarinApp.ViewModels.Resource
 {
-    public class ResourceListViewModel : ViewModelBase, INotifyPropertyChanged
+    public class ResourceListViewModel : ViewModelBase
     {
         #region Navigation
         private readonly INavigationService _navigator;
@@ -51,15 +52,30 @@ namespace XamarinApp.ViewModels.Resource
             var signalRUrl = Xamarin.Forms.Application.Current.Properties["SignalRUrl"] as string;
             _hubConnection = new HubConnectionBuilder().WithUrl($"{signalRUrl}/resourceHub").Build();  
   
-            _hubConnection.On<Domain.Entities.Resource>("ReceiveResource", (resource) =>
+            _hubConnection.On<Type, Domain.Entities.Resource>("ReceiveResource", (type, resource) =>
             {
-                var resourceToCheck = Resources.FirstOrDefault(r => r.Id == resource.Id); 
-                if (resourceToCheck == null)
-                    Resources.Add(resource);
-                else
+                var resourceToCheck = Resources.FirstOrDefault(r => r.Id == resource.Id);
+                switch (type)
                 {
-                    Resources.Remove(resourceToCheck);
-                    Resources.Add(resource);
+                    case Type.Create:
+                    {
+                        if (resourceToCheck == null) Resources.Add(resource);
+                        break;
+                    }
+                    case Type.Update:
+                    {
+                        if (resourceToCheck == null) break;
+                        Resources.Remove(resourceToCheck);
+                        Resources.Add(resource);
+                        break;
+                    }
+                    case Type.Delete:
+                    {
+                        if (resourceToCheck != null) Resources.Remove(resourceToCheck);
+                        break;
+                    }
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(type), type, null);
                 }
             });  
   

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.SignalR;
 using SignalR.Application.Common.Interfaces;
 using SignalR.Domain.Entities;
 using SignalR.WebApi.Hubs;
+using Type = SignalR.Domain.Enums.Type;
 
 namespace SignalR.WebApi.Services
 {
@@ -15,9 +16,9 @@ namespace SignalR.WebApi.Services
             _hubContext = hubContext;
         }
         
-        public async Task SendReservation(Reservation reservation)
+        public async Task SendReservation(Type type, Reservation reservation)
         {
-            await _hubContext.Clients.All.SendAsync("ReceiveReservation", reservation);
+            await _hubContext.Clients.All.SendAsync("ReceiveReservation", type, reservation);
         }
     }
 }

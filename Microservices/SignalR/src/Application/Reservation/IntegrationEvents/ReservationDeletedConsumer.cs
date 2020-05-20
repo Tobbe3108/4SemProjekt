@@ -6,21 +6,21 @@ using SignalR.Domain.Enums;
 
 namespace SignalR.Application.Reservation.IntegrationEvents
 {
-    public class ReservationCreatedConsumer : IConsumer<ToolBox.Contracts.Reservation.ReservationCreated>
+    public class ReservationDeletedConsumer : IConsumer<ToolBox.Contracts.Reservation.ReservationDeleted>
     {
         private readonly IReservationService _reservationService;
-        private readonly ILogger<ReservationCreatedConsumer> _logger;
+        private readonly ILogger<ReservationDeletedConsumer> _logger;
 
-        public ReservationCreatedConsumer(IReservationService reservationService, ILogger<ReservationCreatedConsumer> logger)
+        public ReservationDeletedConsumer(IReservationService reservationService, ILogger<ReservationDeletedConsumer> logger)
         {
             _reservationService = reservationService;
             _logger = logger;
         }
         
-        public async Task Consume(ConsumeContext<ToolBox.Contracts.Reservation.ReservationCreated> context)
+        public async Task Consume(ConsumeContext<ToolBox.Contracts.Reservation.ReservationDeleted> context)
         {
-            _logger.LogInformation("ReservationCreatedConsumer Called");
-            await _reservationService.SendReservation(Type.Create, new Domain.Entities.Reservation
+            _logger.LogInformation("ReservationDeletedConsumer Called");
+            await _reservationService.SendReservation(Type.Delete, new Domain.Entities.Reservation
             {
                 Id = context.Message.Id,
                 UserId = context.Message.UserId,

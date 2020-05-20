@@ -73,8 +73,10 @@ namespace Reservation.WebApi
                 x.AddConsumersFromNamespaceContaining<UpdateReservationConsumer>();
                 x.AddConsumersFromNamespaceContaining<DeleteReservationConsumer>();
                 x.AddConsumersFromNamespaceContaining<GetReservationConsumer>();
+                x.AddConsumersFromNamespaceContaining<GetReservationFromUserConsumer>();
                 
                 x.AddRequestClient<GetReservation>();
+                x.AddRequestClient<GetReservationFromUser>();
                 x.AddRequestClient<SubmitReservation>();
                 
                 x.AddBus(ConfigureBus);

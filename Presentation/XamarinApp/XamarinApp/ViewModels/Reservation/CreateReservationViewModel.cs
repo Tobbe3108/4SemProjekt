@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text.Json;
@@ -12,7 +13,7 @@ using XamarinApp.Application.Common.Interfaces;
 using XamarinApp.Domain.Common;
 using XamarinApp.Domain.Entities;
 
-namespace XamarinApp.ViewModels.Resource
+namespace XamarinApp.ViewModels.Reservation
 {
     public class CreateReservationViewModel : ViewModelBase
     {
@@ -21,12 +22,13 @@ namespace XamarinApp.ViewModels.Resource
         private readonly INavigationService _navigator;
         #endregion
 
-        private readonly Domain.Entities.Resource _resource;
+        private readonly Guid _resourceId;
+        private readonly ObservableCollection<ScheduleReservation> _reservations;
         public DateTime FromDate { get; }
         public TimeSpan fromTime;
         public TimeSpan toTime;
         
-        public CreateReservationViewModel(INavigationService navigator, string navigationPath, DateTime fromDate, Domain.Entities.Resource resource)
+        public CreateReservationViewModel(INavigationService navigator, string navigationPath, DateTime fromDate, Guid resourceId, ObservableCollection<ScheduleReservation> reservations)
         {
             #region Navigation
             NavigationPath = navigationPath;
@@ -34,7 +36,8 @@ namespace XamarinApp.ViewModels.Resource
             #endregion
             
             FromDate = fromDate;
-            _resource = resource;
+            _resourceId = resourceId;
+            _reservations = reservations;
             fromTime = TimeSpan.Parse(FromDate
                 .AddMinutes(-1)
                 .ToString("HH:mm"));
@@ -52,15 +55,15 @@ namespace XamarinApp.ViewModels.Resource
             var fromDate = new DateTime(FromDate.Year, FromDate.Month, FromDate.Day, fromTime.Hours, fromTime.Minutes, 0);
             var toDate = new DateTime(FromDate.Year, FromDate.Month, FromDate.Day, toTime.Hours, toTime.Minutes, 0);
 
-            var reservation = new Reservation
+            var reservation = new Domain.Entities.Reservation
             {
                 UserId = user.Id,
-                ResourceId = _resource.Id,
+                ResourceId = _resourceId,
                 From = fromDate,
                 To = toDate
             };
 
-            if (!ValidateReservation(_resource.Reservations, reservation))
+            if (!ValidateReservation(_reservations, reservation))
             {
                 await _navigator.DisplayAlert("Error!", "You cannot create overlapping reservation", "Ok");
                 return;
@@ -68,7 +71,7 @@ namespace XamarinApp.ViewModels.Resource
             
             try
             {
-                var result = await mobileBffUrl.AppendPathSegment("Reservation").WithOAuthBearerToken(token).PostJsonAsync(reservation);
+                await mobileBffUrl.AppendPathSegment("Reservation").WithOAuthBearerToken(token).PostJsonAsync(reservation);
                 await _navigator.PopModal();
             }
             catch (Exception e)
@@ -77,13 +80,13 @@ namespace XamarinApp.ViewModels.Resource
             }
         });
 
-        private bool ValidateReservation(List<Reservation> reservations, Reservation reservationToValidate)
+        private bool ValidateReservation(ObservableCollection<ScheduleReservation> reservations, Domain.Entities.Reservation reservationToValidate)
         {
             if (!reservations.Any()) return true;
 
             foreach (var reservation in reservations)
             {
-                if (reservation.From < reservationToValidate.To && reservationToValidate.From < reservation.To) return false;
+                if (reservation.StartTime < reservationToValidate.To && reservationToValidate.From < reservation.EndTime) return false;
             }
             
             return true;

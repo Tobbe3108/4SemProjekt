@@ -5,6 +5,7 @@ using Xamarin.Forms;
 using XamarinApp.Application.Common.Interfaces;
 using XamarinApp.Domain.Common;
 using XamarinApp.Domain.Entities;
+using XamarinApp.ViewModels.Reservation;
 using XamarinApp.ViewModels.User;
 
 namespace XamarinApp.ViewModels
@@ -14,7 +15,8 @@ namespace XamarinApp.ViewModels
         #region Navigation
         public string NavigationPath { get; }
         private readonly INavigationService _navigator;
-        public ICommand NavigateToProfileCommand { get; }
+        public ICommand NavigateToProfileViewCommand { get; }
+        public ICommand NavigateToReservationsViewCommand { get; }
         public ICommand LogoutCommand { get; }
         #endregion
         
@@ -26,9 +28,13 @@ namespace XamarinApp.ViewModels
             #region Navigation
             NavigationPath = "/Home";
             _navigator = navigator;
-            NavigateToProfileCommand = new Command(() =>
+            NavigateToProfileViewCommand = new Command(() =>
             {
                 _navigator.NavigateTo(new ProfileViewModel(_navigator, $"{NavigationPath}/Login"));
+            });
+            NavigateToReservationsViewCommand = new Command(() =>
+            {
+                _navigator.NavigateTo(new ReservationsViewModel(_navigator, $"{NavigationPath}/Reservations"));
             });
             LogoutCommand = new Command(() =>
             {

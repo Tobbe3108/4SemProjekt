@@ -2,6 +2,7 @@
 using MassTransit;
 using Microsoft.Extensions.Logging;
 using SignalR.Application.Common.Interfaces;
+using SignalR.Domain.Enums;
 
 namespace SignalR.Application.Resource.IntegrationEvents
 {
@@ -19,7 +20,7 @@ namespace SignalR.Application.Resource.IntegrationEvents
         public async Task Consume(ConsumeContext<ToolBox.Contracts.Resource.ResourceUpdated> context)
         {
             _logger.LogInformation("ResourceUpdatedConsumer Called");
-            await _resourceService.SendResource(new Domain.Entities.Resource
+            await _resourceService.SendResource(Type.Update, new Domain.Entities.Resource
             {
                 Id = context.Message.Id,
                 Name = context.Message.Name,

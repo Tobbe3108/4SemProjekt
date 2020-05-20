@@ -1,15 +1,15 @@
 ﻿using System;
-using System.Globalization;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Reflection.Emit;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR.Client;
 using Syncfusion.SfSchedule.XForms;
-using Syncfusion.XForms.DataForm.Editors;
 using Xamarin.Forms;
 using XamarinApp.Application.Common.Interfaces;
 using XamarinApp.Domain.Common;
 using XamarinApp.Domain.Entities;
+using XamarinApp.ViewModels.Reservation;
+using Type = XamarinApp.Domain.Enums.Type;
 
 namespace XamarinApp.ViewModels.Resource
 {
@@ -21,7 +21,7 @@ namespace XamarinApp.ViewModels.Resource
         #endregion
         
         public readonly Domain.Entities.Resource Resource;
-        public ScheduleAppointmentCollection BlockedAppointments { get; set; }
+        public ObservableCollection<ScheduleReservation> Reservations { get; set; }
         public double MinFromTime = 0;
         public double MaxToTime = 24;
         private HubConnection _hubConnection;
@@ -34,7 +34,12 @@ namespace XamarinApp.ViewModels.Resource
             #endregion
             
             Resource = resource;
-            BlockedAppointments = GenerateNonAccessibleBlocks();
+            Reservations = new ObservableCollection<ScheduleReservation>();
+            GenerateNonAccessibleBlocks(Reservations);
+            foreach (var reservation in Resource.Reservations)
+            {
+                Reservations.Add(CreateAppointment(reservation));
+            }
         }
 
         public override Task BeforeFirstShown()
@@ -43,16 +48,46 @@ namespace XamarinApp.ViewModels.Resource
             var signalRUrl = Xamarin.Forms.Application.Current.Properties["SignalRUrl"] as string;
             _hubConnection = new HubConnectionBuilder().WithUrl($"{signalRUrl}/reservationHub").Build();  
   
-            _hubConnection.On<Domain.Entities.Reservation>("ReceiveReservation", (reservation) =>
+            _hubConnection.On<Type, Domain.Entities.Reservation>("ReceiveReservation", (type, reservation) =>
             {
                 if (reservation.ResourceId != Resource.Id) return;
-                var reservationToCheck = Resource.Reservations.FirstOrDefault(r => r.Id == reservation.Id); 
-                if (reservationToCheck == null)
-                    Resource.Reservations.Add(reservation);
-                else
+                var reservationToCheck = Resource.Reservations.FirstOrDefault(r => r.Id == reservation.Id);
+                switch (type)
                 {
-                    Resource.Reservations.Remove(reservationToCheck);
-                    Resource.Reservations.Add(reservation);
+                    case Type.Create:
+                    {
+                        if (reservationToCheck != null) break;
+                        Resource.Reservations.Add(reservation);
+                        Reservations.Add(CreateAppointment(reservation));
+                        break;
+                    }
+                    case Type.Update:
+                    {
+                        if (reservationToCheck == null) break;
+                        Resource.Reservations.Remove(reservationToCheck);
+                        Resource.Reservations.Add(reservation);
+                        Reservations.Clear();
+                        GenerateNonAccessibleBlocks(Reservations);
+                        foreach (var resourceReservation in Resource.Reservations)
+                        {
+                            Reservations.Add(CreateAppointment(resourceReservation));
+                        }
+                        break;
+                    }
+                    case Type.Delete:
+                    {
+                        if (reservationToCheck == null) break;
+                        Resource.Reservations.Remove(reservationToCheck);
+                        Reservations.Clear();
+                        GenerateNonAccessibleBlocks(Reservations);
+                        foreach (var resourceReservation in Resource.Reservations)
+                        {
+                            Reservations.Add(CreateAppointment(resourceReservation));
+                        }
+                        break;
+                    }
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(type), type, null);
                 }
             });  
   
@@ -64,22 +99,37 @@ namespace XamarinApp.ViewModels.Resource
         
         public void ScheduleOnCellTapped(object sender, CellTappedEventArgs e)
         {
-            if (e.Appointment != null) _navigator.DisplayAlert("Error", "You cannot create an overlapping reservation", "Ok");
-            else
+            if (e.Appointment != null)
             {
-                _navigator.NavigateToModal(new CreateReservationViewModel(_navigator, $"{NavigationPath}/CreateReservation", e.Datetime, Resource));
+                if (((ScheduleReservation) e.Appointment).Subject == "Not Available")
+                    _navigator.DisplayAlert("Error", "You cannot create a reservation at this time", "Ok");
+                else
+                    _navigator.NavigateToModal(new UpdateReservationViewModel(_navigator, $"{NavigationPath}/EditReservation", Resource.Reservations.FirstOrDefault(r => r.Id == ((ScheduleReservation)e.Appointment).ReservationId), Reservations));
             }
-            
+            else
+                _navigator.NavigateToModal(new CreateReservationViewModel(_navigator, $"{NavigationPath}/CreateReservation", e.Datetime, Resource.Id, Reservations));
         }
+
+        private ScheduleReservation CreateAppointment(Domain.Entities.Reservation reservation)
+        {
+            return new ScheduleReservation
+            {
+                StartTime = reservation.From,
+                EndTime = reservation.To,
+                Subject = "Reservation",
+                Notes = $"Reservation by user: {reservation.UserId}",
+                Color = Color.RoyalBlue,
+                ReservationId = reservation.Id
+            };
+        } 
         
-        private ScheduleAppointmentCollection GenerateNonAccessibleBlocks()
+        private void GenerateNonAccessibleBlocks(ObservableCollection<ScheduleReservation> appointmentCollection)
         {
             var minFrom = Resource.Available.Min(x => x.From);
             var maxTo = Resource.Available.Max(x => x.To);
             MinFromTime = double.Parse($"{minFrom.Hour}.{minFrom.Minute}");
             MaxToTime = double.Parse($"{maxTo.Hour}.{maxTo.Minute}");
             
-            var blockedAppointments = new ScheduleAppointmentCollection();
             for (var i = 0; i <= 7; i++)
             {
                 var lastToTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day,0,0,0);
@@ -94,22 +144,21 @@ namespace XamarinApp.ViewModels.Resource
                         RecurrenceRange = RecurrenceRange.NoEndDate
                     };
                     
-                    var scheduleAppointment = new ScheduleAppointment
+                    var scheduleAppointment = new ScheduleReservation
                     {
                         StartTime = lastToTime,
                         EndTime = dayAndTime.From,
                         Subject = "Not Available",
                         Color = Color.LightGray,
+                        RecurrenceId = Resource.Id
                     };
                     scheduleAppointment.RecurrenceRule = DependencyService.Get<IRecurrenceBuilder>().RRuleGenerator(recurrenceProperties, scheduleAppointment.StartTime, scheduleAppointment.EndTime);
                     
-                    blockedAppointments.Add(scheduleAppointment);
+                    appointmentCollection.Add(scheduleAppointment);
                     
                     lastToTime = dayAndTime.To;
                 }
             }
-            
-            return blockedAppointments;
         }
     }
 }

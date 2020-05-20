@@ -42,7 +42,7 @@ namespace XamarinApp.Views.Resource
                 TimeIntervalHeight = -1,
                 ShowCurrentTimeIndicator = true,
                 CurrentTimeIndicatorColor = Color.BlueViolet,
-                DataSource =  ((ResourceViewModel) BindingContext).BlockedAppointments,
+                DataSource =  ((ResourceViewModel) BindingContext).Reservations,
                 DayViewSettings = new DayViewSettings
                 {
                     WorkStartHour = 8,

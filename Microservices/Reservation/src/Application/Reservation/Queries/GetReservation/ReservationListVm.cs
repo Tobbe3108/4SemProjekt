@@ -4,6 +4,6 @@ namespace Reservation.Application.Reservation.Queries.GetReservation
 {
     public interface ReservationListVm
     {
-        public List<global::Reservation.Domain.Entities.Reservation> Reservation { get; set; }
+        public List<global::Reservation.Domain.Entities.Reservation> Reservations { get; set; }
     }
 }

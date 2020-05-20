@@ -13,7 +13,7 @@ namespace XamarinApp.Domain.Common
             OnPropertyChanged(string.Empty);
         }
 
-        private void OnPropertyChanged(string propertyName)
+        protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

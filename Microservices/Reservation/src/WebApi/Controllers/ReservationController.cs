@@ -20,12 +20,14 @@ namespace Reservation.WebApi.Controllers
     public class ReservationController : ControllerBase
     {
         private readonly IRequestClient<GetReservation> _getReservationRequestClient;
+        private readonly IRequestClient<GetReservationFromUser> _getReservationFromUserRequestClient;
         private readonly IRequestClient<SubmitReservation> _submitReservationRequestClient;
         private readonly ISendEndpointProvider _sendEndpointProvider;
 
-        public ReservationController(IRequestClient<GetReservation> getReservationRequestClient, IRequestClient<SubmitReservation> submitReservationRequestClient, ISendEndpointProvider sendEndpointProvider)
+        public ReservationController(IRequestClient<GetReservation> getReservationRequestClient, IRequestClient<GetReservationFromUser> getReservationFromUserRequestClient, IRequestClient<SubmitReservation> submitReservationRequestClient, ISendEndpointProvider sendEndpointProvider)
         {
             _getReservationRequestClient = getReservationRequestClient;
+            _getReservationFromUserRequestClient = getReservationFromUserRequestClient;
             _submitReservationRequestClient = submitReservationRequestClient;
             _sendEndpointProvider = sendEndpointProvider;
         }
@@ -48,6 +50,16 @@ namespace Reservation.WebApi.Controllers
             });
             
             return Ok(response.Message.Id);
+        }
+        
+        [HttpGet("UserId/{id}")]
+        public async Task<IActionResult> GetByUserId(Guid id)
+        {
+            var (reservationListVm, notFound) = await _getReservationFromUserRequestClient.GetResponse<ReservationListVm, NotFound>(new
+            {
+                UserId = id
+            });
+            return reservationListVm.IsCompletedSuccessfully ? Ok(reservationListVm.Result.Message.Reservations) : Problem(notFound.Result.Message.Message);
         }
         
         [HttpGet("{id}")]

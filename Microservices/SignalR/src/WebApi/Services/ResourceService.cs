@@ -1,7 +1,9 @@
 ﻿using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.SignalR;
 using SignalR.Application.Common.Interfaces;
 using SignalR.Domain.Entities;
+using SignalR.Domain.Enums;
 using SignalR.WebApi.Hubs;
 
 namespace SignalR.WebApi.Services
@@ -15,9 +17,9 @@ namespace SignalR.WebApi.Services
             _hubContext = hubContext;
         }
 
-        public async Task SendResource(Resource resource)
+        public async Task SendResource(Type type, Resource resource)
         {
-            await _hubContext.Clients.All.SendAsync("ReceiveResource", resource);
+            await _hubContext.Clients.All.SendAsync("ReceiveResource",type, resource);
         }
     }
 }
