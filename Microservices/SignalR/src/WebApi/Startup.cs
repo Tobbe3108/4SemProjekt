@@ -42,6 +42,7 @@ namespace SignalR.WebApi
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddTransient<IResourceService, ResourceService>();
             services.AddTransient<IReservationService, ReservationService>();
+            services.AddSingleton<IQueueService, QueueService>();
             
             services.AddHttpContextAccessor();
 
@@ -103,6 +104,7 @@ namespace SignalR.WebApi
                 endpoints.MapControllers();
                 endpoints.MapHub<ResourceHub>("/resourceHub");
                 endpoints.MapHub<ReservationHub>("/reservationHub");
+                endpoints.MapHub<ChatHub>("/chatHub");
             });
         }
 

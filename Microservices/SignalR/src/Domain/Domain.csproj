@@ -10,4 +10,8 @@
       <ProjectReference Include="..\..\..\..\ToolBox\ToolBox.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Syncfusion.Xamarin.SfChat" Version="18.1.0.53" />
+    </ItemGroup>
+
 </Project>

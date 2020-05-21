@@ -1,6 +1,5 @@
 ﻿using Syncfusion.XForms.Chat;
 using Xamarin.Forms;
-using XamarinApp.Application.Common.Interfaces;
 using XamarinApp.Domain.Common;
 using XamarinApp.ViewModels;
 
@@ -22,10 +21,12 @@ namespace XamarinApp.Views
                 ShowIncomingMessageTimestamp = true,
                 ShowTimeBreak = true,
                 IncomingMessageTimestampFormat = "HH:mm",
-                OutgoingMessageTimestampFormat = "HH:mm"
+                OutgoingMessageTimestampFormat = "HH:mm",
+                TypingIndicator = ((ChatViewModel) BindingContext).TypingIndicator,
+                
             };
             chat.SendMessage += (sender, args) => ((ChatViewModel) BindingContext).MessageSent(sender, args);
-            
+
             var stackLayout = new StackLayout
             {
                 Spacing = 10,
