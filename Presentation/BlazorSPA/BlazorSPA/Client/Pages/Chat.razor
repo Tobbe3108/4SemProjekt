@@ -1,0 +1,26 @@
+﻿@page "/Chat"
+@using BlazorSPA.Client.Components.Chat
+
+@attribute [Authorize]
+<AuthorizeView Roles="Admin, CustomerService">
+    <div class="row">
+        <div class="col-md-12 p-0">
+            <div class="chat-room">
+                <ChatList />
+                <MessageList />
+                <ChatInformation />
+            </div>
+        </div>
+    </div>
+</AuthorizeView>
+
+<style>   
+    .chat-room {
+        border-collapse: collapse;
+        border-spacing: 0;
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+        position: relative;
+    }
+</style>

@@ -1,0 +1,100 @@
+﻿<aside class="kiri-side">
+    <div class="user-head">
+        <h3>Customer Service</h3>
+    </div>
+    <div class="queue-start d-flex">
+        <p class="my-auto">Users in queue:<span class="badge badge-secondary">1</span></p>
+        <button type="button" class="btn btn-light ml-2">Next</button>
+    </div>
+    <ul class="chat-list">
+        <li>
+            <a href="">
+                <i class="fa fa-rocket"></i>
+                <span>Marketing</span>
+                <i class="fa fa-times pull-right"></i>
+            </a>
+        </li>
+    </ul>
+</aside>
+
+<style>
+    .chat-room aside {
+            display: table-cell;
+            float: none;
+            height: 100%;
+            padding: 0;
+            vertical-align: top;
+        }
+        
+        .chat-room .kiri-side {
+                width: 25%;
+                background: #e5e8ef;
+                border-radius: 4px 0 0 4px;
+                -webkit-border-radius: 4px 0 0 4px;
+            }
+            
+            .chat-room .kiri-side .user-head {
+                    background: #2980b9;
+                    color: #FFFFFF;
+                    min-height: 70px;
+                    padding: 15px;
+                }
+                
+                .chat-room .user-head i {
+                    float: left;
+                    font-size: 40px;
+                    margin-right: 10px;
+                }
+                
+                .chat-room .user-head h3 {
+                    margin: 6px 0 0 0;
+                    font-weight: 100;
+                    letter-spacing: 1px;
+                }
+                
+            .chat-room .kiri-side .queue-start {
+                    border-bottom: 1px solid #d5d7de;
+                    min-height: 35px;
+                    padding: 15px;
+                }
+                
+                
+    ul.chat-list li a {
+        color: #6a6a6a;
+        display: block;
+        padding: 15px;
+        font-weight: 300;
+        text-decoration: none;
+    }
+    ul.chat-list li a:hover, ul.chat-list li.active a {
+        color: #00a9b4;
+        background: #f2f4f7;
+    }
+    
+    ul.chat-list li h4 {
+        padding: 17px 15px;
+        margin: 0;
+        font-size: 14px;
+        font-weight: 600;
+        border-bottom: 1px solid #D5D7DE;
+    }
+    
+    ul.chat-list li h4 i {
+        padding-right: 5px;
+    }
+        
+    ul.chat-list li a i.fa-times {
+        color: #9fa3b0;
+    }
+    
+    ul.chat-list li.active {
+        color: #00a9b4;
+        background: #f2f4f7;
+    }
+    
+    ul.chat-list {
+        border-bottom: 1px solid #d5d7de;
+        padding-left: 0;
+        list-style: none;
+    }
+</style>

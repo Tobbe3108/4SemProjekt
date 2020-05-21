@@ -19,6 +19,12 @@
                     </NavLink>
                 </li>
                 <li class="sidebar-item">
+                    <NavLink class="nav-link" href="/Chat" Match="NavLinkMatch.All">
+                        <span class="e-icons chat"></span>
+                        <span class="e-text" title="resources">Customer Service</span>
+                    </NavLink>
+                </li>
+                <li class="sidebar-item">
                     <NavLink class="nav-link" href="logout" Match="NavLinkMatch.All">
                         <span class="e-icons signOut"></span>
                         <span class="e-text" title="signOut">Sign out</span>
@@ -53,6 +59,9 @@
     }
     .e-sidebar .resources::before {
         content: '\e677';
+    }
+    .e-sidebar .chat::before {
+        content: '\e730';
     }
     .e-sidebar .signOut::before {
         content: '\e82f';
