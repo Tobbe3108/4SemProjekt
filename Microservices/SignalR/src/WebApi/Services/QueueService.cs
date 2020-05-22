@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 using SignalR.Application.Common.Interfaces;
 using SignalR.WebApi.Hubs;
+using Xamarin.Forms.Internals;
 
 namespace SignalR.WebApi.Services
 {
     public class QueueService : IQueueService
     {
         private readonly IHubContext<ChatHub> _hubContext;
-        private readonly Queue<(string, string)> _queue = new Queue<(string, string)>();
+        private readonly Queue<string> _queue = new Queue<string>();
+        private readonly List<(string, List<string>)> _chatList = new List<(string, List<string>)>();
         
         public QueueService(IHubContext<ChatHub> hubContext)
         {
@@ -22,7 +23,17 @@ namespace SignalR.WebApi.Services
         {
             try
             {
-                _queue.Enqueue((chatId, connectionId));
+                _queue.Enqueue(chatId);
+                
+                var chat = _chatList.FirstOrDefault(c => c.Item1 == chatId);
+                if (chat.Item1 == null)
+                    _chatList.Add((chatId, new List<string>{connectionId}));
+                else
+                {
+                    _chatList.Remove(chat);
+                    chat.Item2.Add(connectionId);
+                    _chatList.Add(chat);
+                }
             }
             catch (Exception e)
             {
@@ -32,31 +43,55 @@ namespace SignalR.WebApi.Services
             return null;
         }
         
-        public (string, (string, string)) Dequeue()
+        public (string, string) Dequeue(string connectionId)
         {
             try
             {
                 var success = _queue.TryDequeue(out var result);
-                if (!success) return ("Not possible to dequeue", (null,null));
+                if (!success) return ("Not possible to dequeue", null);
+                
                 return (null, result);
             }
             catch (Exception e)
             {
-                return (e.Message, (null, null));
+                return (e.Message, null);
             }
         }
 
         public string GetChatId(string connectionId)
         {
-            return _queue.FirstOrDefault(x => x.Item2 == connectionId).Item1;
+            return _chatList.FirstOrDefault(x => x.Item2.Any(z => z == connectionId)).Item1;
         }
 
         public async Task SendQueueNr()
         {
-            foreach (var user in _queue)
+            foreach (var connectionId in _queue)
             {
-                await _hubContext.Clients.Client(user.Item2).SendAsync("ReceiveQueueNr", _queue.ToList().IndexOf(user)+1);
+                _chatList.FirstOrDefault(c => c.Item1 == connectionId).Item2.ForEach(async user => await _hubContext.Clients.Client(user).SendAsync("ReceiveQueueNr", _queue.ToList().IndexOf(connectionId)+1));
             }
+        }
+
+        public void WorkerSwitchChannel(string connectionId, string chatId)
+        {
+            foreach (var connection in _chatList.Where(c => c.Item2.Any(x => x == connectionId)))
+            {
+                connection.Item2.Remove(connectionId);
+            }
+            
+            var chat = _chatList.FirstOrDefault(c => c.Item1 == chatId);
+            _chatList.Remove(chat);
+            chat.Item2.Add(connectionId);
+            _chatList.Add(chat);
+        }
+        
+        public int GetQueueCount()
+        {
+            return _queue.Count;
+        }
+        
+        public async Task SendQueueCount()
+        {
+            await _hubContext.Clients.Group("Worker").SendAsync("ReceiveQueueCount", GetQueueCount());
         }
     }
 }

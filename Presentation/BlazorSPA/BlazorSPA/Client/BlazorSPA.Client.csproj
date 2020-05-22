@@ -15,6 +15,7 @@
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="3.1.4" />
     <PackageReference Include="NodaTime" Version="2.4.8" />
     <PackageReference Include="Syncfusion.Blazor" Version="18.1.0.52" />
+    <PackageReference Include="Syncfusion.Xamarin.SfChat" Version="18.1.0.53" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.5.0" />
     <PackageReference Include="System.Net.Http.Json" Version="3.2.0-rc1.20217.1" />
   </ItemGroup>

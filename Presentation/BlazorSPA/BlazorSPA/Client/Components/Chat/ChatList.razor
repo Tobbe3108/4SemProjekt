@@ -1,21 +1,38 @@
-﻿<aside class="kiri-side">
+﻿@using BlazorSPA.Client.Data
+<aside class="kiri-side">
     <div class="user-head">
+        <span class="oi oi-chat"></span>
         <h3>Customer Service</h3>
     </div>
     <div class="queue-start d-flex">
-        <p class="my-auto">Users in queue:<span class="badge badge-secondary">1</span></p>
-        <button type="button" class="btn btn-light ml-2">Next</button>
+        <p class="my-auto">Users in queue:<span class="badge badge-secondary">@QueueNr</span></p>
+        <button type="button" class="btn btn-light ml-2" @onclick="Dequeue">Next</button>
     </div>
     <ul class="chat-list">
-        <li>
-            <a href="">
-                <i class="fa fa-rocket"></i>
-                <span>Marketing</span>
-                <i class="fa fa-times pull-right"></i>
-            </a>
-        </li>
+        @foreach (var chat in Chats)
+        {
+            <ChatListItem Chat="@chat" SetActiveChat="SetActiveChat" RemoveChat="RemoveChat" />
+        }
     </ul>
 </aside>
+
+@code
+{
+    [Parameter]
+    public int QueueNr { get; set; }
+    
+    [Parameter]
+    public List<Chat> Chats { get; set; }
+    
+    [Parameter]
+    public EventCallback Dequeue { get; set; }
+    
+    [Parameter]
+    public EventCallback<string> SetActiveChat { get; set; }
+    
+    [Parameter]
+    public EventCallback<string> RemoveChat { get; set; }
+}
 
 <style>
     .chat-room aside {
@@ -40,7 +57,7 @@
                     padding: 15px;
                 }
                 
-                .chat-room .user-head i {
+                .chat-room .user-head span {
                     float: left;
                     font-size: 40px;
                     margin-right: 10px;
@@ -57,41 +74,7 @@
                     min-height: 35px;
                     padding: 15px;
                 }
-                
-                
-    ul.chat-list li a {
-        color: #6a6a6a;
-        display: block;
-        padding: 15px;
-        font-weight: 300;
-        text-decoration: none;
-    }
-    ul.chat-list li a:hover, ul.chat-list li.active a {
-        color: #00a9b4;
-        background: #f2f4f7;
-    }
-    
-    ul.chat-list li h4 {
-        padding: 17px 15px;
-        margin: 0;
-        font-size: 14px;
-        font-weight: 600;
-        border-bottom: 1px solid #D5D7DE;
-    }
-    
-    ul.chat-list li h4 i {
-        padding-right: 5px;
-    }
-        
-    ul.chat-list li a i.fa-times {
-        color: #9fa3b0;
-    }
-    
-    ul.chat-list li.active {
-        color: #00a9b4;
-        background: #f2f4f7;
-    }
-    
+               
     ul.chat-list {
         border-bottom: 1px solid #d5d7de;
         padding-left: 0;

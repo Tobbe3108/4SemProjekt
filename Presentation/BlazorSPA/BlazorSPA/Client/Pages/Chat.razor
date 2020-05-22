@@ -1,18 +1,134 @@
 ﻿@page "/Chat"
 @using BlazorSPA.Client.Components.Chat
+@using BlazorSPA.Client.Data
+@using BlazorSPA.Client.Services
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.SignalR.Client
+@using Microsoft.Extensions.Configuration
+@using NodaTime.TimeZones
+@using Syncfusion.XForms.Chat
+@using Xamarin.Forms.Internals
+@inject IConfiguration Configuration
+@inject IHttpContextAccessor HttpContextAccessor
 
 @attribute [Authorize]
 <AuthorizeView Roles="Admin, CustomerService">
     <div class="row">
         <div class="col-md-12 p-0">
             <div class="chat-room">
-                <ChatList />
-                <MessageList />
-                <ChatInformation />
+                <ChatList QueueNr="QueueNr" Chats="Chats" Dequeue="Dequeue" SetActiveChat="SetActiveChat" RemoveChat="RemoveChat" />
+                <MessageList Chat="ActiveChat" SendMessage="SendMessage" />
+                <ChatInformation Chat="ActiveChat" />
             </div>
         </div>
     </div>
 </AuthorizeView>
+
+@code
+{
+    private HubConnection _hubConnection;
+    public int QueueNr { get; set; }
+    public string Error { get; set; }
+    public List<Data.Chat> Chats { get; set; }
+    public Data.Chat ActiveChat { get; set; }
+    private Author _author;
+    [CascadingParameter] Task<AuthenticationState> authenticationStateTask { get; set; }
+    
+    protected override async Task OnInitializedAsync()
+    {;
+        Chats = new List<Data.Chat>();
+        
+        var authState = await authenticationStateTask;
+        _author = new Author
+        {
+            Name = authState.User.Identity.Name
+        };
+        
+        var SignalRUrl = Configuration.GetValue<string>("SignalR:BaseUrl");
+        _hubConnection = new HubConnectionBuilder()
+            .WithUrl($"{SignalRUrl}/chatHub")
+            .Build();
+
+        _hubConnection.On<string>("ReceiveChatId", (result) =>
+        {
+            Chats.Add(new Data.Chat()
+            {
+                ChatId = result,
+                Name = result,
+                Messages = new List<Message>()
+            });
+            StateHasChanged();
+        });
+
+        _hubConnection.On<Message>("ReceiveMessage", (result) =>
+        {
+            var chat = Chats.First(c => c.ChatId == result.ChatId);
+            chat.Messages.Add(result);
+            chat.Name = result.Author.Name;
+            StateHasChanged();
+        });
+
+        _hubConnection.On<int>("ReceiveQueueCount", (result) =>
+        {
+            QueueNr = result;
+            StateHasChanged();
+        });
+
+        _hubConnection.On<string>("Error", (result) =>
+        {
+            Error = result;
+            StateHasChanged();
+        });
+
+        await _hubConnection.StartAsync();
+
+        await _hubConnection.SendAsync("WorkerJoin");
+        await _hubConnection.SendAsync("GetQueueCount");
+    }
+
+    private async Task Dequeue()
+    {
+        await _hubConnection.SendAsync("Dequeue");
+    }
+
+    private async Task SendMessage(string text)
+    {
+        var message = new Message
+        {
+            Id = Guid.NewGuid(),
+            Text = text,
+            Author = _author,
+            DateTime = DateTime.Now
+        };
+        await _hubConnection.SendAsync("SendMessage", message);
+        message.Author = new Author
+        {
+            Name = "You"
+        };
+        ActiveChat.Messages.Add(message);
+    }
+    
+    private async Task SetActiveChat(string chatId)
+    {
+        Chats.Where(c => c.Active == true).ForEach(x => x.Active = false);
+        Chats.First(c => c.ChatId == chatId).Active = true;
+        await _hubConnection.SendAsync("WorkerSwitchChannel", chatId);
+        UpdateActiveChat();
+        StateHasChanged();
+    }
+
+    private void UpdateActiveChat()
+    {
+        ActiveChat = Chats.FirstOrDefault(c => c.Active == true);
+    }
+    
+    private void RemoveChat(string chatId)
+    {
+        Chats.Remove(Chats.First(c => c.ChatId == chatId));
+        UpdateActiveChat();
+        StateHasChanged();
+    }
+}
 
 <style>   
     .chat-room {

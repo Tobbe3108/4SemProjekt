@@ -1,17 +1,27 @@
-﻿<aside class="kanan-side">
+﻿@using Microsoft.IdentityModel.Tokens
+<aside class="kanan-side">
     <div class="user-head">
         <h3 class="pull-left">Information</h3>
     </div>
-    <ul class="chat-available-user">
-        <li>
-            <a href="">
-                <i class="fa fa-circle text-success"></i>
-                Jonathan Smith
-                <span class="text-muted">3h:22m</span>
-            </a>
-        </li>
-    </ul>
+    @if (Chat != null)
+    {
+        <ul class="chat-available-user">
+            <li>
+                <a href="">
+                    <i class="fa fa-circle text-success"></i>
+                    Jonathan Smith
+                    <span class="text-muted">3h:22m</span>
+                </a>
+            </li>
+        </ul>
+    }
 </aside>
+
+@code
+{
+    [Parameter]
+    public Data.Chat Chat { get; set; }
+}
 
 <style>
     .chat-room aside {

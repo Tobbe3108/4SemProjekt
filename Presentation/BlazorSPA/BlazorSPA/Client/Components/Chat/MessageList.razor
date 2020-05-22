@@ -1,23 +1,49 @@
-﻿<aside class="tengah-side">
-    
-    <div class="chat-room-head">
-        <h3>Air Koler</h3>
-    </div>
-    
-    <div class="group-rom">
-        <div class="first-part odd">Jonathan Smith</div>
-        <div class="second-part">Hello Cendy are you there?</div>
-        <div class="third-part">12:30</div>
-    </div>
+﻿@using BlazorSPA.Client.Data
 
-    <footer >
-        <div class="chat-txt">
-            <input type="text" class="form-control">
+<aside class="tengah-side">
+    @if (Chat == null)
+    {
+        <div class="chat-room-head">
+        </div>    
+    }
+    else
+    {
+        <div class="chat-room-head">
+            <h3>@Chat.Name</h3>
         </div>
-        <button class="btn btn-danger" data-original-title="" title="">Send</button>
-    </footer>
+        
+        @if (Chat.Messages != null)
+        {
+            foreach (var message in Chat.Messages)
+            {
+                <div class="group-rom">
+                    <div class="first-part odd">@message.Author.Name</div>
+                    <div class="second-part">@message.Text</div>
+                    <div class="third-part">@message.DateTime.ToString("HH:mm")</div>
+                </div>
+            }
+        }
+
+        <footer >
+            <div class="chat-txt">
+                <input type="text" class="form-control" @bind-value="_text">
+            </div>
+            <button class="btn btn-danger" data-original-title="" title="" @onclick="@(() => { SendMessage.InvokeAsync(_text); _text = ""; })">Send</button>
+        </footer>
+    }
 
 </aside>
+
+@code
+{
+    [Parameter]
+    public Chat Chat { get; set; }
+    
+    [Parameter]
+    public EventCallback<string> SendMessage { get; set; }
+
+    private string _text;
+}
 
 <style>
     .chat-room aside {

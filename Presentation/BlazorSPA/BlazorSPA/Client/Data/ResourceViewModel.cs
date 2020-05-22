@@ -18,7 +18,8 @@ namespace BlazorSPA.Client.Data
             {
                 if (dayAndTime.DayOfWeek != timeSlot.DayOfWeek) continue;
                 if (dayAndTime.Id == timeSlot.Id) continue;
-                if (timeSlot.From < dayAndTime.To && dayAndTime.From < timeSlot.To) return true;
+                if (timeSlot.From == timeSlot.To) return true;
+                    if (timeSlot.From < dayAndTime.To && dayAndTime.From < timeSlot.To) return true;
             }
 
             return false;

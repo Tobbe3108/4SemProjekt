@@ -1,0 +1,56 @@
+﻿@using BlazorSPA.Client.Data
+
+<li class="@(Chat.Active ? "active" : "")" @onclick="@(() => SetActiveChat.InvokeAsync(Chat.ChatId))">
+    <a>
+        <span class="oi oi-comment-square"></span>
+        <span>@Chat.Name</span>
+        <span class="oi oi-x" @onclick="@(() => RemoveChat.InvokeAsync(Chat.ChatId))"></span>
+    </a>
+</li>
+
+@code
+{
+    [Parameter]
+    public Chat Chat { get; set; }
+    
+    [Parameter]
+    public EventCallback<string> SetActiveChat { get; set; }
+    
+    [Parameter]
+    public EventCallback<string> RemoveChat { get; set; }
+}
+
+<style>
+        ul.chat-list li a {
+            color: #6a6a6a;
+            display: block;
+            padding: 15px;
+            font-weight: 300;
+            text-decoration: none;
+        }
+        ul.chat-list li a:hover, ul.chat-list li.active a {
+            color: #00a9b4;
+            background: #f2f4f7;
+        }
+        
+        ul.chat-list li span {
+            padding: 17px 15px;
+            margin: 0;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        ul.chat-list li span.oi-comment-square {
+            padding-right: 5px;
+            color: #D5D7DE;
+        }
+            
+        ul.chat-list li a span.oi-x {
+            color: #9fa3b0;
+        }
+        
+        ul.chat-list li.active {
+            color: #00a9b4;
+            background: #f2f4f7;
+        }
+</style>

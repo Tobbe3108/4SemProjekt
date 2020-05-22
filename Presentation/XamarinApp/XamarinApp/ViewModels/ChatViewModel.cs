@@ -60,7 +60,12 @@ namespace XamarinApp.ViewModels
                     Messages.Add(new Message
                     {
                         Id = _ticketId,
-                        Text = $"You are Nr: {nr} in the queue"
+                        Text = $"You are Nr: {nr} in the queue",
+                        Author = new Author
+                        {
+                            Name = "ChatBot"
+                        },
+                        DateTime = DateTime.Now
                     });
             });
             

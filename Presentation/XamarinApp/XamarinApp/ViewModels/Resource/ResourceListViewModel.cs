@@ -28,7 +28,8 @@ namespace XamarinApp.ViewModels.Resource
         public ObservableCollection<Domain.Entities.Resource> Resources { get; set; }
         public string ErrorMessage { get; private set; }
         private SearchBar _searchBar;
-        HubConnection _hubConnection;
+        HubConnection _resourceHubConnection;
+        HubConnection _reservationHubConnection;
 
         public ResourceListViewModel(INavigationService navigator, string navigationPath)
         {
@@ -50,9 +51,10 @@ namespace XamarinApp.ViewModels.Resource
         {
             #region SignalR
             var signalRUrl = Xamarin.Forms.Application.Current.Properties["SignalRUrl"] as string;
-            _hubConnection = new HubConnectionBuilder().WithUrl($"{signalRUrl}/resourceHub").Build();  
+            _resourceHubConnection = new HubConnectionBuilder().WithUrl($"{signalRUrl}/resourceHub").Build();  
+            _reservationHubConnection = new HubConnectionBuilder().WithUrl($"{signalRUrl}/reservationHub").Build(); 
   
-            _hubConnection.On<Type, Domain.Entities.Resource>("ReceiveResource", (type, resource) =>
+            _resourceHubConnection.On<Type, Domain.Entities.Resource>("ReceiveResource", (type, resource) =>
             {
                 var resourceToCheck = Resources.FirstOrDefault(r => r.Id == resource.Id);
                 switch (type)
@@ -77,9 +79,41 @@ namespace XamarinApp.ViewModels.Resource
                     default:
                         throw new ArgumentOutOfRangeException(nameof(type), type, null);
                 }
-            });  
-  
-            _hubConnection.StartAsync();
+            });
+            
+            _reservationHubConnection.On<Type, Domain.Entities.Reservation>("ReceiveReservation", (type, reservation) =>
+            {
+                var resource = Resources.First(r => r.Reservations.Any(x => x.Id == reservation.Id));
+                switch (type)
+                {
+                    case Type.Create:
+                    {
+                        if (resource != null) break;
+                        Resources.First(r => r.Id == reservation.ResourceId).Reservations.Add(reservation);
+                        break;
+                    }
+                    case Type.Update:
+                    {
+                        if (resource == null) break;
+                        var res = resource.Reservations.First(x => x.Id == reservation.Id);
+                        resource.Reservations.Remove(res);
+                        resource.Reservations.Add(reservation);
+                        break;
+                    }
+                    case Type.Delete:
+                    {
+                        if (resource == null) break;
+                        var res = resource.Reservations.First(x => x.Id == reservation.Id);
+                        resource.Reservations.Remove(res);
+                        break;
+                    }
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(type), type, null);
+                } 
+            }); 
+            
+            _resourceHubConnection.StartAsync();
+            _reservationHubConnection.StartAsync();
             #endregion
             
             return base.BeforeFirstShown();

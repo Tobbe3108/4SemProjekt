@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Syncfusion.Blazor;
+using Xamarin.Forms;
 
 namespace BlazorSPA.Client
 {
@@ -31,8 +32,7 @@ namespace BlazorSPA.Client
             builder.Services.AddAuthorizationCore(options =>
             {
             });
-
-
+            
             builder.Services.AddScoped<ResourceService>();
             builder.Services.AddSingleton(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             builder.Services.AddSyncfusionBlazor();
