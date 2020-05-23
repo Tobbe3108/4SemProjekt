@@ -29,6 +29,10 @@ namespace BlazorSPA.Client.Services
         {
             if (resource.Available.Count > 0)
             {
+                if (resource.Available.Any(r => r.From == r.To))
+                {
+                    return (Guid.Empty, "Start and end time cannot be the same time");
+                }
                 if (resource.Available.Any(dayAndTime => resource.HasOverlapping(dayAndTime)))
                 {
                     return (Guid.Empty, "Overlap in available time");

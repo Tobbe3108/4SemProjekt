@@ -31,19 +31,8 @@ namespace WebApi
 
                     if (context.Database.IsSqlServer()) context.Database.Migrate();
 
-                    //await ApplicationDbContextSeed.SeedSampleDataAsync(context);
-                    var submitUserRequestClient = services.GetRequiredService<IRequestClient<SubmitUser>>();
-                    var response = submitUserRequestClient.GetResponse<SubmitUserAccepted>(new
-                    {
-
-                        Id = Guid.NewGuid(),
-                        Username = "Tobbe3108",
-                        Email = "Tobbe3108@gmail.com",
-                        FirstName = "Tobias",
-                        LastName = "Lauritzen",
-                        Password = "Zxasqw12"
-                    });
-                    
+                    var requestClient = services.GetRequiredService<IRequestClient<SubmitUser>>();
+                    await new ApplicationDbContextSeed().SeedSampleDataAsync(requestClient);
                 }
                 catch (Exception ex)
                 {

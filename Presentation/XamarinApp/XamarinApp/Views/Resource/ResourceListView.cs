@@ -1,5 +1,7 @@
-﻿using Syncfusion.DataSource;
+﻿using System;
+using Syncfusion.DataSource;
 using Syncfusion.ListView.XForms;
+using Syncfusion.SfPullToRefresh.XForms;
 using Xamarin.Forms;
 using XamarinApp.Domain.Common;
 using XamarinApp.ViewModels.Resource;
@@ -20,7 +22,7 @@ namespace XamarinApp.Views.Resource
                 Placeholder = "Search to filter"
             };
             searchBar.TextChanged += ((sender, args) => ((ResourceListViewModel)BindingContext).OnFilterTextChanged(sender, args, _listView));
-
+            
             _listView = new SfListView
             {
                 ItemsSource = ((ResourceListViewModel)BindingContext).Resources,
@@ -51,13 +53,25 @@ namespace XamarinApp.Views.Resource
                     return stackLayout;
                 })
             };
+            _listView.Loaded += ((ResourceListViewModel)BindingContext).GenerateResourcesEvent;
             _listView.DataSource.SortDescriptors.Add(new SortDescriptor
             {
                 PropertyName = "Name",
                 Direction = ListSortDirection.Ascending,
             });
-            _listView.Loaded += ((ResourceListViewModel)BindingContext).GenerateResourcesEvent;
             _listView.ItemTapped += ((ResourceListViewModel)BindingContext).ItemTappedEvent;
+
+            var pullToRefresh = new SfPullToRefresh
+            {
+                PullableContent = _listView, 
+                //TransitionMode = TransitionType.SlideOnTop
+            };
+            // pullToRefresh.Refreshing += ((sender, args) =>
+            // {
+            //     pullToRefresh.IsRefreshing = true;
+            //     ((ResourceListViewModel) BindingContext).GenerateResourcesEvent(sender, new ListViewLoadedEventArgs());
+            //     pullToRefresh.IsRefreshing = false;
+            // });
             
             Content = new StackLayout
             {
@@ -65,7 +79,7 @@ namespace XamarinApp.Views.Resource
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 Padding = 30,
                 Spacing = 10,
-                Children = {searchBar, _listView}
+                Children = {searchBar, pullToRefresh, _listView}
             };
         }
     }

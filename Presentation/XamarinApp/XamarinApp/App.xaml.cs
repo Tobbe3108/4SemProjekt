@@ -3,6 +3,7 @@ using Xamarin.Forms.Xaml;
 using XamarinApp.Application.Common.Interfaces;
 using XamarinApp.Infrastructure.Services;
 using XamarinApp.ViewModels;
+using XamarinApp.ViewModels.Resource;
 using XamarinApp.ViewModels.User;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
@@ -18,7 +19,8 @@ namespace XamarinApp
             
             var navigator = new NavigationService(this, new ViewLocator());
 
-            var rootViewModel = new LoginViewModel(navigator, "/Login");
+            //var rootViewModel = new LoginViewModel(navigator, "/Login");
+            var rootViewModel = new ResourceListViewModel(navigator, "/ResourceList");
 
             navigator.PresentAsNavigatableMainPage(rootViewModel);
             

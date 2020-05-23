@@ -22,156 +22,96 @@ namespace Resource.Infrastructure.Persistence
                         Id = Guid.NewGuid(),
                         Name = "Oslo",
                         Description = "Meeting room Oslo",
-                        Available = new List<DayAndTime>
-                        {
-                            new DayAndTime
-                            {
-                                Id = Guid.NewGuid(),
-                                DayOfWeek = DateTime.Now.DayOfWeek,
-                                From = DateTime.Now.AddHours(-1),
-                                To = DateTime.Now.AddHours(1)
-                            },
-                            new DayAndTime
-                            {
-                                Id = Guid.NewGuid(),
-                                DayOfWeek = DateTime.Now.DayOfWeek,
-                                From = DateTime.Now.AddHours(2),
-                                To = DateTime.Now.AddHours(3)
-                            }
-                        }
+                        Available = GetTimeSlots()
                     },
                     new Domain.Entities.Resource
                     {
                         Id = Guid.NewGuid(),
                         Name = "Helsinki",
                         Description = "Meeting room Helsinki",
-                        Available = new List<DayAndTime>
-                        {
-                            new DayAndTime
-                            {
-                                Id = Guid.NewGuid(),
-                                DayOfWeek = DateTime.Now.DayOfWeek,
-                                From = DateTime.Now.AddHours(-1),
-                                To = DateTime.Now.AddHours(1)
-                            }
-                        }
+                        Available = GetTimeSlots()
                     },
                     new Domain.Entities.Resource
                     {
                         Id = Guid.NewGuid(),
                         Name = "Tokyo",
                         Description = "Meeting room Tokyo",
-                        Available = new List<DayAndTime>
-                        {
-                            new DayAndTime
-                            {
-                                Id = Guid.NewGuid(),
-                                DayOfWeek = DateTime.Now.DayOfWeek,
-                                From = DateTime.Now.AddHours(-1),
-                                To = DateTime.Now.AddHours(1)
-                            }
-                        }
+                        Available = GetTimeSlots()
                     },
                     new Domain.Entities.Resource
                     {
                         Id = Guid.NewGuid(),
                         Name = "Berlin",
                         Description = "Meeting room Berlin",
-                        Available = new List<DayAndTime>
-                        {
-                            new DayAndTime
-                            {
-                                Id = Guid.NewGuid(),
-                                DayOfWeek = DateTime.Now.DayOfWeek,
-                                From = DateTime.Now.AddHours(-1),
-                                To = DateTime.Now.AddHours(1)
-                            }
-                        }
+                        Available = GetTimeSlots()
                     },
                     new Domain.Entities.Resource
                     {
                         Id = Guid.NewGuid(),
                         Name = "Moscow",
                         Description = "Meeting room Moscow",
-                        Available = new List<DayAndTime>
-                        {
-                            new DayAndTime
-                            {
-                                Id = Guid.NewGuid(),
-                                DayOfWeek = DateTime.Now.DayOfWeek,
-                                From = DateTime.Now.AddHours(-1),
-                                To = DateTime.Now.AddHours(1)
-                            }
-                        }
+                        Available = GetTimeSlots()
                     },
                     new Domain.Entities.Resource
                     {
                         Id = Guid.NewGuid(),
                         Name = "Nairobi",
                         Description = "Meeting room Nairobi",
-                        Available = new List<DayAndTime>
-                        {
-                            new DayAndTime
-                            {
-                                Id = Guid.NewGuid(),
-                                DayOfWeek = DateTime.Now.DayOfWeek,
-                                From = DateTime.Now.AddHours(-1),
-                                To = DateTime.Now.AddHours(1)
-                            }
-                        }
+                        Available = GetTimeSlots()
                     },
                     new Domain.Entities.Resource
                     {
                         Id = Guid.NewGuid(),
                         Name = "Rio",
                         Description = "Meeting room Rio",
-                        Available = new List<DayAndTime>
-                        {
-                            new DayAndTime
-                            {
-                                Id = Guid.NewGuid(),
-                                DayOfWeek = DateTime.Now.DayOfWeek,
-                                From = DateTime.Now.AddHours(-1),
-                                To = DateTime.Now.AddHours(1)
-                            }
-                        }
+                        Available = GetTimeSlots()
                     },
                     new Domain.Entities.Resource
                     {
                         Id = Guid.NewGuid(),
                         Name = "Denver",
                         Description = "Meeting room Denver",
-                        Available = new List<DayAndTime>
-                        {
-                            new DayAndTime
-                            {
-                                Id = Guid.NewGuid(),
-                                DayOfWeek = DateTime.Now.DayOfWeek,
-                                From = DateTime.Now.AddHours(-1),
-                                To = DateTime.Now.AddHours(1)
-                            }
-                        }
+                        Available = GetTimeSlots()
                     },
                     new Domain.Entities.Resource
                     {
                         Id = Guid.NewGuid(),
                         Name = "Stockholm",
                         Description = "Meeting room Stockholm",
-                        Available = new List<DayAndTime>
-                        {
-                            new DayAndTime
-                            {
-                                Id = Guid.NewGuid(),
-                                DayOfWeek = DateTime.Now.DayOfWeek,
-                                From = DateTime.Now.AddHours(-1),
-                                To = DateTime.Now.AddHours(1)
-                            }
-                        }
+                        Available = GetTimeSlots()
                     },
                 });
 
                 await context.SaveChangesAsync();
             }
+        }
+
+        private static List<DayAndTime> GetTimeSlots()
+        {
+            var random = new Random();
+            var list = new List<DayAndTime>();
+            for (var i = 0; i < 7; i++)
+            {
+                var time = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 08, 00, 00);
+                while (time <= new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 16, 00, 00))
+                {
+                    var oldTime = time;
+                    time = time.AddMinutes(random.Next(15, 481));
+                    
+                    if (time >= new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 16, 00, 00)) break;
+                    list.Add(new DayAndTime
+                    {
+                        Id = Guid.NewGuid(),
+                        DayOfWeek = (DayOfWeek)i,
+                        From = oldTime,
+                        To = time
+                    });
+                    
+                    time = time.AddMinutes(random.Next(15, 240));
+                }
+            }
+
+            return list;
         }
     }
 }

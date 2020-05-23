@@ -23,9 +23,9 @@ namespace Auth.WebApi
                 {
                     var context = services.GetRequiredService<ApplicationDbContext>();
 
-                    if (context.Database.IsSqlServer()) context.Database.Migrate();
+                    if (context.Database.IsSqlServer()) await context.Database.MigrateAsync();
 
-                    //await ApplicationDbContextSeed.SeedSampleDataAsync(context);
+                    await ApplicationDbContextSeed.SeedSampleDataAsync(context);
                 }
                 catch (Exception ex)
                 {

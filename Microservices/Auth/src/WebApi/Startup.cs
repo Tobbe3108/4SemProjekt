@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -121,8 +122,6 @@ namespace Auth.WebApi
 
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Auth Microservice v1"));
-
-            await CreateRoles(serviceProvider);
         }
 
         static IBusControl ConfigureBus(IRegistrationContext<IServiceProvider> provider)
@@ -133,28 +132,6 @@ namespace Auth.WebApi
 
                 cfg.ConfigureEndpoints(provider, KebabCaseEndpointNameFormatter.Instance);
             });
-        }
-
-        private async Task CreateRoles(IServiceProvider serviceProvider)
-        {
-            //adding custom roles
-
-            var authContext = serviceProvider.GetRequiredService<IApplicationDbContext>();
-
-            const string roleName = "Admin";
-
-            //creating the role and seeding it to the database
-            var roleExist = authContext.Roles.Any(r => r.RoleName == roleName);
-
-            var roleToAdd = new Role
-            {
-                RoleId = Guid.NewGuid(),
-                RoleName = roleName
-            };
-
-            if (!roleExist) await authContext.Roles.AddAsync(roleToAdd);
-            
-            await authContext.SaveChangesAsync(CancellationToken.None);
         }
     }
 }
