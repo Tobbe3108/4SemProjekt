@@ -3,6 +3,7 @@
 @page "/Login"
 @using BlazorSPA.Client.Services
 @using BlazorSPA.Client.Data
+@using Microsoft.AspNetCore.WebUtilities
 
 @if (_invalidLogin)
 {
@@ -23,15 +24,25 @@
 
 <SfSpinner @ref="SpinnerObj" Target="#form" />
 
-@code {
+@code {    
     private readonly LoginDTO _loginDTO = new LoginDTO
     {
-        UsernameOrEmail = "Tobbe3108",
+        UsernameOrEmail = "Admin",
         Password = "Zxasqw12"
     };
 
     private bool _invalidLogin;
     private string Message { get; set; }
+    private string returnUrl;
+
+    protected override void OnInitialized()
+    {
+        var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
+        if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("returnUrl", out var _returnUrl))
+        {
+            returnUrl = _returnUrl;
+        }
+    }
 
     private async void OnValidSubmit()
     {
@@ -41,7 +52,7 @@
         var (success, message) = await AuthService.Login(_loginDTO); 
         if (success)
         {
-            NavigationManager.NavigateTo("");
+            NavigationManager.NavigateTo(returnUrl);
         }
         else
         {

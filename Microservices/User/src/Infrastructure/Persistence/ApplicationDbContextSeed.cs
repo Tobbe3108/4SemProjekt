@@ -6,11 +6,11 @@ using ToolBox.Contracts.User;
 
 namespace User.Infrastructure.Persistence
 {
-    public class ApplicationDbContextSeed
+    public static class ApplicationDbContextSeed
     {
-        public async Task SeedSampleDataAsync(IRequestClient<SubmitUser> requestClient)
+        public static async Task SeedSampleDataAsync(IRequestClient<SubmitUser> requestClient)
         {
-            await requestClient.GetResponse<SubmitUserAccepted>(new
+            var response = requestClient.GetResponse<SubmitUserAccepted>(new
             {
                 Id = Guid.NewGuid(),
                 Username = "Admin",
@@ -20,7 +20,7 @@ namespace User.Infrastructure.Persistence
                 Password = "Zxasqw12"
             });
             
-            await requestClient.GetResponse<SubmitUserAccepted>(new
+            response = requestClient.GetResponse<SubmitUserAccepted>(new
             {
                 Id = Guid.NewGuid(),
                 Username = "CustomerService",

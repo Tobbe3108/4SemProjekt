@@ -32,7 +32,7 @@ namespace WebApi
                     if (context.Database.IsSqlServer()) context.Database.Migrate();
 
                     var requestClient = services.GetRequiredService<IRequestClient<SubmitUser>>();
-                    await new ApplicationDbContextSeed().SeedSampleDataAsync(requestClient);
+                    await ApplicationDbContextSeed.SeedSampleDataAsync(requestClient);
                 }
                 catch (Exception ex)
                 {

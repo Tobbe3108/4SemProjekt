@@ -12,7 +12,7 @@ namespace Auth.Application.User.Commands.AuthenticateUser
 {
     public class AuthenticateUserCommand
     {
-        [DefaultValue("Tobbe3108")] public string UsernameOrEmail { get; set; }
+        [DefaultValue("Admin")] public string UsernameOrEmail { get; set; }
         [DefaultValue("Zxasqw12")] public string Password { get; set; }
     }
 

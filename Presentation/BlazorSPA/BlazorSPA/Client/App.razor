@@ -1,10 +1,15 @@
 @using BlazorSPA.Client.Components
+@inject NavigationManager NavigationManager
 
 <Router AppAssembly="@typeof(Program).Assembly">
     <Found Context="routeData">
         <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
             <NotAuthorized>
-                <RedirectToLogin />
+                @{
+                     var returnUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+                     <RedirectToLogin ReturnUrl="@returnUrl"/>
+                 
+                  }
             </NotAuthorized>
             <Authorizing>
                 <h1>Logger ind...</h1>

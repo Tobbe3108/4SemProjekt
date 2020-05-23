@@ -24,12 +24,24 @@
                         <span class="e-text" title="resources">Customer Service</span>
                     </NavLink>
                 </li>
-                <li class="sidebar-item">
-                    <NavLink class="nav-link" href="logout" Match="NavLinkMatch.All">
-                        <span class="e-icons signOut"></span>
-                        <span class="e-text" title="signOut">Sign out</span>
-                    </NavLink>
-                </li>
+                <AuthorizeView>
+                    <Authorized>
+                        <li class="sidebar-item">
+                            <NavLink class="nav-link" href="logout" Match="NavLinkMatch.All">
+                                <span class="e-icons signOut"></span>
+                                <span class="e-text" title="signOut">Sign out</span>
+                            </NavLink>
+                        </li>
+                    </Authorized>
+                    <NotAuthorized>
+                        <li class="sidebar-item">
+                            <NavLink class="nav-link" href="login?returnUrl=" Match="NavLinkMatch.All">
+                                <span class="e-icons signIn"></span>
+                                <span class="e-text" title="signOut">Sign in</span>
+                            </NavLink>
+                        </li>
+                    </NotAuthorized>
+                </AuthorizeView>
             </ul>
         </div>
     </ChildContent>
@@ -64,7 +76,10 @@
         content: '\e730';
     }
     .e-sidebar .signOut::before {
-        content: '\e82f';
+        content: '\e794';
+    }
+    .e-sidebar .signIn::before {
+        content: '\e735';
     }
      
         
