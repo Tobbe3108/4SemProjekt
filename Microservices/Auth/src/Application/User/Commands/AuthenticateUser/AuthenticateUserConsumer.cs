@@ -62,12 +62,20 @@ namespace Auth.Application.User.Commands.AuthenticateUser
 
             var result = _hashService.Compare(context.Message.Password, userIn.PasswordHash, userIn.PasswordSalt);
 
-            if (result == PasswordVerificationResult.Success)
+            switch (result)
             {
-                await context.RespondAsync<Token>(new
-                {
-                    Token = _authService.GenerateJsonWebToken(userIn)
-                });
+                case PasswordVerificationResult.Failed:
+                    await context.RespondAsync<NotFound>(new
+                    {
+                        Message = $"Wrong password or username"
+                    });
+                    break;
+                case PasswordVerificationResult.Success:
+                    await context.RespondAsync<Token>(new
+                    {
+                        Token = _authService.GenerateJsonWebToken(userIn)
+                    });
+                    break;
             }
         }
     }

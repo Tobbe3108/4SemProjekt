@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using FluentValidation;
+using User.Application.Common.Interfaces;
 
 namespace User.Application.User.Commands.CreateUser
 {

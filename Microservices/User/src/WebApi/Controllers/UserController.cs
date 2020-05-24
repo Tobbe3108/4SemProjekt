@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using FluentValidation.Results;
 using MassTransit;
@@ -18,14 +19,16 @@ namespace WebApi.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
+        private readonly IApplicationDbContext _dbContext;
         private readonly IRequestClient<GetUser> _getUserRequestClient;
         private readonly IRequestClient<SubmitUser> _submitUserRequestClient;
         private readonly IRequestClient<GetCurrentUser> _getCurrentUserRequestClient;
         private readonly ISendEndpointProvider _sendEndpointProvider;
         private readonly ICurrentUserService _userService;
 
-        public UserController(IRequestClient<GetUser> getUserRequestClient, IRequestClient<SubmitUser> submitUserRequestClient, IRequestClient<GetCurrentUser> getCurrentUserRequestClient , ISendEndpointProvider sendEndpointProvider, ICurrentUserService userService)
+        public UserController(IApplicationDbContext dbContext, IRequestClient<GetUser> getUserRequestClient, IRequestClient<SubmitUser> submitUserRequestClient, IRequestClient<GetCurrentUser> getCurrentUserRequestClient , ISendEndpointProvider sendEndpointProvider, ICurrentUserService userService)
         {
+            _dbContext = dbContext;
             _getUserRequestClient = getUserRequestClient;
             _submitUserRequestClient = submitUserRequestClient;
             _getCurrentUserRequestClient = getCurrentUserRequestClient;
@@ -39,6 +42,9 @@ namespace WebApi.Controllers
             var validator = new SubmitUserCommandValidator();
             ValidationResult result = await validator.ValidateAsync(command);
             if (!result.IsValid) return BadRequest(result.Errors);
+
+            if (_dbContext.Users.Any(u => u.Username == command.Username)) return BadRequest("Username already taken");
+            if (_dbContext.Users.Any(u => u.Email == command.Email)) return BadRequest("Email already taken");
             
             var response = await _submitUserRequestClient.GetResponse<SubmitUserAccepted>(new
             {

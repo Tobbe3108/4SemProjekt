@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Linq;
 using Automatonymous;
 using MassTransit;
+using Microsoft.EntityFrameworkCore;
 using ToolBox.Contracts.Auth;
 using ToolBox.Contracts.User;
+using User.Application.Common.Interfaces;
 
 namespace User.Application.User.Commands.CreateUser
 {
