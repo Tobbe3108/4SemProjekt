@@ -60,18 +60,6 @@ namespace XamarinApp.Views.Resource
                 Direction = ListSortDirection.Ascending,
             });
             _listView.ItemTapped += ((ResourceListViewModel)BindingContext).ItemTappedEvent;
-
-            var pullToRefresh = new SfPullToRefresh
-            {
-                PullableContent = _listView, 
-                //TransitionMode = TransitionType.SlideOnTop
-            };
-            // pullToRefresh.Refreshing += ((sender, args) =>
-            // {
-            //     pullToRefresh.IsRefreshing = true;
-            //     ((ResourceListViewModel) BindingContext).GenerateResourcesEvent(sender, new ListViewLoadedEventArgs());
-            //     pullToRefresh.IsRefreshing = false;
-            // });
             
             Content = new StackLayout
             {
@@ -79,7 +67,7 @@ namespace XamarinApp.Views.Resource
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 Padding = 30,
                 Spacing = 10,
-                Children = {searchBar, pullToRefresh, _listView}
+                Children = {searchBar, _listView}
             };
         }
     }

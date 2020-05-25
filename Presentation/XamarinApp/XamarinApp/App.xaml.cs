@@ -19,8 +19,7 @@ namespace XamarinApp
             
             var navigator = new NavigationService(this, new ViewLocator());
 
-            //var rootViewModel = new LoginViewModel(navigator, "/Login");
-            var rootViewModel = new ResourceListViewModel(navigator, "/ResourceList");
+            var rootViewModel = new LoginViewModel(navigator, "/Login");
 
             navigator.PresentAsNavigatableMainPage(rootViewModel);
             

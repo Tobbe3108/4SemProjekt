@@ -39,7 +39,6 @@ namespace XamarinApp.Views.Resource
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 ScheduleView = ScheduleView.DayView,
                 TimeInterval = 30,
-                TimeIntervalHeight = -1,
                 ShowCurrentTimeIndicator = true,
                 CurrentTimeIndicatorColor = Color.BlueViolet,
                 DataSource =  ((ResourceViewModel) BindingContext).Reservations,
@@ -47,8 +46,6 @@ namespace XamarinApp.Views.Resource
                 {
                     WorkStartHour = 8,
                     WorkEndHour = 16,
-                    StartHour = ((ResourceViewModel) BindingContext).MinFromTime,
-                    EndHour = ((ResourceViewModel) BindingContext).MaxToTime,
                     DayLabelSettings = new DayLabelSettings
                     {
                         DayFormat = "EEEE",
