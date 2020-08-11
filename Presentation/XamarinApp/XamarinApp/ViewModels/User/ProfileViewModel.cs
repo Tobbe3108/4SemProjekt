@@ -58,6 +58,10 @@ namespace XamarinApp.ViewModels.User
             var mobileBffUrl = Xamarin.Forms.Application.Current.Properties["MobileBffUrl"] as string;
             var token = await SecureStorage.GetAsync("jwt_token");
             HttpResponseMessage result;
+            
+            if (string.IsNullOrEmpty(ProfileInformation.Password))
+                ProfileInformation.Password = _user.password;
+
             try
             {
                 result = await mobileBffUrl.AppendPathSegment($"User/{_user.Id}").WithOAuthBearerToken(token).PutJsonAsync(new

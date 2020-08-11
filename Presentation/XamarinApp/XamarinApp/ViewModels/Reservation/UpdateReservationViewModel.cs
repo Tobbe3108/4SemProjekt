@@ -72,6 +72,9 @@ namespace XamarinApp.ViewModels.Reservation
 
             foreach (var reservation in reservations)
             {
+                if (reservation.ReservationId == reservationToValidate.Id)
+                    continue;
+                
                 if (reservation.StartTime < reservationToValidate.To && reservationToValidate.From < reservation.EndTime) return false;
             }
             
